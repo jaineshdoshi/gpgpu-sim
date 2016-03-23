@@ -1,0 +1,8 @@
+<map id="BitPermutationTrafficPattern" name="BitPermutationTrafficPattern">
+<area shape="rect" id="node4" href="$classBitCompTrafficPattern.html" title="BitCompTrafficPattern" alt="" coords="605,5,753,32"/>
+<area shape="rect" id="node5" href="$classBitRevTrafficPattern.html" title="BitRevTrafficPattern" alt="" coords="611,56,747,83"/>
+<area shape="rect" id="node6" href="$classShuffleTrafficPattern.html" title="ShuffleTrafficPattern" alt="" coords="611,107,747,133"/>
+<area shape="rect" id="node7" href="$classTransposeTrafficPattern.html" title="TransposeTrafficPattern" alt="" coords="600,157,757,184"/>
+<area shape="rect" id="node2" href="$classPermutationTrafficPattern.html" title="PermutationTrafficPattern" alt="" coords="152,81,320,108"/>
+<area shape="rect" id="node3" href="$classTrafficPattern.html" title="TrafficPattern" alt="" coords="5,81,104,108"/>
+</map>

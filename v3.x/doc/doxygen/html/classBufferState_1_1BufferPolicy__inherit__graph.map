@@ -1,0 +1,10 @@
+<map id="BufferState::BufferPolicy" name="BufferState::BufferPolicy">
+<area shape="rect" id="node3" href="$classBufferState_1_1PrivateBufferPolicy.html" title="BufferState::PrivateBuffer\lPolicy" alt="" coords="327,5,492,46"/>
+<area shape="rect" id="node4" href="$classBufferState_1_1SharedBufferPolicy.html" title="BufferState::SharedBuffer\lPolicy" alt="" coords="326,70,493,111"/>
+<area shape="rect" id="node2" href="$classModule.html" title="Module" alt="" coords="5,45,69,72"/>
+<area shape="rect" id="node5" href="$classBufferState_1_1FeedbackSharedBufferPolicy.html" title="BufferState::FeedbackShared\lBufferPolicy" alt="" coords="542,37,733,78"/>
+<area shape="rect" id="node7" href="$classBufferState_1_1LimitedSharedBufferPolicy.html" title="BufferState::LimitedShared\lBufferPolicy" alt="" coords="550,102,725,143"/>
+<area shape="rect" id="node6" href="$classBufferState_1_1SimpleFeedbackSharedBufferPolicy.html" title="BufferState::SimpleFeedback\lSharedBufferPolicy" alt="" coords="781,37,971,78"/>
+<area shape="rect" id="node8" href="$classBufferState_1_1DynamicLimitedSharedBufferPolicy.html" title="BufferState::DynamicLimited\lSharedBufferPolicy" alt="" coords="784,102,968,143"/>
+<area shape="rect" id="node9" href="$classBufferState_1_1ShiftingDynamicLimitedSharedBufferPolicy.html" title="BufferState::ShiftingDynamic\lLimitedSharedBufferPolicy" alt="" coords="1019,102,1205,143"/>
+</map>

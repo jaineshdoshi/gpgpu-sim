@@ -1,0 +1,8 @@
+<map id="The XML parser" name="The XML parser">
+<area shape="rect" id="node1" href="$group__conversions.html" title="Parsing XML files/strings\l to an XMLNode structure\l and Rendering XMLNode&#39;s\l to files/string." alt="" coords="181,5,357,75"/>
+<area shape="rect" id="node2" href="$group__atoX.html" title="ato? like functions" alt="" coords="207,100,332,127"/>
+<area shape="rect" id="node3" href="$group__xmlModify.html" title="Create or Update the\l XMLNode structure" alt="" coords="200,151,339,193"/>
+<area shape="rect" id="node4" href="$group__navigate.html" title="Navigate the XMLNode\l structure" alt="" coords="193,217,346,258"/>
+<area shape="rect" id="node5" href="$group__ToXMLStringTool.html" title="Helper class to create\l XML files using &quot;printf&quot;,\l &quot;fprintf&quot;, &quot;cout&quot;,... functions." alt="" coords="181,281,358,337"/>
+<area shape="rect" id="node6" href="$group__XMLParserBase64Tool.html" title="Helper class to include\l binary data inside XML\l strings using &quot;Base64 encoding&quot;." alt="" coords="166,361,373,417"/>
+</map>

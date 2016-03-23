@@ -1,0 +1,13 @@
+<map id="InterconnectInterface" name="InterconnectInterface">
+<area shape="rect" id="node5" href="$classTrafficManager.html" title="TrafficManager" alt="" coords="1088,1535,1195,1561"/>
+<area shape="rect" id="node20" href="$classRouter.html" title="Router" alt="" coords="423,568,483,595"/>
+<area shape="rect" id="node4" href="$classGPUTrafficManager.html" title="GPUTrafficManager" alt="" coords="1370,1535,1505,1561"/>
+<area shape="rect" id="node6" href="$classModule.html" title="Module" alt="" coords="49,1552,113,1579"/>
+<area shape="rect" id="node36" href="$classNetwork.html" title="Network" alt="" coords="743,568,812,595"/>
+<area shape="rect" id="node38" href="$classStats.html" title="Stats" alt="" coords="427,1199,479,1225"/>
+<area shape="rect" id="node40" href="$classBufferState.html" title="BufferState" alt="" coords="410,1739,497,1765"/>
+<area shape="rect" id="node21" href="$classint.html" title="int" alt="" coords="62,868,101,895"/>
+<area shape="rect" id="node44" href="$classIntersimConfig.html" title="IntersimConfig" alt="" coords="1385,2733,1489,2760"/>
+<area shape="rect" id="node45" href="$classBookSimConfig.html" title="BookSimConfig" alt="" coords="1086,2765,1197,2792"/>
+<area shape="rect" id="node46" href="$classConfiguration.html" title="Configuration" alt="" coords="729,2765,826,2792"/>
+</map>

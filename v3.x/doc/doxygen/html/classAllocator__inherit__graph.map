@@ -1,0 +1,14 @@
+<map id="Allocator" name="Allocator">
+<area shape="rect" id="node3" href="$classDenseAllocator.html" title="DenseAllocator" alt="" coords="177,155,287,181"/>
+<area shape="rect" id="node8" href="$classSparseAllocator.html" title="SparseAllocator" alt="" coords="378,155,491,181"/>
+<area shape="rect" id="node2" href="$classModule.html" title="Module" alt="" coords="301,5,365,32"/>
+<area shape="rect" id="node4" href="$classLOA.html" title="LOA" alt="" coords="5,229,53,256"/>
+<area shape="rect" id="node5" href="$classMaxSizeMatch.html" title="MaxSizeMatch" alt="" coords="77,229,184,256"/>
+<area shape="rect" id="node6" href="$classPIM.html" title="PIM" alt="" coords="209,229,255,256"/>
+<area shape="rect" id="node7" href="$classWavefront.html" title="Wavefront" alt="" coords="280,229,359,256"/>
+<area shape="rect" id="node9" href="$classiSLIP__Sparse.html" title="iSLIP_Sparse" alt="" coords="384,229,485,256"/>
+<area shape="rect" id="node10" href="$classSelAlloc.html" title="SelAlloc" alt="" coords="510,229,580,256"/>
+<area shape="rect" id="node11" href="$classSeparableAllocator.html" title="SeparableAllocator" alt="" coords="604,229,733,256"/>
+<area shape="rect" id="node12" href="$classSeparableInputFirstAllocator.html" title="SeparableInputFirstAllocator" alt="" coords="470,304,655,331"/>
+<area shape="rect" id="node13" href="$classSeparableOutputFirstAllocator.html" title="SeparableOutputFirstAllocator" alt="" coords="680,304,875,331"/>
+</map>

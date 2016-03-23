@@ -1,0 +1,37 @@
+<map id="Core" name="Core">
+<area shape="rect" id="node2" href="$classComponent.html" title="Component" alt="" coords="1261,1344,1349,1371"/>
+<area shape="rect" id="node7" href="$classUndiffCore.html" title="UndiffCore" alt="" coords="1593,3376,1674,3403"/>
+<area shape="rect" id="node19" href="$classPipeline.html" title="Pipeline" alt="" coords="1599,4965,1667,4992"/>
+<area shape="rect" id="node25" href="$classEXECU.html" title="EXECU" alt="" coords="2166,1751,2231,1777"/>
+<area shape="rect" id="node26" href="$classFunctionalUnit.html" title="FunctionalUnit" alt="" coords="1581,2611,1686,2637"/>
+<area shape="rect" id="node29" href="$classSchedulerU.html" title="SchedulerU" alt="" coords="1901,2325,1990,2352"/>
+<area shape="rect" id="node30" href="$classArrayST.html" title="ArrayST" alt="" coords="1599,3724,1668,3751"/>
+<area shape="rect" id="node32" href="$classselection__logic.html" title="selection_logic" alt="" coords="1580,3087,1687,3113"/>
+<area shape="rect" id="node33" href="$classinterconnect.html" title="interconnect" alt="" coords="1587,1613,1680,1640"/>
+<area shape="rect" id="node35" href="$classRegFU.html" title="RegFU" alt="" coords="1914,1785,1977,1812"/>
+<area shape="rect" id="node36" href="$classCrossbar.html" title="Crossbar" alt="" coords="1597,932,1669,959"/>
+<area shape="rect" id="node37" href="$classInstFetchU.html" title="InstFetchU" alt="" coords="2156,5012,2241,5039"/>
+<area shape="rect" id="node39" href="$classinst__decoder.html" title="inst_decoder" alt="" coords="1586,4415,1681,4441"/>
+<area shape="rect" id="node40" href="$classBranchPredictor.html" title="BranchPredictor" alt="" coords="1888,3784,2003,3811"/>
+<area shape="rect" id="node41" href="$classInstCache.html" title="InstCache" alt="" coords="1905,3201,1985,3228"/>
+<area shape="rect" id="node42" href="$classSharedCache.html" title="SharedCache" alt="" coords="2398,940,2498,967"/>
+<area shape="rect" id="node46" href="$classRENAMINGU.html" title="RENAMINGU" alt="" coords="1895,5325,1995,5352"/>
+<area shape="rect" id="node47" href="$classdep__resource__conflict__check.html" title="dep_resource_conflict\l_check" alt="" coords="1560,4899,1707,4941"/>
+<area shape="rect" id="node48" href="$classMemManU.html" title="MemManU" alt="" coords="1903,3037,1988,3064"/>
+<area shape="rect" id="node49" href="$classLoadStoreU.html" title="LoadStoreU" alt="" coords="2403,2571,2493,2597"/>
+<area shape="rect" id="node5" href="$classpowerComponents.html" title="powerComponents" alt="" coords="203,3625,331,3652"/>
+<area shape="rect" id="node6" href="$classArea.html" title="Area" alt="" coords="930,1044,979,1071"/>
+<area shape="rect" id="node8" href="$classCoreDynParam.html" title="CoreDynParam" alt="" coords="1251,5348,1360,5375"/>
+<area shape="rect" id="node14" href="$classInputParameter.html" title="InputParameter" alt="" coords="1250,3255,1361,3281"/>
+<area shape="rect" id="node18" href="$structroot__system.html" title="root_system" alt="" coords="909,2184,1000,2211"/>
+<area shape="rect" id="node21" href="$classuca__org__t.html" title="uca_org_t" alt="" coords="1266,4487,1345,4513"/>
+<area shape="rect" id="node23" href="$classmem__array.html" title="mem_array" alt="" coords="911,3339,998,3365"/>
+<area shape="rect" id="node24" href="$structresults__mem__array.html" title="results_mem_array" alt="" coords="889,3960,1020,3987"/>
+<area shape="rect" id="node34" href="$classTechnologyParameter_1_1DeviceType.html" title="TechnologyParameter\l::DeviceType" alt="" coords="1231,1114,1379,1155"/>
+<area shape="rect" id="node43" href="$classCacheDynParam.html" title="CacheDynParam" alt="" coords="1574,625,1693,652"/>
+<area shape="rect" id="node4" href="$classpowerDef.html" title="powerDef" alt="" coords="550,3703,626,3729"/>
+<area shape="rect" id="node9" href="$classint.html" title="int" alt="" coords="569,2296,607,2323"/>
+<area shape="rect" id="node17" href="$classParseXML.html" title="ParseXML" alt="" coords="1264,2152,1347,2179"/>
+<area shape="rect" id="node27" href="$classstatsDef.html" title="statsDef" alt="" coords="1271,4108,1340,4135"/>
+<area shape="rect" id="node45" href="$classDataCache.html" title="DataCache" alt="" coords="2155,2728,2242,2755"/>
+</map>

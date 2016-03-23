@@ -1,0 +1,9 @@
+<map id="Create or Update the XMLNode structure" name="Create or Update the XMLNode structure">
+<area shape="rect" id="node1" href="$group__xmlWOSD.html" title="???_WOSD functions." alt="" coords="369,5,517,32"/>
+<area shape="rect" id="node3" href="$group__StringAlloc.html" title="String Allocation/Free\l functions" alt="" coords="369,57,516,98"/>
+<area shape="rect" id="node4" href="$group__xmlPosition.html" title="Position helper functions\l (use in conjunction with\l the update&amp;add functions" alt="" coords="357,121,528,177"/>
+<area shape="rect" id="node5" href="$group__xmlUpdate.html" title="Updating Nodes" alt="" coords="387,201,499,228"/>
+<area shape="rect" id="node7" href="$group__xmlDelete.html" title="Deleting Nodes or Attributes" alt="" coords="353,252,533,279"/>
+<area shape="rect" id="node8" href="$group__creation.html" title="Creating from scratch\l a XMLNode structure" alt="" coords="370,303,515,345"/>
+<area shape="rect" id="node6" href="$group__XMLParserGeneral.html" title="The XML parser" alt="" coords="5,169,117,196"/>
+</map>

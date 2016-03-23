@@ -1,0 +1,19 @@
+<map id="warp_inst_t::per_thread_info" name="warp_inst_t::per_thread_info">
+<area shape="rect" id="node5" href="$classinst__t.html" title="inst_t" alt="" coords="789,956,843,983"/>
+<area shape="rect" id="node11" href="$classmemory__space__t.html" title="memory_space_t" alt="" coords="365,663,485,689"/>
+<area shape="rect" id="node18" href="$classptx__thread__info.html" title="ptx_thread_info" alt="" coords="1766,2103,1877,2129"/>
+<area shape="rect" id="node20" href="$classsymbol__table.html" title="symbol_table" alt="" coords="767,1667,865,1693"/>
+<area shape="rect" id="node24" href="$classptx__version.html" title="ptx_version" alt="" coords="382,1636,469,1663"/>
+<area shape="rect" id="node29" href="$classcore__t.html" title="core_t" alt="" coords="1984,2429,2043,2456"/>
+<area shape="rect" id="node30" href="$classsimt__stack.html" title="simt_stack" alt="" coords="578,2495,662,2521"/>
+<area shape="rect" id="node31" href="$classgpgpu__sim.html" title="gpgpu_sim" alt="" coords="774,2697,858,2724"/>
+<area shape="rect" id="node32" href="$classgpgpu__t.html" title="gpgpu_t" alt="" coords="391,2528,459,2555"/>
+<area shape="rect" id="node35" href="$classkernel__info__t.html" title="kernel_info_t" alt="" coords="1455,2428,1551,2455"/>
+<area shape="rect" id="node36" href="$classfunction__info.html" title="function_info" alt="" coords="1127,1855,1223,1881"/>
+<area shape="rect" id="node43" href="$structdim3.html" title="dim3" alt="" coords="1149,2345,1200,2372"/>
+<area shape="rect" id="node44" href="$unionptx__reg__t.html" title="ptx_reg_t" alt="" coords="779,244,853,271"/>
+<area shape="rect" id="node50" href="$classptx__cta__info.html" title="ptx_cta_info" alt="" coords="961,2252,1053,2279"/>
+<area shape="rect" id="node3" href="$structdram__callback__t.html" title="dram_callback_t" alt="" coords="1116,1383,1233,1409"/>
+<area shape="rect" id="node13" href="$classint.html" title="int" alt="" coords="406,612,445,639"/>
+<area shape="rect" id="node33" href="$classmemory__space.html" title="memory_space" alt="" coords="32,2909,141,2936"/>
+</map>

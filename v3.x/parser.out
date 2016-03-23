@@ -1,0 +1,81 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> sentence
+Rule 1     sentence -> WORD EQUALS VALUE
+Rule 2     sentence -> WORD EQUALS NUMBER
+Rule 3     sentence -> WORD EQUALS NOTHING
+
+Terminals, with rules where they appear
+
+EQUALS               : 1 2 3
+NOTHING              : 3
+NUMBER               : 2
+VALUE                : 1
+WORD                 : 1 2 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+sentence             : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sentence
+    (1) sentence -> . WORD EQUALS VALUE
+    (2) sentence -> . WORD EQUALS NUMBER
+    (3) sentence -> . WORD EQUALS NOTHING
+
+    WORD            shift and go to state 1
+
+    sentence                       shift and go to state 2
+
+state 1
+
+    (1) sentence -> WORD . EQUALS VALUE
+    (2) sentence -> WORD . EQUALS NUMBER
+    (3) sentence -> WORD . EQUALS NOTHING
+
+    EQUALS          shift and go to state 3
+
+
+state 2
+
+    (0) S' -> sentence .
+
+
+
+state 3
+
+    (1) sentence -> WORD EQUALS . VALUE
+    (2) sentence -> WORD EQUALS . NUMBER
+    (3) sentence -> WORD EQUALS . NOTHING
+
+    VALUE           shift and go to state 5
+    NUMBER          shift and go to state 6
+    NOTHING         shift and go to state 4
+
+
+state 4
+
+    (3) sentence -> WORD EQUALS NOTHING .
+
+    $end            reduce using rule 3 (sentence -> WORD EQUALS NOTHING .)
+
+
+state 5
+
+    (1) sentence -> WORD EQUALS VALUE .
+
+    $end            reduce using rule 1 (sentence -> WORD EQUALS VALUE .)
+
+
+state 6
+
+    (2) sentence -> WORD EQUALS NUMBER .
+
+    $end            reduce using rule 2 (sentence -> WORD EQUALS NUMBER .)
+

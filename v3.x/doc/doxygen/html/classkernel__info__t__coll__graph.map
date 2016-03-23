@@ -1,0 +1,19 @@
+<map id="kernel_info_t" name="kernel_info_t">
+<area shape="rect" id="node3" href="$classfunction__info.html" title="function_info" alt="" coords="1135,2291,1231,2317"/>
+<area shape="rect" id="node40" href="$classsymbol.html" title="symbol" alt="" coords="1461,2000,1523,2027"/>
+<area shape="rect" id="node4" href="$classsymbol__table.html" title="symbol_table" alt="" coords="770,2251,867,2277"/>
+<area shape="rect" id="node41" href="$classtype__info.html" title="type_info" alt="" coords="1145,1949,1220,1976"/>
+<area shape="rect" id="node8" href="$classptx__version.html" title="ptx_version" alt="" coords="382,2548,469,2575"/>
+<area shape="rect" id="node38" href="$classoperand__info.html" title="operand_info" alt="" coords="1755,1611,1851,1637"/>
+<area shape="rect" id="node21" href="$classptx__instruction.html" title="ptx_instruction" alt="" coords="2014,1024,2119,1051"/>
+<area shape="rect" id="node22" href="$classwarp__inst__t.html" title="warp_inst_t" alt="" coords="1139,784,1226,811"/>
+<area shape="rect" id="node23" href="$classinst__t.html" title="inst_t" alt="" coords="792,744,845,771"/>
+<area shape="rect" id="node33" href="$structcore__config.html" title="core_config" alt="" coords="775,917,863,944"/>
+<area shape="rect" id="node34" href="$structbasic__block__t.html" title="basic_block_t" alt="" coords="2275,1088,2376,1115"/>
+<area shape="rect" id="node42" href="$classtype__info__key.html" title="type_info_key" alt="" coords="768,1400,869,1427"/>
+<area shape="rect" id="node27" href="$classmemory__space__t.html" title="memory_space_t" alt="" coords="365,1009,485,1036"/>
+<area shape="rect" id="node46" href="$structgpgpu__ptx__sim__kernel__info.html" title="gpgpu_ptx_sim_kernel_info" alt="" coords="729,1492,908,1519"/>
+<area shape="rect" id="node50" href="$structdim3.html" title="dim3" alt="" coords="595,93,645,120"/>
+<area shape="rect" id="node29" href="$classint.html" title="int" alt="" coords="406,1251,445,1277"/>
+<area shape="rect" id="node49" href="$classmemory__space.html" title="memory_space" alt="" coords="1128,217,1237,244"/>
+</map>

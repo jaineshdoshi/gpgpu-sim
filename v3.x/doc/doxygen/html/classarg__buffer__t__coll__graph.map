@@ -1,0 +1,18 @@
+<map id="arg_buffer_t" name="arg_buffer_t">
+<area shape="rect" id="node2" href="$unionptx__reg__t.html" title="ptx_reg_t" alt="" coords="704,2973,779,3000"/>
+<area shape="rect" id="node11" href="$classoperand__info.html" title="operand_info" alt="" coords="693,2581,789,2608"/>
+<area shape="rect" id="node35" href="$classinst__t.html" title="inst_t" alt="" coords="715,1773,768,1800"/>
+<area shape="rect" id="node19" href="$classptx__version.html" title="ptx_version" alt="" coords="698,633,785,660"/>
+<area shape="rect" id="node7" href="$classint.html" title="int" alt="" coords="337,1933,375,1960"/>
+<area shape="rect" id="node24" href="$classtype__info__key.html" title="type_info_key" alt="" coords="691,1855,792,1881"/>
+<area shape="rect" id="node33" href="$classptx__instruction.html" title="ptx_instruction" alt="" coords="1393,1431,1498,1457"/>
+<area shape="rect" id="node39" href="$structcore__config.html" title="core_config" alt="" coords="697,1533,785,1560"/>
+<area shape="rect" id="node40" href="$structbasic__block__t.html" title="basic_block_t" alt="" coords="1753,1321,1855,1348"/>
+<area shape="rect" id="node45" href="$structgpgpu__ptx__sim__kernel__info.html" title="gpgpu_ptx_sim_kernel_info" alt="" coords="652,735,831,761"/>
+<area shape="rect" id="node13" href="$classsymbol.html" title="symbol" alt="" coords="2030,1175,2093,1201"/>
+<area shape="rect" id="node15" href="$classsymbol__table.html" title="symbol_table" alt="" coords="1074,819,1171,845"/>
+<area shape="rect" id="node25" href="$classmemory__space__t.html" title="memory_space_t" alt="" coords="296,2213,416,2240"/>
+<area shape="rect" id="node26" href="$classfunction__info.html" title="function_info" alt="" coords="1756,740,1852,767"/>
+<area shape="rect" id="node34" href="$classwarp__inst__t.html" title="warp_inst_t" alt="" coords="1079,1560,1166,1587"/>
+<area shape="rect" id="node14" href="$classtype__info.html" title="type_info" alt="" coords="1408,1088,1483,1115"/>
+</map>

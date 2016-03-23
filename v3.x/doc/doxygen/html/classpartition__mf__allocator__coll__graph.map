@@ -1,0 +1,8 @@
+<map id="partition_mf_allocator" name="partition_mf_allocator">
+<area shape="rect" id="node2" href="$classmem__fetch__allocator.html" title="mem_fetch_allocator" alt="" coords="993,785,1135,812"/>
+<area shape="rect" id="node3" href="$structmemory__config.html" title="memory_config" alt="" coords="1009,836,1119,863"/>
+<area shape="rect" id="node8" href="$classlinear__to__raw__address__translation.html" title="linear_to_raw_address\l_translation" alt="" coords="392,1050,541,1091"/>
+<area shape="rect" id="node12" href="$classcache__config.html" title="cache_config" alt="" coords="417,560,516,587"/>
+<area shape="rect" id="node11" href="$classl2__cache__config.html" title="l2_cache_config" alt="" coords="735,865,849,892"/>
+<area shape="rect" id="node10" href="$classint.html" title="int" alt="" coords="75,1211,114,1237"/>
+</map>

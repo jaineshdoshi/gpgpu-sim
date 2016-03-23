@@ -1,0 +1,4 @@
+<map id="AsymmetricTrafficPattern" name="AsymmetricTrafficPattern">
+<area shape="rect" id="node2" href="$classRandomTrafficPattern.html" title="RandomTrafficPattern" alt="" coords="15,80,161,107"/>
+<area shape="rect" id="node3" href="$classTrafficPattern.html" title="TrafficPattern" alt="" coords="39,5,137,32"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classcache__t.html" title="cache_t" alt="" coords="6,81,74,108"/>
+<area shape="rect" id="node2" href="$classbaseline__cache.html" title="baseline_cache" alt="" coords="123,56,234,83"/>
+<area shape="rect" id="node7" href="$classtex__cache.html" title="tex_cache" alt="" coords="138,107,219,133"/>
+<area shape="rect" id="node3" href="$classdata__cache.html" title="Data cache &#45; Implements common functions for L1 and L2 data cache. " alt="" coords="298,31,387,57"/>
+<area shape="rect" id="node6" href="$classread__only__cache.html" title="Read only cache. " alt="" coords="283,81,402,108"/>
+<area shape="rect" id="node4" href="$classl1__cache.html" title="l1_cache" alt="" coords="451,5,525,32"/>
+<area shape="rect" id="node5" href="$classl2__cache.html" title="l2_cache" alt="" coords="451,56,525,83"/>
+</map>

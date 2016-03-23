@@ -1,0 +1,17 @@
+<map id="IQRouter" name="IQRouter">
+<area shape="rect" id="node2" href="$classRouter.html" title="Router" alt="" coords="1037,2264,1097,2291"/>
+<area shape="rect" id="node3" href="$classTimedModule.html" title="TimedModule" alt="" coords="690,2605,790,2632"/>
+<area shape="rect" id="node4" href="$classModule.html" title="Module" alt="" coords="313,2177,377,2204"/>
+<area shape="rect" id="node17" href="$classPipelineFIFO.html" title="PipelineFIFO\&lt; Credit \&gt;" alt="" coords="989,1597,1144,1624"/>
+<area shape="rect" id="node28" href="$classPipelineFIFO.html" title="PipelineFIFO\&lt; Flit \&gt;" alt="" coords="997,759,1136,785"/>
+<area shape="rect" id="node38" href="$classAllocator.html" title="Allocator" alt="" coords="703,1647,777,1673"/>
+<area shape="rect" id="node42" href="$classBufferState.html" title="BufferState" alt="" coords="697,2089,783,2116"/>
+<area shape="rect" id="node44" href="$classBufferState_1_1BufferPolicy.html" title="BufferState::BufferPolicy" alt="" coords="987,2121,1147,2148"/>
+<area shape="rect" id="node45" href="$classVC.html" title="VC" alt="" coords="721,933,759,960"/>
+<area shape="rect" id="node11" href="$classint.html" title="int" alt="" coords="51,1127,90,1153"/>
+<area shape="rect" id="node19" href="$classCredit.html" title="Credit" alt="" coords="712,1327,768,1353"/>
+<area shape="rect" id="node26" href="$classSwitchMonitor.html" title="SwitchMonitor" alt="" coords="688,1225,792,1252"/>
+<area shape="rect" id="node30" href="$structFlit.html" title="Flit" alt="" coords="720,612,760,639"/>
+<area shape="rect" id="node31" href="$classOutputSet.html" title="OutputSet" alt="" coords="305,521,386,548"/>
+<area shape="rect" id="node40" href="$classBufferMonitor.html" title="BufferMonitor" alt="" coords="691,1276,789,1303"/>
+</map>

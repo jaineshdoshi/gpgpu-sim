@@ -1,0 +1,32 @@
+<map id="PCIeController" name="PCIeController">
+<area shape="rect" id="node2" href="$classComponent.html" title="Component" alt="" coords="1056,137,1144,164"/>
+<area shape="rect" id="node5" href="$classpowerComponents.html" title="powerComponents" alt="" coords="349,479,477,505"/>
+<area shape="rect" id="node6" href="$classArea.html" title="Area" alt="" coords="585,68,634,95"/>
+<area shape="rect" id="node7" href="$classuca__org__t.html" title="uca_org_t" alt="" coords="1287,989,1366,1016"/>
+<area shape="rect" id="node9" href="$classmem__array.html" title="mem_array" alt="" coords="1057,989,1143,1016"/>
+<area shape="rect" id="node10" href="$classmin__values__t.html" title="min_values_t" alt="" coords="561,957,658,984"/>
+<area shape="rect" id="node13" href="$structresults__mem__array.html" title="results_mem_array" alt="" coords="1035,829,1165,856"/>
+<area shape="rect" id="node15" href="$classPCIeParam.html" title="PCIeParam" alt="" coords="369,6507,458,6533"/>
+<area shape="rect" id="node17" href="$classInputParameter.html" title="InputParameter" alt="" coords="358,5851,469,5877"/>
+<area shape="rect" id="node20" href="$structroot__system.html" title="root_system" alt="" coords="1055,4473,1145,4500"/>
+<area shape="rect" id="node21" href="$structsystem__L2.html" title="system_L2" alt="" coords="372,5651,455,5677"/>
+<area shape="rect" id="node22" href="$structsystem__L3.html" title="system_L3" alt="" coords="372,5291,455,5317"/>
+<area shape="rect" id="node23" href="$structsystem__L2Directory.html" title="system_L2Directory" alt="" coords="346,3875,481,3901"/>
+<area shape="rect" id="node24" href="$structsystem__mc.html" title="system_mc" alt="" coords="370,4448,457,4475"/>
+<area shape="rect" id="node25" href="$structsystem__mem.html" title="system_mem" alt="" coords="364,2708,463,2735"/>
+<area shape="rect" id="node26" href="$structsystem__L1Directory.html" title="system_L1Directory" alt="" coords="346,4928,481,4955"/>
+<area shape="rect" id="node27" href="$structsystem__niu.html" title="system_niu" alt="" coords="370,2443,457,2469"/>
+<area shape="rect" id="node28" href="$structsystem__core.html" title="system_core" alt="" coords="719,2075,814,2101"/>
+<area shape="rect" id="node29" href="$structpredictor__systemcore.html" title="predictor_systemcore" alt="" coords="341,2868,485,2895"/>
+<area shape="rect" id="node30" href="$structBTB__systemcore.html" title="BTB_systemcore" alt="" coords="353,1804,473,1831"/>
+<area shape="rect" id="node31" href="$structitlb__systemcore.html" title="itlb_systemcore" alt="" coords="358,2075,469,2101"/>
+<area shape="rect" id="node32" href="$structicache__systemcore.html" title="icache_systemcore" alt="" coords="347,2024,479,2051"/>
+<area shape="rect" id="node33" href="$structdcache__systemcore.html" title="dcache_systemcore" alt="" coords="345,1864,481,1891"/>
+<area shape="rect" id="node34" href="$structdtlb__systemcore.html" title="dtlb_systemcore" alt="" coords="356,1139,471,1165"/>
+<area shape="rect" id="node35" href="$structsystem__NoC.html" title="system_NoC" alt="" coords="719,4717,814,4744"/>
+<area shape="rect" id="node36" href="$structxbar0__systemNoC.html" title="xbar0_systemNoC" alt="" coords="351,3245,476,3272"/>
+<area shape="rect" id="node37" href="$structsystem__pcie.html" title="system_pcie" alt="" coords="367,4139,460,4165"/>
+<area shape="rect" id="node4" href="$classpowerDef.html" title="powerDef" alt="" coords="729,288,805,315"/>
+<area shape="rect" id="node11" href="$classint.html" title="int" alt="" coords="43,3177,82,3204"/>
+<area shape="rect" id="node19" href="$classParseXML.html" title="ParseXML" alt="" coords="1285,3675,1368,3701"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="UniformBackgroundTrafficPattern" name="UniformBackgroundTrafficPattern">
+<area shape="rect" id="node2" href="$classRandomTrafficPattern.html" title="RandomTrafficPattern" alt="" coords="5,173,152,200"/>
+<area shape="rect" id="node3" href="$classTrafficPattern.html" title="TrafficPattern" alt="" coords="29,96,128,123"/>
+<area shape="rect" id="node4" href="$classint.html" title="int" alt="" coords="59,5,97,32"/>
+</map>

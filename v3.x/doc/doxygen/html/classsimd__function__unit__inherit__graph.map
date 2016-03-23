@@ -1,0 +1,6 @@
+<map id="simd_function_unit" name="simd_function_unit">
+<area shape="rect" id="node2" href="$classpipelined__simd__unit.html" title="pipelined_simd_unit" alt="" coords="51,80,185,107"/>
+<area shape="rect" id="node3" href="$classldst__unit.html" title="ldst_unit" alt="" coords="5,155,75,181"/>
+<area shape="rect" id="node4" href="$classsfu.html" title="sfu" alt="" coords="99,155,137,181"/>
+<area shape="rect" id="node5" href="$classsp__unit.html" title="sp_unit" alt="" coords="162,155,224,181"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="ptx_thread_info" name="ptx_thread_info">
+<area shape="rect" id="node14" href="$classcore__t.html" title="core_t" alt="" coords="2147,1128,2205,1155"/>
+<area shape="rect" id="node50" href="$structdram__callback__t.html" title="dram_callback_t" alt="" coords="2117,1375,2235,1401"/>
+<area shape="rect" id="node3" href="$classsymbol__table.html" title="symbol_table" alt="" coords="826,1923,923,1949"/>
+<area shape="rect" id="node26" href="$classfunction__info.html" title="function_info" alt="" coords="1199,2244,1295,2271"/>
+<area shape="rect" id="node7" href="$classptx__version.html" title="ptx_version" alt="" coords="441,2284,527,2311"/>
+<area shape="rect" id="node16" href="$classgpgpu__sim.html" title="gpgpu_sim" alt="" coords="833,509,917,536"/>
+<area shape="rect" id="node42" href="$unionptx__reg__t.html" title="ptx_reg_t" alt="" coords="837,987,912,1013"/>
+<area shape="rect" id="node33" href="$classptx__instruction.html" title="ptx_instruction" alt="" coords="1827,2601,1933,2628"/>
+<area shape="rect" id="node37" href="$classsymbol.html" title="symbol" alt="" coords="1537,2601,1599,2628"/>
+<area shape="rect" id="node15" href="$classsimt__stack.html" title="simt_stack" alt="" coords="637,1639,721,1665"/>
+<area shape="rect" id="node17" href="$classgpgpu__t.html" title="gpgpu_t" alt="" coords="450,189,518,216"/>
+<area shape="rect" id="node25" href="$classkernel__info__t.html" title="kernel_info_t" alt="" coords="1520,1204,1616,1231"/>
+<area shape="rect" id="node34" href="$classmemory__space__t.html" title="memory_space_t" alt="" coords="1508,1644,1628,1671"/>
+<area shape="rect" id="node38" href="$structgpgpu__ptx__sim__kernel__info.html" title="gpgpu_ptx_sim_kernel_info" alt="" coords="785,1812,964,1839"/>
+<area shape="rect" id="node41" href="$structdim3.html" title="dim3" alt="" coords="1221,1269,1272,1296"/>
+<area shape="rect" id="node49" href="$classptx__cta__info.html" title="ptx_cta_info" alt="" coords="1019,1292,1111,1319"/>
+<area shape="rect" id="node23" href="$classmemory__space.html" title="memory_space" alt="" coords="40,397,149,424"/>
+<area shape="rect" id="node36" href="$classint.html" title="int" alt="" coords="465,1555,503,1581"/>
+</map>

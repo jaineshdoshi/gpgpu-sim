@@ -1,0 +1,29 @@
+<map id="_cl_device_id" name="_cl_device_id">
+<area shape="rect" id="node2" href="$classgpgpu__sim.html" title="gpgpu_sim" alt="" coords="2569,1611,2653,1637"/>
+<area shape="rect" id="node21" href="$classsimt__core__cluster.html" title="simt_core_cluster" alt="" coords="2824,1792,2947,1819"/>
+<area shape="rect" id="node3" href="$classgpgpu__t.html" title="gpgpu_t" alt="" coords="821,2179,889,2205"/>
+<area shape="rect" id="node11" href="$classgpgpu__functional__sim__config.html" title="gpgpu_functional_sim\l_config" alt="" coords="365,1899,512,1941"/>
+<area shape="rect" id="node15" href="$structshader__core__config.html" title="shader_core_config" alt="" coords="1136,1227,1269,1253"/>
+<area shape="rect" id="node16" href="$structcore__config.html" title="core_config" alt="" coords="395,1184,483,1211"/>
+<area shape="rect" id="node19" href="$classcache__config.html" title="cache_config" alt="" coords="389,1965,488,1992"/>
+<area shape="rect" id="node23" href="$structshader__core__stats__pod.html" title="shader_core_stats_pod" alt="" coords="1125,665,1280,692"/>
+<area shape="rect" id="node28" href="$classmemory__stats__t.html" title="memory_stats_t" alt="" coords="1491,2120,1605,2147"/>
+<area shape="rect" id="node29" href="$structmemory__config.html" title="memory_config" alt="" coords="1148,2120,1257,2147"/>
+<area shape="rect" id="node35" href="$classshader__core__ctx.html" title="shader_core_ctx" alt="" coords="3057,1837,3173,1864"/>
+<area shape="rect" id="node37" href="$classmemory__partition__unit.html" title="memory_partition_unit" alt="" coords="2160,2303,2309,2329"/>
+<area shape="rect" id="node40" href="$classdram__t.html" title="dram_t" alt="" coords="2579,2827,2642,2853"/>
+<area shape="rect" id="node41" href="$classmemory__sub__partition.html" title="memory_sub_partition" alt="" coords="1798,2077,1946,2104"/>
+<area shape="rect" id="node45" href="$classgpgpu__sim__config.html" title="gpgpu_sim_config" alt="" coords="1485,1475,1611,1501"/>
+<area shape="rect" id="node48" href="$classgpgpu__sim__wrapper.html" title="gpgpu_sim_wrapper" alt="" coords="371,1629,507,1656"/>
+<area shape="rect" id="node10" href="$classmemory__space.html" title="memory_space" alt="" coords="384,2016,493,2043"/>
+<area shape="rect" id="node31" href="$classlinear__to__raw__address__translation.html" title="linear_to_raw_address\l_translation" alt="" coords="364,1681,513,1722"/>
+<area shape="rect" id="node46" href="$structpower__config.html" title="power_config" alt="" coords="390,627,487,653"/>
+<area shape="rect" id="node13" href="$classint.html" title="int" alt="" coords="45,231,83,257"/>
+<area shape="rect" id="node38" href="$classmemory__partition__unit_1_1arbitration__metadata.html" title="memory_partition_unit\l::arbitration_metadata" alt="" coords="572,370,721,411"/>
+<area shape="rect" id="node22" href="$classshader__core__stats.html" title="shader_core_stats" alt="" coords="1485,689,1611,716"/>
+<area shape="rect" id="node42" href="$classpower__stat__t.html" title="power_stat_t" alt="" coords="2187,1184,2282,1211"/>
+<area shape="rect" id="node43" href="$classpower__core__stat__t.html" title="power_core_stat_t" alt="" coords="1809,1005,1935,1032"/>
+<area shape="rect" id="node44" href="$classpower__mem__stat__t.html" title="power_mem_stat_t" alt="" coords="1807,1209,1937,1236"/>
+<area shape="rect" id="node32" href="$classl2__cache__config.html" title="l2_cache_config" alt="" coords="797,1883,912,1909"/>
+<area shape="rect" id="node25" href="$classtraffic__breakdown.html" title="traffic_breakdown" alt="" coords="1142,472,1263,499"/>
+</map>

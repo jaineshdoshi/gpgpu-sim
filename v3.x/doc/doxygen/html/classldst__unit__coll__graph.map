@@ -1,0 +1,35 @@
+<map id="ldst_unit" name="ldst_unit">
+<area shape="rect" id="node17" href="$classshader__core__ctx.html" title="shader_core_ctx" alt="" coords="2645,1549,2761,1576"/>
+<area shape="rect" id="node2" href="$classpipelined__simd__unit.html" title="pipelined_simd_unit" alt="" coords="2939,2213,3074,2240"/>
+<area shape="rect" id="node3" href="$classsimd__function__unit.html" title="simd_function_unit" alt="" coords="1005,2244,1136,2271"/>
+<area shape="rect" id="node4" href="$structshader__core__config.html" title="shader_core_config" alt="" coords="699,2244,832,2271"/>
+<area shape="rect" id="node19" href="$classshader__core__stats.html" title="shader_core_stats" alt="" coords="1350,1665,1477,1692"/>
+<area shape="rect" id="node5" href="$structcore__config.html" title="core_config" alt="" coords="357,2307,445,2333"/>
+<area shape="rect" id="node10" href="$classwarp__inst__t.html" title="warp_inst_t" alt="" coords="722,1916,809,1943"/>
+<area shape="rect" id="node9" href="$classcache__config.html" title="cache_config" alt="" coords="352,1400,451,1427"/>
+<area shape="rect" id="node11" href="$classinst__t.html" title="inst_t" alt="" coords="375,1805,428,1832"/>
+<area shape="rect" id="node24" href="$structmemory__config.html" title="memory_config" alt="" coords="1016,1739,1125,1765"/>
+<area shape="rect" id="node26" href="$classlinear__to__raw__address__translation.html" title="linear_to_raw_address\l_translation" alt="" coords="327,1638,476,1679"/>
+<area shape="rect" id="node40" href="$classopndcoll__rfu__t.html" title="opndcoll_rfu_t" alt="" coords="2955,1156,3058,1183"/>
+<area shape="rect" id="node44" href="$structtex__cache_1_1data__block.html" title="tex_cache::data_block" alt="" coords="326,573,477,600"/>
+<area shape="rect" id="node20" href="$structshader__core__stats__pod.html" title="shader_core_stats_pod" alt="" coords="520,1177,675,1204"/>
+<area shape="rect" id="node28" href="$classScoreboard.html" title="Scoreboard" alt="" coords="2104,1657,2192,1684"/>
+<area shape="rect" id="node33" href="$classcache__stats.html" title="cache_stats" alt="" coords="1025,616,1116,643"/>
+<area shape="rect" id="node36" href="$classtag__array.html" title="tag_array" alt="" coords="872,755,947,781"/>
+<area shape="rect" id="node38" href="$classshader__core__mem__fetch__allocator.html" title="shader_core_mem_fetch\l_allocator" alt="" coords="1715,1534,1879,1575"/>
+<area shape="rect" id="node45" href="$classtex__cache_1_1fifo.html" title="tex_cache::fifo\&lt; tex\l_cache::fragment_entry \&gt;" alt="" coords="1510,449,1677,490"/>
+<area shape="rect" id="node46" href="$classtex__cache_1_1fifo.html" title="tex_cache::fifo\&lt; mem\l_fetch * \&gt;" alt="" coords="1725,849,1869,890"/>
+<area shape="rect" id="node47" href="$classmem__fetch.html" title="mem_fetch" alt="" coords="1370,1364,1457,1391"/>
+<area shape="rect" id="node48" href="$classtex__cache_1_1fifo.html" title="tex_cache::fifo\&lt; tex\l_cache::rob_entry \&gt;" alt="" coords="530,366,665,407"/>
+<area shape="rect" id="node16" href="$classregister__set.html" title="register_set" alt="" coords="1204,2937,1292,2964"/>
+<area shape="rect" id="node27" href="$classl2__cache__config.html" title="l2_cache_config" alt="" coords="708,1557,823,1584"/>
+<area shape="rect" id="node31" href="$classbaseline__cache.html" title="baseline_cache" alt="" coords="1358,836,1469,863"/>
+<area shape="rect" id="node43" href="$classtex__cache.html" title="tex_cache" alt="" coords="2107,952,2189,979"/>
+<area shape="rect" id="node21" href="$classtraffic__breakdown.html" title="traffic_breakdown" alt="" coords="1010,1688,1131,1715"/>
+<area shape="rect" id="node18" href="$classmem__fetch__interface.html" title="mem_fetch_interface" alt="" coords="999,1164,1143,1191"/>
+<area shape="rect" id="node30" href="$classread__only__cache.html" title="Read only cache. " alt="" coords="2089,728,2207,755"/>
+<area shape="rect" id="node42" href="$classdata__cache.html" title="Data cache &#45; Implements common functions for L1 and L2 data cache. " alt="" coords="1753,1264,1842,1291"/>
+<area shape="rect" id="node32" href="$classcache__t.html" title="cache_t" alt="" coords="1037,717,1105,744"/>
+<area shape="rect" id="node39" href="$classmem__fetch__allocator.html" title="mem_fetch_allocator" alt="" coords="1342,1415,1485,1441"/>
+<area shape="rect" id="node41" href="$classl1__cache.html" title="l1_cache" alt="" coords="2111,1265,2185,1292"/>
+</map>

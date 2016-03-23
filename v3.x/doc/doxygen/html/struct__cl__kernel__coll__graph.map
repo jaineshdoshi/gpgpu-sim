@@ -1,0 +1,17 @@
+<map id="_cl_kernel" name="_cl_kernel">
+<area shape="rect" id="node5" href="$classfunction__info.html" title="function_info" alt="" coords="1132,1560,1228,1587"/>
+<area shape="rect" id="node6" href="$classsymbol__table.html" title="symbol_table" alt="" coords="770,2123,867,2149"/>
+<area shape="rect" id="node10" href="$classptx__version.html" title="ptx_version" alt="" coords="382,2208,469,2235"/>
+<area shape="rect" id="node22" href="$classptx__instruction.html" title="ptx_instruction" alt="" coords="2009,1389,2114,1416"/>
+<area shape="rect" id="node42" href="$classsymbol.html" title="symbol" alt="" coords="1455,1605,1518,1632"/>
+<area shape="rect" id="node43" href="$classtype__info.html" title="type_info" alt="" coords="1143,1777,1217,1804"/>
+<area shape="rect" id="node40" href="$classoperand__info.html" title="operand_info" alt="" coords="1749,2191,1845,2217"/>
+<area shape="rect" id="node23" href="$classwarp__inst__t.html" title="warp_inst_t" alt="" coords="1137,781,1223,808"/>
+<area shape="rect" id="node24" href="$classinst__t.html" title="inst_t" alt="" coords="792,643,845,669"/>
+<area shape="rect" id="node35" href="$structcore__config.html" title="core_config" alt="" coords="775,1125,863,1152"/>
+<area shape="rect" id="node36" href="$structbasic__block__t.html" title="basic_block_t" alt="" coords="2269,2236,2371,2263"/>
+<area shape="rect" id="node44" href="$classtype__info__key.html" title="type_info_key" alt="" coords="768,1881,869,1908"/>
+<area shape="rect" id="node29" href="$classmemory__space__t.html" title="memory_space_t" alt="" coords="365,719,485,745"/>
+<area shape="rect" id="node48" href="$structgpgpu__ptx__sim__kernel__info.html" title="gpgpu_ptx_sim_kernel_info" alt="" coords="729,1379,908,1405"/>
+<area shape="rect" id="node31" href="$classint.html" title="int" alt="" coords="406,1595,445,1621"/>
+</map>

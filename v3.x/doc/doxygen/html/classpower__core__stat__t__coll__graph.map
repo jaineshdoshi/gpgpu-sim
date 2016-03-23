@@ -1,0 +1,10 @@
+<map id="power_core_stat_t" name="power_core_stat_t">
+<area shape="rect" id="node2" href="$structshader__core__power__stats__pod.html" title="shader_core_power_stats_pod" alt="" coords="411,396,605,423"/>
+<area shape="rect" id="node20" href="$structshader__core__stats__pod.html" title="shader_core_stats_pod" alt="" coords="431,259,585,285"/>
+<area shape="rect" id="node5" href="$structshader__core__config.html" title="shader_core_config" alt="" coords="760,1200,893,1227"/>
+<area shape="rect" id="node6" href="$structcore__config.html" title="core_config" alt="" coords="464,928,552,955"/>
+<area shape="rect" id="node11" href="$classcache__config.html" title="cache_config" alt="" coords="459,1823,557,1849"/>
+<area shape="rect" id="node19" href="$classshader__core__stats.html" title="shader_core_stats" alt="" coords="1089,297,1215,324"/>
+<area shape="rect" id="node7" href="$classint.html" title="int" alt="" coords="75,693,114,720"/>
+<area shape="rect" id="node23" href="$classtraffic__breakdown.html" title="traffic_breakdown" alt="" coords="766,200,887,227"/>
+</map>
