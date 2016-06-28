@@ -1,0 +1,213 @@
+!SESSION 2016-05-22 21:33:39.325 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -data /home/jaineshdoshi/Documents/GPGPU-sim/gpgpu-sim -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-05-22 21:34:05.492
+!MESSAGE no spawner in java.library.path
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-05-22 21:34:06.630
+!MESSAGE Indexed 'reconf-gpgpu' (0 sources, 0 headers) in 0.00 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.core.jobs 4 2 2016-05-22 21:39:44.388
+!MESSAGE An internal error occurred during: "Organizing includes".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.corext.codemanipulation.InclusionContext.<init>(InclusionContext.java:52)
+	at org.eclipse.cdt.internal.ui.refactoring.includes.IncludeCreationContext.<init>(IncludeCreationContext.java:43)
+	at org.eclipse.cdt.internal.ui.refactoring.includes.IncludeOrganizer.<init>(IncludeOrganizer.java:190)
+	at org.eclipse.cdt.internal.ui.editor.OrganizeIncludesAction$1.runOnAST(OrganizeIncludesAction.java:83)
+	at org.eclipse.cdt.ui.text.SharedASTJob$1.runOnAST(SharedASTJob.java:74)
+	at org.eclipse.cdt.internal.core.model.ASTCache.runOnAST(ASTCache.java:219)
+	at org.eclipse.cdt.internal.ui.editor.ASTProvider.runOnAST(ASTProvider.java:359)
+	at org.eclipse.cdt.ui.text.SharedASTJob.run(SharedASTJob.java:71)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SESSION 2016-05-23 21:01:56.659 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-05-23 21:02:12.493
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-05-23 21:02:40.230
+!MESSAGE no spawner in java.library.path
+!SESSION 2016-05-24 18:38:02.695 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-05-24 18:38:41.129
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.resources 4 77 2016-05-24 18:40:15.947
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2016-05-24 18:40:15.947
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2016-05-24 18:40:15.947
+!MESSAGE /home/jaineshdoshi/Documents/GPGPU-sim/gpgpu-sim/v3.x overlaps the location of another project: 'v3.x'
+!SESSION 2016-05-24 18:41:39.363 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-05-24 18:42:35.746
+!MESSAGE no spawner in java.library.path
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-05-24 18:43:27.421
+!MESSAGE Indexed 'v3.x' (188 sources, 1,105 headers) in 48.48 sec: 1,17,252 declarations; 3,64,508 references; 24 unresolved inclusions; 126 syntax errors; 1,058 unresolved names (0.22%)
+!SESSION 2016-06-02 19:54:26.962 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-02 19:54:34.545
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-06-02 19:55:51.443
+!MESSAGE no spawner in java.library.path
+!SESSION 2016-06-02 23:17:07.192 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-02 23:17:14.371
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-02 23:43:18.855 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-02 23:43:26.304
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-03 04:04:41.570 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-03 04:04:48.807
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-03 17:48:04.479 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-03 17:48:11.761
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-03 18:00:25.389 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-03 18:00:32.626
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-03 19:57:21.184 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-03 19:57:28.531
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-03 22:29:25.231 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-03 22:29:32.190
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-04 18:57:35.562 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-04 18:57:42.779
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-04 20:07:37.365 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-04 20:07:52.001
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-06 05:21:37.836 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-06 05:21:45.529
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-16 17:07:43.276 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-16 17:07:52.112
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-06-17 15:41:03.589 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-06-17 15:43:06.206
+!MESSAGE Indexed 'base-platfrom' (13 sources, 193 headers) in 4.36 sec: 10,511 declarations; 18,533 references; 40 unresolved inclusions; 301 syntax errors; 1,282 unresolved names (4.23%)
+!SESSION 2016-06-25 02:18:32.287 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-25 02:18:39.811
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-06-25 02:33:32.231
+!MESSAGE Indexed 'base-platfrom' (14 sources, 194 headers) in 4.14 sec: 10,724 declarations; 18,916 references; 40 unresolved inclusions; 348 syntax errors; 2,297 unresolved names (7.19%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-06-25 16:38:38.113
+!MESSAGE Indexed 'base-platfrom' (16 sources, 195 headers) in 3.71 sec: 10,737 declarations; 18,956 references; 40 unresolved inclusions; 348 syntax errors; 2,340 unresolved names (7.30%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-06-25 16:40:05.276
+!MESSAGE Indexed 'base-platfrom' (14 sources, 194 headers) in 3.26 sec: 10,725 declarations; 18,921 references; 40 unresolved inclusions; 348 syntax errors; 2,304 unresolved names (7.21%)
+!SESSION 2016-06-27 17:25:21.894 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-06-27 17:25:30.367
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

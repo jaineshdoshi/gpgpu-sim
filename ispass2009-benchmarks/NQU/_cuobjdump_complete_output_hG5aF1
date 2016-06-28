@@ -1,0 +1,1934 @@
+
+Fatbin ptx code:
+================
+arch = sm_30
+code version = [3,0]
+producer = cuda
+host = linux
+compile_size = 64bit
+identifier = nqueen.cu
+
+
+
+
+
+
+.version 3.0
+.target sm_30
+.address_size 64
+
+.file	1 "/tmp/tmpxft_00003c06_00000000-11_nqueen.compute_30.cpp3.i"
+.file	2 "nqueen.cu"
+
+
+
+
+
+
+.entry _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i(
+.param .u32 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_0,
+.param .u32 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_1,
+.param .u64 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_2,
+.param .u64 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_3,
+.param .u64 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_4,
+.param .u64 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_5,
+.param .u32 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_6
+)
+{
+.reg .pred %p<16>;
+.reg .s32 %r<133>;
+.reg .s64 %rl<42>;
+
+	.shared .align 4 .b8 __cuda_local_var_17460_39_non_const_mask[3840];
+
+	.shared .align 4 .b8 __cuda_local_var_17461_39_non_const_l_mask[3840];
+
+	.shared .align 4 .b8 __cuda_local_var_17462_39_non_const_r_mask[3840];
+
+	.shared .align 4 .b8 __cuda_local_var_17463_39_non_const_m[3840];
+
+	.shared .align 4 .b8 __cuda_local_var_17465_39_non_const_sum[384];
+
+ld.param.u32 %r16, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_0];
+ld.param.u64 %rl9, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_2];
+ld.param.u64 %rl10, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_3];
+ld.param.u64 %rl11, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_4];
+ld.param.u64 %rl12, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_5];
+ld.param.u32 %r17, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_6];
+cvta.to.global.u64 %rl1, %rl12;
+cvta.to.global.u64 %rl2, %rl11;
+cvta.to.global.u64 %rl3, %rl10;
+cvta.to.global.u64 %rl4, %rl9;
+.loc 2 327 1
+mov.u32 %r18, %ntid.x;
+.loc 2 326 1
+mov.u32 %r19, %ctaid.x;
+.loc 2 325 1
+mov.u32 %r2, %tid.x;
+.loc 2 327 1
+mad.lo.s32 %r3, %r18, %r19, %r2;
+mov.u32 %r20, 1;
+.loc 2 336 1
+shl.b32 %r21, %r20, %r16;
+add.s32 %r4, %r21, -1;
+.loc 2 341 1
+setp.lt.s32 %p1, %r3, %r17;
+mul.wide.s32 %rl13, %r2, 4;
+mov.u64 %rl14, __cuda_local_var_17465_39_non_const_sum;
+add.s64 %rl5, %rl14, %rl13;
+.loc 2 341 1
+@%p1 bra BB0_2;
+
+mov.u32 %r22, 0;
+.loc 2 376 1
+st.shared.u32 [%rl5], %r22;
+bra.uni BB0_11;
+
+BB0_2:
+.loc 2 342 1
+mul.wide.s32 %rl15, %r3, 4;
+add.s64 %rl16, %rl4, %rl15;
+.loc 2 325 1
+mov.u32 %r120, %tid.x;
+.loc 2 342 1
+cvt.s64.s32 %rl6, %r120;
+mov.u64 %rl17, __cuda_local_var_17460_39_non_const_mask;
+mad.lo.s64 %rl18, %rl6, 40, %rl17;
+.loc 2 342 1
+ld.global.u32 %r26, [%rl16];
+st.shared.u32 [%rl18], %r26;
+.loc 2 343 1
+add.s64 %rl19, %rl3, %rl15;
+mov.u64 %rl20, __cuda_local_var_17461_39_non_const_l_mask;
+mad.lo.s64 %rl21, %rl6, 40, %rl20;
+.loc 2 343 1
+ld.global.u32 %r29, [%rl19];
+st.shared.u32 [%rl21], %r29;
+.loc 2 344 1
+add.s64 %rl22, %rl2, %rl15;
+mov.u64 %rl23, __cuda_local_var_17462_39_non_const_r_mask;
+mad.lo.s64 %rl24, %rl6, 40, %rl23;
+.loc 2 344 1
+ld.global.u32 %r32, [%rl22];
+st.shared.u32 [%rl24], %r32;
+.loc 2 345 1
+or.b32 %r35, %r29, %r26;
+or.b32 %r36, %r35, %r32;
+mov.u64 %rl25, __cuda_local_var_17463_39_non_const_m;
+mad.lo.s64 %rl26, %rl6, 40, %rl25;
+.loc 2 345 1
+st.shared.u32 [%rl26], %r36;
+mov.u32 %r132, 0;
+mov.u32 %r130, %r132;
+
+BB0_3:
+.loc 2 348 1
+cvt.s64.s32 %rl7, %r130;
+mul.wide.s32 %rl29, %r130, 4;
+add.s64 %rl8, %rl26, %rl29;
+.loc 2 348 1
+ld.shared.u32 %r7, [%rl8];
+and.b32 %r39, %r7, %r4;
+setp.eq.s32 %p2, %r39, %r4;
+@%p2 bra BB0_8;
+
+.loc 2 352 1
+add.s32 %r40, %r7, 1;
+not.b32 %r41, %r7;
+and.b32 %r8, %r40, %r41;
+.loc 2 353 1
+or.b32 %r42, %r7, %r8;
+st.shared.u32 [%rl8], %r42;
+.loc 2 354 1
+and.b32 %r44, %r8, %r4;
+setp.eq.s32 %p3, %r44, 0;
+@%p3 bra BB0_8;
+
+.loc 2 355 1
+add.s32 %r131, %r130, 1;
+ld.param.u32 %r109, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_1];
+.loc 2 355 1
+setp.eq.s32 %p4, %r131, %r109;
+@%p4 bra BB0_7;
+
+shl.b64 %rl32, %rl7, 2;
+add.s64 %rl33, %rl18, %rl32;
+.loc 2 360 1
+ld.shared.u32 %r45, [%rl33];
+or.b32 %r47, %r45, %r8;
+st.shared.u32 [%rl33+4], %r47;
+add.s64 %rl36, %rl21, %rl32;
+.loc 2 361 1
+ld.shared.u32 %r49, [%rl36];
+or.b32 %r51, %r49, %r8;
+shl.b32 %r52, %r51, 1;
+st.shared.u32 [%rl36+4], %r52;
+add.s64 %rl39, %rl24, %rl32;
+.loc 2 362 1
+ld.shared.u32 %r54, [%rl39];
+or.b32 %r56, %r54, %r8;
+shr.u32 %r57, %r56, 1;
+st.shared.u32 [%rl39+4], %r57;
+.loc 2 363 1
+or.b32 %r59, %r52, %r47;
+or.b32 %r60, %r59, %r57;
+st.shared.u32 [%rl8+4], %r60;
+bra.uni BB0_9;
+
+BB0_7:
+.loc 2 356 1
+add.s32 %r132, %r132, 1;
+
+BB0_8:
+.loc 2 349 1
+add.s32 %r131, %r130, -1;
+
+BB0_9:
+mov.u32 %r130, %r131;
+setp.gt.s32 %p5, %r130, -1;
+.loc 2 347 1
+@%p5 bra BB0_3;
+
+.loc 2 373 1
+st.shared.u32 [%rl5], %r132;
+
+BB0_11:
+.loc 2 379 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r128, %tid.x;
+.loc 2 382 1
+add.s32 %r63, %r128, 64;
+setp.lt.s32 %p6, %r63, 96;
+setp.lt.s32 %p7, %r128, 64;
+and.pred %p8, %p7, %p6;
+.loc 2 382 1
+@!%p8 bra BB0_13;
+
+.loc 2 382 1
+ld.shared.u32 %r64, [%rl5];
+ld.shared.u32 %r66, [%rl5+256];
+add.s32 %r68, %r64, %r66;
+st.shared.u32 [%rl5], %r68;
+
+BB0_13:
+.loc 2 382 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r127, %tid.x;
+.loc 2 383 1
+setp.gt.s32 %p9, %r127, 31;
+@%p9 bra BB0_15;
+
+.loc 2 383 1
+ld.shared.u32 %r70, [%rl5];
+ld.shared.u32 %r72, [%rl5+128];
+add.s32 %r74, %r70, %r72;
+st.shared.u32 [%rl5], %r74;
+
+BB0_15:
+.loc 2 383 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r126, %tid.x;
+.loc 2 384 1
+setp.gt.s32 %p10, %r126, 15;
+@%p10 bra BB0_17;
+
+.loc 2 384 1
+ld.shared.u32 %r76, [%rl5];
+ld.shared.u32 %r78, [%rl5+64];
+add.s32 %r80, %r76, %r78;
+st.shared.u32 [%rl5], %r80;
+
+BB0_17:
+.loc 2 384 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r125, %tid.x;
+.loc 2 385 1
+setp.gt.s32 %p11, %r125, 7;
+@%p11 bra BB0_19;
+
+.loc 2 385 1
+ld.shared.u32 %r82, [%rl5];
+ld.shared.u32 %r84, [%rl5+32];
+add.s32 %r86, %r82, %r84;
+st.shared.u32 [%rl5], %r86;
+
+BB0_19:
+.loc 2 385 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r124, %tid.x;
+.loc 2 386 1
+setp.gt.s32 %p12, %r124, 3;
+@%p12 bra BB0_21;
+
+.loc 2 386 1
+ld.shared.u32 %r88, [%rl5];
+ld.shared.u32 %r90, [%rl5+16];
+add.s32 %r92, %r88, %r90;
+st.shared.u32 [%rl5], %r92;
+
+BB0_21:
+.loc 2 386 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r123, %tid.x;
+.loc 2 387 1
+setp.gt.s32 %p13, %r123, 1;
+@%p13 bra BB0_23;
+
+.loc 2 387 1
+ld.shared.u32 %r94, [%rl5];
+ld.shared.u32 %r96, [%rl5+8];
+add.s32 %r98, %r94, %r96;
+st.shared.u32 [%rl5], %r98;
+
+BB0_23:
+.loc 2 387 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r122, %tid.x;
+.loc 2 388 1
+setp.gt.s32 %p14, %r122, 0;
+@%p14 bra BB0_25;
+
+.loc 2 388 1
+ld.shared.u32 %r100, [%rl5];
+ld.shared.u32 %r102, [%rl5+4];
+add.s32 %r104, %r100, %r102;
+st.shared.u32 [%rl5], %r104;
+
+BB0_25:
+.loc 2 388 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r121, %tid.x;
+.loc 2 390 1
+setp.eq.s32 %p15, %r121, 0;
+@%p15 bra BB0_27;
+
+.loc 2 393 2
+ret;
+
+BB0_27:
+.loc 2 391 1
+ld.shared.u32 %r106, [__cuda_local_var_17465_39_non_const_sum];
+.loc 2 326 1
+mov.u32 %r119, %ctaid.x;
+.loc 2 391 1
+mul.wide.s32 %rl40, %r119, 4;
+add.s64 %rl41, %rl1, %rl40;
+st.global.u32 [%rl41], %r106;
+.loc 2 393 2
+ret;
+}
+
+
+
+Fatbin elf code:
+================
+arch = sm_30
+code version = [1,4]
+producer = cuda
+host = linux
+compile_size = 64bit
+identifier = nqueen.cu
+
+.section .strtab	STRTAB
+
+.section .shstrtab	STRTAB
+
+.section .symtab	SYMTAB
+ index           value           size      info    other  shndx    name  
+   0               0               0        0        0      0     (null)
+   1               0               0        3        0      1     .shstrtab
+   2               0               0        3        0      2     .strtab
+   3               0               0        3        0      3     .symtab
+   4               0               0        3        0      0     
+   5               0               0        3        0      0     
+   6               0            1344        3        0      4     .text._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+   7               0               0        3        0      6     .nv.info._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+   8               0               0        3        0      8     .nv.info
+   9               0               0        3        0      7     .nv.shared._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+  10               0               0        3        0      5     .nv.constant0._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+  11               0            1344       12       10      4     _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+
+
+.nv.constant0._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+0x00000000  0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  
+
+
+.nv.shared._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	NOBITS
+   No data to be dumped. 
+
+
+.text._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+bar = 1	reg = 17	lmem=0	smem=15744
+0x42304007  0x22720280  0x10005de4  0x28004001  
+0x94001c04  0x2c000000  0x04009de2  0x18000000  
+0x8400dc04  0x2c000000  0xc0000007  0x6000000a  
+0xa0011ca3  0x20064000  0x00209c03  0x60004005  
+0x0042c047  0x228042e0  0xa041dc23  0x188e4005  
+0x00301c43  0x4000c0f0  0xfc209c03  0x4800ffff  
+0x200001e7  0x40000000  0x000fdc95  0xc9000000  
+0x10015de2  0x18000000  0x1040dce3  0x5000c000  
+0xc202c047  0x22c20042  0x20419ca3  0x200b8005  
+0x00000007  0x60000009  0x3031dc43  0x48004005  
+0x40421ca3  0x200b8005  0x00619c85  0x84000000  
+0x50325c43  0x48004005  0x60429ca3  0x200b8005  
+0x43620207  0x22e2d200  0x7032dc43  0x48004005  
+0x00815c85  0x84000000  0x8400dc04  0x2c000000  
+0x00a11c85  0x84000000  0x1851dc43  0x68000000  
+0xa030dc03  0x5000c000  0x00319c85  0xc9000000  
+0xd0420047  0x22d20042  0x0032dc03  0x4800c03c  
+0x00315c85  0xc900003c  0x00331c03  0x4800c078  
+0x10719c43  0x68000000  0x00311c85  0xc9000078  
+0xfc015de4  0x28000000  0x00335c03  0x4800c0b4  
+0x80000047  0x22c28372  0x00319c85  0xc90000b4  
+0xfc011de4  0x28000000  0x40000007  0x70000005  
+0x34539c43  0x40000000  0x00e19c85  0xc1000000  
+0x0861dc03  0x68000000  0x0871dc23  0x190e0000  
+0x82804007  0x22c28042  0x400001e7  0x40000004  
+0x0461dc03  0x4800c000  0x1bf21dc3  0x68000000  
+0x2071dc03  0x68000000  0x08721c03  0x68000000  
+0x1c619c43  0x68000000  0xfc81dc23  0x190e0000  
+0xc2800047  0x22028002  0x00e19c85  0xc9000000  
+0x200001e7  0x40000003  0x04519c03  0x4800c000  
+0x1061dc23  0x190e4005  0xa00001e7  0x40000002  
+0x0c529c43  0x40000000  0x00a21c85  0xc1000000  
+0xe0428367  0x22828372  0x2c53dc43  0x40000000  
+0x1c825c43  0x68000000  0x30541c43  0x40000000  
+0x10a25c85  0xc9000000  0x00f21c85  0xc1000000  
+0x1c821c43  0x68000000  0x04829c03  0x6000c000  
+0x428372e7  0x22e20280  0x10f29c85  0xc9000000  
+0x01021c85  0xc1000000  0x1c81dc43  0x68000000  
+0x24a21c43  0x68000000  0x04715c03  0x5800c000  
+0x1481dc43  0x68000000  0x11015c85  0xc9000000  
+0x4002e047  0x22c04000  0x10e1dc85  0xc9000000  
+0x00001de7  0xb0000000  0x04411c03  0x4800c000  
+0xfc519c03  0x4800ffff  0x00001de7  0xb0000000  
+0xfc61dc23  0x1a0effff  0x18015de4  0x28000000  
+0x100002e7  0x22c28283  0x200001e7  0x4003fffa  
+0x00001df4  0x40000000  0x00011c95  0xc9000000  
+0x00001c04  0x500ec000  0x84009c04  0x2c000000  
+0x0020dc03  0x4800c001  0x8031dc23  0x188ec001  
+0x837232c7  0x228312e2  0x0021dc23  0x1880c001  
+0x0000c085  0xc1000000  0x00008085  0xc1000004  
+0x08308003  0x48000000  0x00008085  0xc9000000  
+0x00001c04  0x500ec000  0x84009c04  0x2c000000  
+0x837232c7  0x228312e2  0x7c21dc23  0x1a0ec000  
+0x0000e085  0xc1000000  0x0000a085  0xc1000002  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0x00001c04  0x500ec000  0x84009c04  0x2c000000  
+0x837232c7  0x228312e2  0x3c21dc23  0x1a0ec000  
+0x0000e085  0xc1000000  0x0000a085  0xc1000001  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0x00001c04  0x500ec000  0x84009c04  0x2c000000  
+0x837232c7  0x228312e2  0x1c21dc23  0x1a0ec000  
+0x0000e085  0xc1000000  0x8000a085  0xc1000000  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0x00001c04  0x500ec000  0x84009c04  0x2c000000  
+0x837232c7  0x228312e2  0x0c21dc23  0x1a0ec000  
+0x0000e085  0xc1000000  0x4000a085  0xc1000000  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0x00001c04  0x500ec000  0x84009c04  0x2c000000  
+0x837232c7  0x228312e2  0x0421dc23  0x1a0ec000  
+0x0000e085  0xc1000000  0x2000a085  0xc1000000  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0x00001c04  0x500ec000  0x84009c04  0x2c000000  
+0x837232c7  0x228312e2  0xfc21dc23  0x1a0e0000  
+0x0000e085  0xc1000000  0x1000a085  0xc1000000  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0x00001c04  0x500ec000  0x84001c04  0x2c000000  
+0x428042c7  0x22a28230  0xfc01dc23  0x190e0000  
+0x94008004  0x2c000000  0x8000c1e4  0x28004005  
+0x03f00085  0xc10000f0  0x102100a3  0x2007c000  
+0x102080e3  0x5000c000  0x90214043  0x48004005  
+0x0002e047  0x20000000  0x00400085  0x94000000  
+0x00001de7  0x80000000  0xe0001de7  0x4003ffff  
+0x00001de4  0x40000000  0x00001de4  0x40000000  
+0x00001de4  0x40000000  0x00001de4  0x40000000  
+
+
+
+.nv.info._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+	<0x1>
+	Attribute:	EIATTR_PARAM_CBANK
+	Format:	EIFMT_SVAL
+	Value:	0xa 0x2c0140 
+	<0x2>
+	Attribute:	EIATTR_CBANK_PARAM_SIZE
+	Format:	EIFMT_HVAL
+	Value:	0x2c
+	<0x3>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x6	Offset  : 0x28	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x4>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x5	Offset  : 0x20	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x5>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x4	Offset  : 0x18	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x6>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x3	Offset  : 0x10	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x7>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x2	Offset  : 0x8	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x8>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x1	Offset  : 0x4	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x9>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x0	Offset  : 0x0	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x10>
+	Attribute:	EIATTR_SYNC_STACK
+	Format:	EIFMT_SVAL
+	Value:	0x230230 0x20 
+
+
+.nv.info	PROGBITS
+	<0x1>
+	Attribute:	EIATTR_MIN_STACK_SIZE
+	Format:	EIFMT_SVAL
+	Value:	function: _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i(0xb)	min stack size: 0x0
+	<0x2>
+	Attribute:	EIATTR_FRAME_SIZE
+	Format:	EIFMT_SVAL
+	Value:	function: _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i(0xb)	frame size: 0x0
+
+	code for sm_30
+		Function : _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+	/*0008*/     /*0x10005de428004001*/ 	MOV R1, c [0x0] [0x44];
+	/*0010*/     /*0x94001c042c000000*/ 	S2R R0, SR_CTAid_X;
+	/*0018*/     /*0x04009de218000000*/ 	MOV32I R2, 0x1;
+	/*0020*/     /*0x8400dc042c000000*/ 	S2R R3, SR_Tid_X;
+	/*0028*/     /*0xc00000076000000a*/ 	SSY 0x2e0;
+	/*0030*/     /*0xa0011ca320064000*/ 	IMAD R4, R0, c [0x0] [0x28], R3;
+	/*0038*/     /*0x00209c0360004005*/ 	SHL R2, R2, c [0x0] [0x140];
+	/*0048*/     /*0xa041dc23188e4005*/ 	ISETP.LT.AND P0, pt, R4, c [0x0] [0x168], pt;
+	/*0050*/     /*0x00301c434000c0f0*/ 	ISCADD R0, R3, 0x3c00, 0x2;
+	/*0058*/     /*0xfc209c034800ffff*/ 	IADD R2, R2, 0xfffff;
+	/*0060*/     /*0x200001e740000000*/ 	@P0 BRA 0x70;
+	/*0068*/     /*0x000fdc95c9000000*/ 	STS.S [R0], RZ;
+	/*0070*/     /*0x10015de218000000*/ 	MOV32I R5, 0x4;
+	/*0078*/     /*0x1040dce35000c000*/ 	IMUL.HI R3, R4, 0x4;
+	/*0088*/     /*0x20419ca3200b8005*/ 	IMAD R6.CC, R4, R5, c [0x0] [0x148];
+	/*0090*/     /*0x0000000760000009*/ 	SSY 0x2d8;
+	/*0098*/     /*0x3031dc4348004005*/ 	IADD.X R7, R3, c [0x0] [0x14c];
+	/*00a0*/     /*0x40421ca3200b8005*/ 	IMAD R8.CC, R4, R5, c [0x0] [0x150];
+	/*00a8*/     /*0x00619c8584000000*/ 	LD.E R6, [R6];
+	/*00b0*/     /*0x50325c4348004005*/ 	IADD.X R9, R3, c [0x0] [0x154];
+	/*00b8*/     /*0x60429ca3200b8005*/ 	IMAD R10.CC, R4, R5, c [0x0] [0x158];
+	/*00c8*/     /*0x7032dc4348004005*/ 	IADD.X R11, R3, c [0x0] [0x15c];
+	/*00d0*/     /*0x00815c8584000000*/ 	LD.E R5, [R8];
+	/*00d8*/     /*0x8400dc042c000000*/ 	S2R R3, SR_Tid_X;
+	/*00e0*/     /*0x00a11c8584000000*/ 	LD.E R4, [R10];
+	/*00e8*/     /*0x1851dc4368000000*/ 	LOP.OR R7, R5, R6;
+	/*00f0*/     /*0xa030dc035000c000*/ 	IMUL.U32.U32 R3, R3, 0x28;
+	/*00f8*/     /*0x00319c85c9000000*/ 	STS [R3], R6;
+	/*0108*/     /*0x0032dc034800c03c*/ 	IADD R11, R3, 0xf00;
+	/*0110*/     /*0x00315c85c900003c*/ 	STS [R3+0xf00], R5;
+	/*0118*/     /*0x00331c034800c078*/ 	IADD R12, R3, 0x1e00;
+	/*0120*/     /*0x10719c4368000000*/ 	LOP.OR R6, R7, R4;
+	/*0128*/     /*0x00311c85c9000078*/ 	STS [R3+0x1e00], R4;
+	/*0130*/     /*0xfc015de428000000*/ 	MOV R5, RZ;
+	/*0138*/     /*0x00335c034800c0b4*/ 	IADD R13, R3, 0x2d00;
+	/*0148*/     /*0x00319c85c90000b4*/ 	STS [R3+0x2d00], R6;
+	/*0150*/     /*0xfc011de428000000*/ 	MOV R4, RZ;
+	/*0158*/     /*0x4000000770000005*/ 	PCNT 0x2b0;
+	/*0160*/     /*0x34539c4340000000*/ 	ISCADD R14, R5, R13, 0x2;
+	/*0168*/     /*0x00e19c85c1000000*/ 	LDS R6, [R14];
+	/*0170*/     /*0x0861dc0368000000*/ 	LOP.AND R7, R6, R2;
+	/*0178*/     /*0x0871dc23190e0000*/ 	ISETP.EQ.AND P0, pt, R7, R2, pt;
+	/*0188*/     /*0x400001e740000004*/ 	@P0 BRA 0x2a0;
+	/*0190*/     /*0x0461dc034800c000*/ 	IADD R7, R6, 0x1;
+	/*0198*/     /*0x1bf21dc368000000*/ 	LOP.PASS_B R8, RZ, ~R6;
+	/*01a0*/     /*0x2071dc0368000000*/ 	LOP.AND R7, R7, R8;
+	/*01a8*/     /*0x08721c0368000000*/ 	LOP.AND R8, R7, R2;
+	/*01b0*/     /*0x1c619c4368000000*/ 	LOP.OR R6, R6, R7;
+	/*01b8*/     /*0xfc81dc23190e0000*/ 	ISETP.EQ.AND P0, pt, R8, RZ, pt;
+	/*01c8*/     /*0x00e19c85c9000000*/ 	STS [R14], R6;
+	/*01d0*/     /*0x200001e740000003*/ 	@P0 BRA 0x2a0;
+	/*01d8*/     /*0x04519c034800c000*/ 	IADD R6, R5, 0x1;
+	/*01e0*/     /*0x1061dc23190e4005*/ 	ISETP.EQ.AND P0, pt, R6, c [0x0] [0x144], pt;
+	/*01e8*/     /*0xa00001e740000002*/ 	@P0 BRA 0x298;
+	/*01f0*/     /*0x0c529c4340000000*/ 	ISCADD R10, R5, R3, 0x2;
+	/*01f8*/     /*0x00a21c85c1000000*/ 	LDS R8, [R10];
+	/*0208*/     /*0x2c53dc4340000000*/ 	ISCADD R15, R5, R11, 0x2;
+	/*0210*/     /*0x1c825c4368000000*/ 	LOP.OR R9, R8, R7;
+	/*0218*/     /*0x30541c4340000000*/ 	ISCADD R16, R5, R12, 0x2;
+	/*0220*/     /*0x10a25c85c9000000*/ 	STS [R10+0x4], R9;
+	/*0228*/     /*0x00f21c85c1000000*/ 	LDS R8, [R15];
+	/*0230*/     /*0x1c821c4368000000*/ 	LOP.OR R8, R8, R7;
+	/*0238*/     /*0x04829c036000c000*/ 	SHL R10, R8, 0x1;
+	/*0248*/     /*0x10f29c85c9000000*/ 	STS [R15+0x4], R10;
+	/*0250*/     /*0x01021c85c1000000*/ 	LDS R8, [R16];
+	/*0258*/     /*0x1c81dc4368000000*/ 	LOP.OR R7, R8, R7;
+	/*0260*/     /*0x24a21c4368000000*/ 	LOP.OR R8, R10, R9;
+	/*0268*/     /*0x04715c035800c000*/ 	SHR.U32 R5, R7, 0x1;
+	/*0270*/     /*0x1481dc4368000000*/ 	LOP.OR R7, R8, R5;
+	/*0278*/     /*0x11015c85c9000000*/ 	STS [R16+0x4], R5;
+	/*0288*/     /*0x10e1dc85c9000000*/ 	STS [R14+0x4], R7;
+	/*0290*/     /*0x00001de7b0000000*/ 	CONT;
+	/*0298*/     /*0x04411c034800c000*/ 	IADD R4, R4, 0x1;
+	/*02a0*/     /*0xfc519c034800ffff*/ 	IADD R6, R5, 0xfffff;
+	/*02a8*/     /*0x00001de7b0000000*/ 	CONT;
+	/*02b0*/     /*0xfc61dc231a0effff*/ 	ISETP.GT.AND P0, pt, R6, 0xfffff, pt;
+	/*02b8*/     /*0x18015de428000000*/ 	MOV R5, R6;
+	/*02c8*/     /*0x200001e74003fffa*/ 	@P0 BRA 0x158;
+	/*02d0*/     /*0x00001df440000000*/ 	NOP.S CC.T;
+	/*02d8*/     /*0x00011c95c9000000*/ 	STS.S [R0], R4;
+	/*02e0*/     /*0x00001c04500ec000*/ 	BAR.SYNC 0x0;
+	/*02e8*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*02f0*/     /*0x0020dc034800c001*/ 	IADD R3, R2, 0x40;
+	/*02f8*/     /*0x8031dc23188ec001*/ 	ISETP.LT.AND P0, pt, R3, 0x60, pt;
+	/*0308*/     /*0x0021dc231880c001*/ 	ISETP.LT.AND P0, pt, R2, 0x40, P0;
+	/*0310*/     /*0x0000c085c1000000*/ 	@P0 LDS R3, [R0];
+	/*0318*/     /*0x00008085c1000004*/ 	@P0 LDS R2, [R0+0x100];
+	/*0320*/     /*0x0830800348000000*/ 	@P0 IADD R2, R3, R2;
+	/*0328*/     /*0x00008085c9000000*/ 	@P0 STS [R0], R2;
+	/*0330*/     /*0x00001c04500ec000*/ 	BAR.SYNC 0x0;
+	/*0338*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0348*/     /*0x7c21dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0x1f, pt;
+	/*0350*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0358*/     /*0x0000a085c1000002*/ 	@!P0 LDS R2, [R0+0x80];
+	/*0360*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*0368*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*0370*/     /*0x00001c04500ec000*/ 	BAR.SYNC 0x0;
+	/*0378*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0388*/     /*0x3c21dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0xf, pt;
+	/*0390*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0398*/     /*0x0000a085c1000001*/ 	@!P0 LDS R2, [R0+0x40];
+	/*03a0*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*03a8*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*03b0*/     /*0x00001c04500ec000*/ 	BAR.SYNC 0x0;
+	/*03b8*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*03c8*/     /*0x1c21dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0x7, pt;
+	/*03d0*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*03d8*/     /*0x8000a085c1000000*/ 	@!P0 LDS R2, [R0+0x20];
+	/*03e0*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*03e8*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*03f0*/     /*0x00001c04500ec000*/ 	BAR.SYNC 0x0;
+	/*03f8*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0408*/     /*0x0c21dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0x3, pt;
+	/*0410*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0418*/     /*0x4000a085c1000000*/ 	@!P0 LDS R2, [R0+0x10];
+	/*0420*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*0428*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*0430*/     /*0x00001c04500ec000*/ 	BAR.SYNC 0x0;
+	/*0438*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0448*/     /*0x0421dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0x1, pt;
+	/*0450*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0458*/     /*0x2000a085c1000000*/ 	@!P0 LDS R2, [R0+0x8];
+	/*0460*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*0468*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*0470*/     /*0x00001c04500ec000*/ 	BAR.SYNC 0x0;
+	/*0478*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0488*/     /*0xfc21dc231a0e0000*/ 	ISETP.GT.AND P0, pt, R2, RZ, pt;
+	/*0490*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0498*/     /*0x1000a085c1000000*/ 	@!P0 LDS R2, [R0+0x4];
+	/*04a0*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*04a8*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*04b0*/     /*0x00001c04500ec000*/ 	BAR.SYNC 0x0;
+	/*04b8*/     /*0x84001c042c000000*/ 	S2R R0, SR_Tid_X;
+	/*04c8*/     /*0xfc01dc23190e0000*/ 	ISETP.EQ.AND P0, pt, R0, RZ, pt;
+	/*04d0*/     /*0x940080042c000000*/ 	@P0 S2R R2, SR_CTAid_X;
+	/*04d8*/     /*0x8000c1e428004005*/ 	@P0 MOV R3, c [0x0] [0x160];
+	/*04e0*/     /*0x03f00085c10000f0*/ 	@P0 LDS R0, [0x3c00];
+	/*04e8*/     /*0x102100a32007c000*/ 	@P0 IMAD R4.CC, R2, 0x4, R3;
+	/*04f0*/     /*0x102080e35000c000*/ 	@P0 IMUL.HI R2, R2, 0x4;
+	/*04f8*/     /*0x9021404348004005*/ 	@P0 IADD.X R5, R2, c [0x0] [0x164];
+	/*0508*/     /*0x0040008594000000*/ 	@P0 ST.E [R4], R0;
+	/*0510*/     /*0x00001de780000000*/ 	EXIT;
+	/*0518*/     /*0xe0001de74003ffff*/ 	BRA 0x518;
+	/*0520*/     /*0x00001de440000000*/ 	NOP CC.T;
+	/*0528*/     /*0x00001de440000000*/ 	NOP CC.T;
+	/*0530*/     /*0x00001de440000000*/ 	NOP CC.T;
+	/*0538*/     /*0x00001de440000000*/ 	NOP CC.T;
+		........................................................
+
+
+
+Fatbin elf code:
+================
+arch = sm_20
+code version = [1,4]
+producer = cuda
+host = linux
+compile_size = 64bit
+identifier = nqueen.cu
+
+.section .strtab	STRTAB
+
+.section .shstrtab	STRTAB
+
+.section .symtab	SYMTAB
+ index           value           size      info    other  shndx    name  
+   0               0               0        0        0      0     (null)
+   1               0               0        3        0      1     .shstrtab
+   2               0               0        3        0      2     .strtab
+   3               0               0        3        0      3     .symtab
+   4               0               0        3        0      0     
+   5               0               0        3        0      0     
+   6               0            1144        3        0      4     .text._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+   7               0               0        3        0      6     .nv.info._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+   8               0               0        3        0      8     .nv.info
+   9               0               0        3        0      7     .nv.shared._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+  10               0               0        3        0      5     .nv.constant0._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+  11               0            1144       12       10      4     _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+
+
+.nv.constant0._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+0x00000000  0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  0x00000000  0x00000000  
+0x00000000  0x00000000  
+
+
+.nv.shared._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	NOBITS
+   No data to be dumped. 
+
+
+.text._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+bar = 1	reg = 16	lmem=0	smem=15744
+0x00005de4  0x28004404  0x94001c04  0x2c000000  
+0x84009c04  0x2c000000  0x04011de2  0x18000000  
+0x60000007  0x60000009  0x2000dca3  0x20044000  
+0x80411c03  0x60004000  0x00201c43  0x4000c0f0  
+0x2031dc23  0x188e4001  0xfc409c03  0x4800ffff  
+0x200001e7  0x40000000  0x000fdc95  0xc9000000  
+0x10025de2  0x18000000  0x10321ce3  0x5000c000  
+0x00000007  0x60000008  0xa0319ca3  0x20138000  
+0xb081dc43  0x48004000  0xc0311ca3  0x20138000  
+0x0062dc85  0x84000000  0xd0815c43  0x48004000  
+0xe0331ca3  0x20138000  0x8400dc04  0x2c000000  
+0x00429c85  0x84000000  0xf0835c43  0x48004000  
+0xa0321c03  0x5000c000  0xfc00dde4  0x28000000  
+0x00c25c85  0x84000000  0xfc011de4  0x28000000  
+0x00815c03  0x4800c03c  0x00819c03  0x4800c078  
+0x0081dc03  0x4800c0b4  0x0082dc85  0xc9000000  
+0x2ca31c43  0x68000000  0x00829c85  0xc900003c  
+0x24c31c43  0x68000000  0x00825c85  0xc9000078  
+0x00831c85  0xc90000b4  0xa0000007  0x70000004  
+0x1c425c43  0x40000000  0x0092dc85  0xc1000000  
+0x08b29c03  0x68000000  0x08a1dc23  0x190e0000  
+0xc00001e7  0x40000003  0x04b29c03  0x4800c000  
+0x2ff31dc3  0x68000000  0x30a29c03  0x68000000  
+0x08a31c03  0x68000000  0x28b2dc43  0x68000000  
+0xfcc1dc23  0x190e0000  0x0092dc85  0xc9000000  
+0xc00001e7  0x40000002  0x0442dc03  0x4800c000  
+0x90b1dc23  0x190e4000  0x400001e7  0x40000002  
+0x20439c43  0x40000000  0x1443dc43  0x40000000  
+0x18411c43  0x40000000  0x00e31c85  0xc1000000  
+0x28c31c43  0x68000000  0x10e31c85  0xc9000000  
+0x00f35c85  0xc1000000  0x28d35c43  0x68000000  
+0x04d39c03  0x6000c000  0x10f39c85  0xc9000000  
+0x00435c85  0xc1000000  0x30e31c43  0x68000000  
+0x28d29c43  0x68000000  0x04a29c03  0x5800c000  
+0x28c31c43  0x68000000  0x10429c85  0xc9000000  
+0x10931c85  0xc9000000  0x00001de7  0xb0000000  
+0x0430dc03  0x4800c000  0xfc42dc03  0x4800ffff  
+0x00001de7  0xb0000000  0xfcb1dc23  0x1a0effff  
+0x2c011de4  0x28000000  0xe00001e7  0x4003fffa  
+0x00001df4  0x40000000  0x0000dc95  0xc9000000  
+0xfc1fdc03  0x207e0000  0xffffdc04  0x50ee0000  
+0x84009c04  0x2c000000  0x0020dc03  0x4800c001  
+0x8031dc23  0x188ec001  0x0021dc23  0x1880c001  
+0x0000c085  0xc1000000  0x00008085  0xc1000004  
+0x08308003  0x48000000  0x00008085  0xc9000000  
+0xffffdc04  0x50ee0000  0x84009c04  0x2c000000  
+0x7c21dc23  0x1a0ec000  0x0000e085  0xc1000000  
+0x0000a085  0xc1000002  0x0830a003  0x48000000  
+0x0000a085  0xc9000000  0xffffdc04  0x50ee0000  
+0x84009c04  0x2c000000  0x3c21dc23  0x1a0ec000  
+0x0000e085  0xc1000000  0x0000a085  0xc1000001  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0xffffdc04  0x50ee0000  0x84009c04  0x2c000000  
+0x1c21dc23  0x1a0ec000  0x0000e085  0xc1000000  
+0x8000a085  0xc1000000  0x0830a003  0x48000000  
+0x0000a085  0xc9000000  0xffffdc04  0x50ee0000  
+0x84009c04  0x2c000000  0x0c21dc23  0x1a0ec000  
+0x0000e085  0xc1000000  0x4000a085  0xc1000000  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0xffffdc04  0x50ee0000  0x84009c04  0x2c000000  
+0x0421dc23  0x1a0ec000  0x0000e085  0xc1000000  
+0x2000a085  0xc1000000  0x0830a003  0x48000000  
+0x0000a085  0xc9000000  0xffffdc04  0x50ee0000  
+0x84009c04  0x2c000000  0xfc21dc23  0x1a0e0000  
+0x0000e085  0xc1000000  0x1000a085  0xc1000000  
+0x0830a003  0x48000000  0x0000a085  0xc9000000  
+0xffffdc04  0x50ee0000  0x84001c04  0x2c000000  
+0xfc01dc23  0x190e0000  0x94000004  0x2c000000  
+0x000081e4  0x28004001  0x100100a3  0x2005c000  
+0x100080e3  0x5000c000  0x03f00085  0xc10000f0  
+0x10214043  0x48004001  0x00400085  0x94000000  
+0x00001de7  0x80000000  
+
+
+.nv.info._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+	<0x1>
+	Attribute:	EIATTR_PARAM_CBANK
+	Format:	EIFMT_SVAL
+	Value:	0xa 0x2c0020 
+	<0x2>
+	Attribute:	EIATTR_CBANK_PARAM_SIZE
+	Format:	EIFMT_HVAL
+	Value:	0x2c
+	<0x3>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x6	Offset  : 0x28	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x4>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x5	Offset  : 0x20	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x5>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x4	Offset  : 0x18	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x6>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x3	Offset  : 0x10	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x7>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x2	Offset  : 0x8	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x8>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x1	Offset  : 0x4	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x9>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x0	Offset  : 0x0	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : CBANK	
+	<0x10>
+	Attribute:	EIATTR_SYNC_STACK
+	Format:	EIFMT_SVAL
+	Value:	0x2301a4 0x20 
+
+
+.nv.info	PROGBITS
+	<0x1>
+	Attribute:	EIATTR_MIN_STACK_SIZE
+	Format:	EIFMT_SVAL
+	Value:	function: _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i(0xb)	min stack size: 0x0
+	<0x2>
+	Attribute:	EIATTR_FRAME_SIZE
+	Format:	EIFMT_SVAL
+	Value:	function: _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i(0xb)	frame size: 0x0
+
+	code for sm_20
+		Function : _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+	/*0000*/     /*0x00005de428004404*/ 	MOV R1, c [0x1] [0x100];
+	/*0008*/     /*0x94001c042c000000*/ 	S2R R0, SR_CTAid_X;
+	/*0010*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0018*/     /*0x04011de218000000*/ 	MOV32I R4, 0x1;
+	/*0020*/     /*0x6000000760000009*/ 	SSY 0x280;
+	/*0028*/     /*0x2000dca320044000*/ 	IMAD R3, R0, c [0x0] [0x8], R2;
+	/*0030*/     /*0x80411c0360004000*/ 	SHL R4, R4, c [0x0] [0x20];
+	/*0038*/     /*0x00201c434000c0f0*/ 	ISCADD R0, R2, 0x3c00, 0x2;
+	/*0040*/     /*0x2031dc23188e4001*/ 	ISETP.LT.AND P0, pt, R3, c [0x0] [0x48], pt;
+	/*0048*/     /*0xfc409c034800ffff*/ 	IADD R2, R4, 0xfffff;
+	/*0050*/     /*0x200001e740000000*/ 	@P0 BRA 0x60;
+	/*0058*/     /*0x000fdc95c9000000*/ 	STS.S [R0], RZ;
+	/*0060*/     /*0x10025de218000000*/ 	MOV32I R9, 0x4;
+	/*0068*/     /*0x10321ce35000c000*/ 	IMUL.HI R8, R3, 0x4;
+	/*0070*/     /*0x0000000760000008*/ 	SSY 0x278;
+	/*0078*/     /*0xa0319ca320138000*/ 	IMAD R6.CC, R3, R9, c [0x0] [0x28];
+	/*0080*/     /*0xb081dc4348004000*/ 	IADD.X R7, R8, c [0x0] [0x2c];
+	/*0088*/     /*0xc0311ca320138000*/ 	IMAD R4.CC, R3, R9, c [0x0] [0x30];
+	/*0090*/     /*0x0062dc8584000000*/ 	LD.E R11, [R6];
+	/*0098*/     /*0xd0815c4348004000*/ 	IADD.X R5, R8, c [0x0] [0x34];
+	/*00a0*/     /*0xe0331ca320138000*/ 	IMAD R12.CC, R3, R9, c [0x0] [0x38];
+	/*00a8*/     /*0x8400dc042c000000*/ 	S2R R3, SR_Tid_X;
+	/*00b0*/     /*0x00429c8584000000*/ 	LD.E R10, [R4];
+	/*00b8*/     /*0xf0835c4348004000*/ 	IADD.X R13, R8, c [0x0] [0x3c];
+	/*00c0*/     /*0xa0321c035000c000*/ 	IMUL.U32.U32 R8, R3, 0x28;
+	/*00c8*/     /*0xfc00dde428000000*/ 	MOV R3, RZ;
+	/*00d0*/     /*0x00c25c8584000000*/ 	LD.E R9, [R12];
+	/*00d8*/     /*0xfc011de428000000*/ 	MOV R4, RZ;
+	/*00e0*/     /*0x00815c034800c03c*/ 	IADD R5, R8, 0xf00;
+	/*00e8*/     /*0x00819c034800c078*/ 	IADD R6, R8, 0x1e00;
+	/*00f0*/     /*0x0081dc034800c0b4*/ 	IADD R7, R8, 0x2d00;
+	/*00f8*/     /*0x0082dc85c9000000*/ 	STS [R8], R11;
+	/*0100*/     /*0x2ca31c4368000000*/ 	LOP.OR R12, R10, R11;
+	/*0108*/     /*0x00829c85c900003c*/ 	STS [R8+0xf00], R10;
+	/*0110*/     /*0x24c31c4368000000*/ 	LOP.OR R12, R12, R9;
+	/*0118*/     /*0x00825c85c9000078*/ 	STS [R8+0x1e00], R9;
+	/*0120*/     /*0x00831c85c90000b4*/ 	STS [R8+0x2d00], R12;
+	/*0128*/     /*0xa000000770000004*/ 	PCNT 0x258;
+	/*0130*/     /*0x1c425c4340000000*/ 	ISCADD R9, R4, R7, 0x2;
+	/*0138*/     /*0x0092dc85c1000000*/ 	LDS R11, [R9];
+	/*0140*/     /*0x08b29c0368000000*/ 	LOP.AND R10, R11, R2;
+	/*0148*/     /*0x08a1dc23190e0000*/ 	ISETP.EQ.AND P0, pt, R10, R2, pt;
+	/*0150*/     /*0xc00001e740000003*/ 	@P0 BRA 0x248;
+	/*0158*/     /*0x04b29c034800c000*/ 	IADD R10, R11, 0x1;
+	/*0160*/     /*0x2ff31dc368000000*/ 	LOP.PASS_B R12, RZ, ~R11;
+	/*0168*/     /*0x30a29c0368000000*/ 	LOP.AND R10, R10, R12;
+	/*0170*/     /*0x08a31c0368000000*/ 	LOP.AND R12, R10, R2;
+	/*0178*/     /*0x28b2dc4368000000*/ 	LOP.OR R11, R11, R10;
+	/*0180*/     /*0xfcc1dc23190e0000*/ 	ISETP.EQ.AND P0, pt, R12, RZ, pt;
+	/*0188*/     /*0x0092dc85c9000000*/ 	STS [R9], R11;
+	/*0190*/     /*0xc00001e740000002*/ 	@P0 BRA 0x248;
+	/*0198*/     /*0x0442dc034800c000*/ 	IADD R11, R4, 0x1;
+	/*01a0*/     /*0x90b1dc23190e4000*/ 	ISETP.EQ.AND P0, pt, R11, c [0x0] [0x24], pt;
+	/*01a8*/     /*0x400001e740000002*/ 	@P0 BRA 0x240;
+	/*01b0*/     /*0x20439c4340000000*/ 	ISCADD R14, R4, R8, 0x2;
+	/*01b8*/     /*0x1443dc4340000000*/ 	ISCADD R15, R4, R5, 0x2;
+	/*01c0*/     /*0x18411c4340000000*/ 	ISCADD R4, R4, R6, 0x2;
+	/*01c8*/     /*0x00e31c85c1000000*/ 	LDS R12, [R14];
+	/*01d0*/     /*0x28c31c4368000000*/ 	LOP.OR R12, R12, R10;
+	/*01d8*/     /*0x10e31c85c9000000*/ 	STS [R14+0x4], R12;
+	/*01e0*/     /*0x00f35c85c1000000*/ 	LDS R13, [R15];
+	/*01e8*/     /*0x28d35c4368000000*/ 	LOP.OR R13, R13, R10;
+	/*01f0*/     /*0x04d39c036000c000*/ 	SHL R14, R13, 0x1;
+	/*01f8*/     /*0x10f39c85c9000000*/ 	STS [R15+0x4], R14;
+	/*0200*/     /*0x00435c85c1000000*/ 	LDS R13, [R4];
+	/*0208*/     /*0x30e31c4368000000*/ 	LOP.OR R12, R14, R12;
+	/*0210*/     /*0x28d29c4368000000*/ 	LOP.OR R10, R13, R10;
+	/*0218*/     /*0x04a29c035800c000*/ 	SHR.U32 R10, R10, 0x1;
+	/*0220*/     /*0x28c31c4368000000*/ 	LOP.OR R12, R12, R10;
+	/*0228*/     /*0x10429c85c9000000*/ 	STS [R4+0x4], R10;
+	/*0230*/     /*0x10931c85c9000000*/ 	STS [R9+0x4], R12;
+	/*0238*/     /*0x00001de7b0000000*/ 	CONT;
+	/*0240*/     /*0x0430dc034800c000*/ 	IADD R3, R3, 0x1;
+	/*0248*/     /*0xfc42dc034800ffff*/ 	IADD R11, R4, 0xfffff;
+	/*0250*/     /*0x00001de7b0000000*/ 	CONT;
+	/*0258*/     /*0xfcb1dc231a0effff*/ 	ISETP.GT.AND P0, pt, R11, 0xfffff, pt;
+	/*0260*/     /*0x2c011de428000000*/ 	MOV R4, R11;
+	/*0268*/     /*0xe00001e74003fffa*/ 	@P0 BRA 0x128;
+	/*0270*/     /*0x00001df440000000*/ 	NOP.S CC.T;
+	/*0278*/     /*0x0000dc95c9000000*/ 	STS.S [R0], R3;
+	/*0280*/     /*0xfc1fdc03207e0000*/ 	IMAD.U32.U32 RZ, R1, RZ, RZ;
+	/*0288*/     /*0xffffdc0450ee0000*/ 	BAR.RED.POPC RZ, RZ;
+	/*0290*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0298*/     /*0x0020dc034800c001*/ 	IADD R3, R2, 0x40;
+	/*02a0*/     /*0x8031dc23188ec001*/ 	ISETP.LT.AND P0, pt, R3, 0x60, pt;
+	/*02a8*/     /*0x0021dc231880c001*/ 	ISETP.LT.AND P0, pt, R2, 0x40, P0;
+	/*02b0*/     /*0x0000c085c1000000*/ 	@P0 LDS R3, [R0];
+	/*02b8*/     /*0x00008085c1000004*/ 	@P0 LDS R2, [R0+0x100];
+	/*02c0*/     /*0x0830800348000000*/ 	@P0 IADD R2, R3, R2;
+	/*02c8*/     /*0x00008085c9000000*/ 	@P0 STS [R0], R2;
+	/*02d0*/     /*0xffffdc0450ee0000*/ 	BAR.RED.POPC RZ, RZ;
+	/*02d8*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*02e0*/     /*0x7c21dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0x1f, pt;
+	/*02e8*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*02f0*/     /*0x0000a085c1000002*/ 	@!P0 LDS R2, [R0+0x80];
+	/*02f8*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*0300*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*0308*/     /*0xffffdc0450ee0000*/ 	BAR.RED.POPC RZ, RZ;
+	/*0310*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0318*/     /*0x3c21dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0xf, pt;
+	/*0320*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0328*/     /*0x0000a085c1000001*/ 	@!P0 LDS R2, [R0+0x40];
+	/*0330*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*0338*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*0340*/     /*0xffffdc0450ee0000*/ 	BAR.RED.POPC RZ, RZ;
+	/*0348*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0350*/     /*0x1c21dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0x7, pt;
+	/*0358*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0360*/     /*0x8000a085c1000000*/ 	@!P0 LDS R2, [R0+0x20];
+	/*0368*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*0370*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*0378*/     /*0xffffdc0450ee0000*/ 	BAR.RED.POPC RZ, RZ;
+	/*0380*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*0388*/     /*0x0c21dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0x3, pt;
+	/*0390*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0398*/     /*0x4000a085c1000000*/ 	@!P0 LDS R2, [R0+0x10];
+	/*03a0*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*03a8*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*03b0*/     /*0xffffdc0450ee0000*/ 	BAR.RED.POPC RZ, RZ;
+	/*03b8*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*03c0*/     /*0x0421dc231a0ec000*/ 	ISETP.GT.AND P0, pt, R2, 0x1, pt;
+	/*03c8*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*03d0*/     /*0x2000a085c1000000*/ 	@!P0 LDS R2, [R0+0x8];
+	/*03d8*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*03e0*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*03e8*/     /*0xffffdc0450ee0000*/ 	BAR.RED.POPC RZ, RZ;
+	/*03f0*/     /*0x84009c042c000000*/ 	S2R R2, SR_Tid_X;
+	/*03f8*/     /*0xfc21dc231a0e0000*/ 	ISETP.GT.AND P0, pt, R2, RZ, pt;
+	/*0400*/     /*0x0000e085c1000000*/ 	@!P0 LDS R3, [R0];
+	/*0408*/     /*0x1000a085c1000000*/ 	@!P0 LDS R2, [R0+0x4];
+	/*0410*/     /*0x0830a00348000000*/ 	@!P0 IADD R2, R3, R2;
+	/*0418*/     /*0x0000a085c9000000*/ 	@!P0 STS [R0], R2;
+	/*0420*/     /*0xffffdc0450ee0000*/ 	BAR.RED.POPC RZ, RZ;
+	/*0428*/     /*0x84001c042c000000*/ 	S2R R0, SR_Tid_X;
+	/*0430*/     /*0xfc01dc23190e0000*/ 	ISETP.EQ.AND P0, pt, R0, RZ, pt;
+	/*0438*/     /*0x940000042c000000*/ 	@P0 S2R R0, SR_CTAid_X;
+	/*0440*/     /*0x000081e428004001*/ 	@P0 MOV R2, c [0x0] [0x40];
+	/*0448*/     /*0x100100a32005c000*/ 	@P0 IMAD R4.CC, R0, 0x4, R2;
+	/*0450*/     /*0x100080e35000c000*/ 	@P0 IMUL.HI R2, R0, 0x4;
+	/*0458*/     /*0x03f00085c10000f0*/ 	@P0 LDS R0, [0x3c00];
+	/*0460*/     /*0x1021404348004001*/ 	@P0 IADD.X R5, R2, c [0x0] [0x44];
+	/*0468*/     /*0x0040008594000000*/ 	@P0 ST.E [R4], R0;
+	/*0470*/     /*0x00001de780000000*/ 	EXIT;
+		........................................................
+
+
+
+Fatbin ptx code:
+================
+arch = sm_20
+code version = [3,0]
+producer = cuda
+host = linux
+compile_size = 64bit
+identifier = nqueen.cu
+
+
+
+
+
+
+.version 3.0
+.target sm_20
+.address_size 64
+
+.file	1 "/tmp/tmpxft_00003c06_00000000-15_nqueen.compute_20.cpp3.i"
+.file	2 "nqueen.cu"
+
+
+
+
+
+
+.entry _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i(
+.param .u32 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_0,
+.param .u32 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_1,
+.param .u64 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_2,
+.param .u64 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_3,
+.param .u64 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_4,
+.param .u64 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_5,
+.param .u32 _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_6
+)
+{
+.reg .pred %p<16>;
+.reg .s32 %r<133>;
+.reg .s64 %rl<42>;
+
+	.shared .align 4 .b8 __cuda_local_var_17387_39_non_const_mask[3840];
+
+	.shared .align 4 .b8 __cuda_local_var_17388_39_non_const_l_mask[3840];
+
+	.shared .align 4 .b8 __cuda_local_var_17389_39_non_const_r_mask[3840];
+
+	.shared .align 4 .b8 __cuda_local_var_17390_39_non_const_m[3840];
+
+	.shared .align 4 .b8 __cuda_local_var_17392_39_non_const_sum[384];
+
+ld.param.u32 %r16, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_0];
+ld.param.u64 %rl9, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_2];
+ld.param.u64 %rl10, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_3];
+ld.param.u64 %rl11, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_4];
+ld.param.u64 %rl12, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_5];
+ld.param.u32 %r17, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_6];
+cvta.to.global.u64 %rl1, %rl12;
+cvta.to.global.u64 %rl2, %rl11;
+cvta.to.global.u64 %rl3, %rl10;
+cvta.to.global.u64 %rl4, %rl9;
+.loc 2 327 1
+mov.u32 %r18, %ntid.x;
+.loc 2 326 1
+mov.u32 %r19, %ctaid.x;
+.loc 2 325 1
+mov.u32 %r2, %tid.x;
+.loc 2 327 1
+mad.lo.s32 %r3, %r18, %r19, %r2;
+mov.u32 %r20, 1;
+.loc 2 336 1
+shl.b32 %r21, %r20, %r16;
+add.s32 %r4, %r21, -1;
+.loc 2 341 1
+setp.lt.s32 %p1, %r3, %r17;
+mul.wide.s32 %rl13, %r2, 4;
+mov.u64 %rl14, __cuda_local_var_17392_39_non_const_sum;
+add.s64 %rl5, %rl14, %rl13;
+.loc 2 341 1
+@%p1 bra BB0_2;
+
+mov.u32 %r22, 0;
+.loc 2 376 1
+st.shared.u32 [%rl5], %r22;
+bra.uni BB0_11;
+
+BB0_2:
+.loc 2 342 1
+mul.wide.s32 %rl15, %r3, 4;
+add.s64 %rl16, %rl4, %rl15;
+.loc 2 325 1
+mov.u32 %r120, %tid.x;
+.loc 2 342 1
+cvt.s64.s32 %rl6, %r120;
+mov.u64 %rl17, __cuda_local_var_17387_39_non_const_mask;
+mad.lo.s64 %rl18, %rl6, 40, %rl17;
+.loc 2 342 1
+ld.global.u32 %r26, [%rl16];
+st.shared.u32 [%rl18], %r26;
+.loc 2 343 1
+add.s64 %rl19, %rl3, %rl15;
+mov.u64 %rl20, __cuda_local_var_17388_39_non_const_l_mask;
+mad.lo.s64 %rl21, %rl6, 40, %rl20;
+.loc 2 343 1
+ld.global.u32 %r29, [%rl19];
+st.shared.u32 [%rl21], %r29;
+.loc 2 344 1
+add.s64 %rl22, %rl2, %rl15;
+mov.u64 %rl23, __cuda_local_var_17389_39_non_const_r_mask;
+mad.lo.s64 %rl24, %rl6, 40, %rl23;
+.loc 2 344 1
+ld.global.u32 %r32, [%rl22];
+st.shared.u32 [%rl24], %r32;
+.loc 2 345 1
+or.b32 %r35, %r29, %r26;
+or.b32 %r36, %r35, %r32;
+mov.u64 %rl25, __cuda_local_var_17390_39_non_const_m;
+mad.lo.s64 %rl26, %rl6, 40, %rl25;
+.loc 2 345 1
+st.shared.u32 [%rl26], %r36;
+mov.u32 %r132, 0;
+mov.u32 %r130, %r132;
+
+BB0_3:
+.loc 2 348 1
+cvt.s64.s32 %rl7, %r130;
+mul.wide.s32 %rl29, %r130, 4;
+add.s64 %rl8, %rl26, %rl29;
+.loc 2 348 1
+ld.shared.u32 %r7, [%rl8];
+and.b32 %r39, %r7, %r4;
+setp.eq.s32 %p2, %r39, %r4;
+@%p2 bra BB0_8;
+
+.loc 2 352 1
+add.s32 %r40, %r7, 1;
+not.b32 %r41, %r7;
+and.b32 %r8, %r40, %r41;
+.loc 2 353 1
+or.b32 %r42, %r7, %r8;
+st.shared.u32 [%rl8], %r42;
+.loc 2 354 1
+and.b32 %r44, %r8, %r4;
+setp.eq.s32 %p3, %r44, 0;
+@%p3 bra BB0_8;
+
+.loc 2 355 1
+add.s32 %r131, %r130, 1;
+ld.param.u32 %r109, [_Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_param_1];
+.loc 2 355 1
+setp.eq.s32 %p4, %r131, %r109;
+@%p4 bra BB0_7;
+
+shl.b64 %rl32, %rl7, 2;
+add.s64 %rl33, %rl18, %rl32;
+.loc 2 360 1
+ld.shared.u32 %r45, [%rl33];
+or.b32 %r47, %r45, %r8;
+st.shared.u32 [%rl33+4], %r47;
+add.s64 %rl36, %rl21, %rl32;
+.loc 2 361 1
+ld.shared.u32 %r49, [%rl36];
+or.b32 %r51, %r49, %r8;
+shl.b32 %r52, %r51, 1;
+st.shared.u32 [%rl36+4], %r52;
+add.s64 %rl39, %rl24, %rl32;
+.loc 2 362 1
+ld.shared.u32 %r54, [%rl39];
+or.b32 %r56, %r54, %r8;
+shr.u32 %r57, %r56, 1;
+st.shared.u32 [%rl39+4], %r57;
+.loc 2 363 1
+or.b32 %r59, %r52, %r47;
+or.b32 %r60, %r59, %r57;
+st.shared.u32 [%rl8+4], %r60;
+bra.uni BB0_9;
+
+BB0_7:
+.loc 2 356 1
+add.s32 %r132, %r132, 1;
+
+BB0_8:
+.loc 2 349 1
+add.s32 %r131, %r130, -1;
+
+BB0_9:
+mov.u32 %r130, %r131;
+setp.gt.s32 %p5, %r130, -1;
+.loc 2 347 1
+@%p5 bra BB0_3;
+
+.loc 2 373 1
+st.shared.u32 [%rl5], %r132;
+
+BB0_11:
+.loc 2 379 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r128, %tid.x;
+.loc 2 382 1
+add.s32 %r63, %r128, 64;
+setp.lt.s32 %p6, %r63, 96;
+setp.lt.s32 %p7, %r128, 64;
+and.pred %p8, %p7, %p6;
+.loc 2 382 1
+@!%p8 bra BB0_13;
+
+.loc 2 382 1
+ld.shared.u32 %r64, [%rl5];
+ld.shared.u32 %r66, [%rl5+256];
+add.s32 %r68, %r64, %r66;
+st.shared.u32 [%rl5], %r68;
+
+BB0_13:
+.loc 2 382 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r127, %tid.x;
+.loc 2 383 1
+setp.gt.s32 %p9, %r127, 31;
+@%p9 bra BB0_15;
+
+.loc 2 383 1
+ld.shared.u32 %r70, [%rl5];
+ld.shared.u32 %r72, [%rl5+128];
+add.s32 %r74, %r70, %r72;
+st.shared.u32 [%rl5], %r74;
+
+BB0_15:
+.loc 2 383 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r126, %tid.x;
+.loc 2 384 1
+setp.gt.s32 %p10, %r126, 15;
+@%p10 bra BB0_17;
+
+.loc 2 384 1
+ld.shared.u32 %r76, [%rl5];
+ld.shared.u32 %r78, [%rl5+64];
+add.s32 %r80, %r76, %r78;
+st.shared.u32 [%rl5], %r80;
+
+BB0_17:
+.loc 2 384 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r125, %tid.x;
+.loc 2 385 1
+setp.gt.s32 %p11, %r125, 7;
+@%p11 bra BB0_19;
+
+.loc 2 385 1
+ld.shared.u32 %r82, [%rl5];
+ld.shared.u32 %r84, [%rl5+32];
+add.s32 %r86, %r82, %r84;
+st.shared.u32 [%rl5], %r86;
+
+BB0_19:
+.loc 2 385 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r124, %tid.x;
+.loc 2 386 1
+setp.gt.s32 %p12, %r124, 3;
+@%p12 bra BB0_21;
+
+.loc 2 386 1
+ld.shared.u32 %r88, [%rl5];
+ld.shared.u32 %r90, [%rl5+16];
+add.s32 %r92, %r88, %r90;
+st.shared.u32 [%rl5], %r92;
+
+BB0_21:
+.loc 2 386 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r123, %tid.x;
+.loc 2 387 1
+setp.gt.s32 %p13, %r123, 1;
+@%p13 bra BB0_23;
+
+.loc 2 387 1
+ld.shared.u32 %r94, [%rl5];
+ld.shared.u32 %r96, [%rl5+8];
+add.s32 %r98, %r94, %r96;
+st.shared.u32 [%rl5], %r98;
+
+BB0_23:
+.loc 2 387 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r122, %tid.x;
+.loc 2 388 1
+setp.gt.s32 %p14, %r122, 0;
+@%p14 bra BB0_25;
+
+.loc 2 388 1
+ld.shared.u32 %r100, [%rl5];
+ld.shared.u32 %r102, [%rl5+4];
+add.s32 %r104, %r100, %r102;
+st.shared.u32 [%rl5], %r104;
+
+BB0_25:
+.loc 2 388 1
+bar.sync 0;
+.loc 2 325 1
+mov.u32 %r121, %tid.x;
+.loc 2 390 1
+setp.eq.s32 %p15, %r121, 0;
+@%p15 bra BB0_27;
+
+.loc 2 393 2
+ret;
+
+BB0_27:
+.loc 2 391 1
+ld.shared.u32 %r106, [__cuda_local_var_17392_39_non_const_sum];
+.loc 2 326 1
+mov.u32 %r119, %ctaid.x;
+.loc 2 391 1
+mul.wide.s32 %rl40, %r119, 4;
+add.s64 %rl41, %rl1, %rl40;
+st.global.u32 [%rl41], %r106;
+.loc 2 393 2
+ret;
+}
+
+
+
+Fatbin elf code:
+================
+arch = sm_10
+code version = [1,2]
+producer = cuda
+host = linux
+compile_size = 64bit
+identifier = nqueen.cu
+
+.section .strtab	STRTAB
+
+.section .shstrtab	STRTAB
+
+.section .symtab	SYMTAB
+ index           value           size      info    other  shndx    name  
+   0               0               0        0        0      0     (null)
+   1               0               0        3        0      1     .shstrtab
+   2               0               0        3        0      2     .strtab
+   3               0               0        3        0      3     .symtab
+   4               0               0        3        0      0     
+   5               0               0        3        0      0     
+   6               0            1096        3        0      4     .text._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+   7               0               0        3        0      6     .nv.info._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+   8               0               0        3        0      7     .nv.shared._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+   9               0               0        3        0      5     .nv.constant1._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+  10               0               0       12       10      4     _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+
+
+.nv.constant1._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+0x0000001f  0x0000000f  0x00000007  0x00000003  0x00000001  
+
+
+
+.nv.shared._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	NOBITS
+   No data to be dumped. 
+
+
+.text._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+bar = 1	reg = 10	lmem=0	smem=15804
+0xa0004c0d  0x04200780  0x40074205  0x00200780  
+0x30100205  0xc4100780  0xa0000001  0x04000780  
+0x60064205  0x00204780  0x20000005  0x04004780  
+0x3001ddfd  0x6c20c7c8  0xa0056003  0x00000000  
+0x10054003  0x00000280  0x30020215  0xc4100780  
+0x40680005  0x00000003  0x2000cc09  0x04214780  
+0xd00e0411  0x80c00780  0x00000205  0xc0000780  
+0x2000d005  0x04214780  0xd00e0209  0x80c00780  
+0x2000d405  0x04214780  0xd00e0205  0x80c00780  
+0x0400de01  0xe4210780  0xd0020811  0x04004780  
+0x040fde01  0xe4208780  0xd0040219  0x04004780  
+0x04085e01  0xe4204780  0x10018011  0x00000003  
+0x1000c805  0x0423c780  0x30030009  0xc4100780  
+0x30010015  0xc4100780  0x04175e01  0xe4218780  
+0x3001081d  0xc4000780  0x20000419  0x04014780  
+0xa0051003  0x00000000  0x1000f815  0x0403c780  
+0x1000f805  0x0403c780  0x1000f811  0x0403c780  
+0x203f8e1d  0x0fffffff  0x20000a09  0x04018780  
+0x00020405  0xc0000780  0xd45d7809  0x20000780  
+0xd807c021  0x04200780  0x202f8409  0x000000bb  
+0x30080ffd  0x640147c8  0x00020409  0xc0000780  
+0xa004f003  0x00000000  0x1002f003  0x00000280  
+0x203f8205  0x0fffffff  0x203f8a15  0x0fffffff  
+0x1004f003  0x00000780  0x2901e009  0x00000003  
+0xd802c021  0x04210780  0xd808c009  0x04204780  
+0xd00711fd  0x040007c8  0x08000001  0xe4208780  
+0x1004d003  0x00000100  0x20018209  0x00000003  
+0x3002cbfd  0x6c2147c8  0x1003c003  0x00000280  
+0x203f8a15  0x0fffffff  0x20018811  0x00000003  
+0x203f8205  0x0fffffff  0x1004f003  0x00000780  
+0xd403780d  0x20000780  0xdc08c005  0x04204780  
+0xd43f780d  0x20000780  0x0400e001  0xe4204780  
+0xdc08c025  0x04204780  0x30011225  0xc4100780  
+0xd421780d  0x20000780  0x040fe001  0xe4224780  
+0xdc08c021  0x04204780  0x30011021  0xe4100780  
+0xd0090205  0x04004780  0x04086001  0xe4220780  
+0xd0011005  0x04004780  0x08000201  0xe4204780  
+0x20018a15  0x00000003  0x10000405  0x0403c780  
+0x1004f003  0x00000780  0x203f8205  0x0fffffff  
+0x203f8a15  0x0fffffff  0x307c03fd  0x6c0187ca  
+0x10023003  0x00000280  0x00020005  0xc0000782  
+0x04001e01  0xe4210780  0x10056003  0x00000780  
+0x00020005  0xc0000780  0x04001e01  0xe43f0780  
+0xf0000001  0xe0000002  0x861ffe03  0x00000000  
+0x30800005  0x6c40c7d0  0xa00003fd  0x0c0147c8  
+0x00020005  0xc0001680  0xd4027809  0x20001680  
+0x1800c005  0x0423d680  0x2400de05  0x04205680  
+0x04001e01  0xe4205680  0x861ffe03  0x00000000  
+0x00020005  0xc0000680  0xd4017809  0x20000680  
+0x1800c005  0x0423c680  0x2400de05  0x04204680  
+0x04001e01  0xe4204680  0x861ffe03  0x00000000  
+0x308101fd  0x6c4107c8  0x00020005  0xc0000500  
+0x1400fe05  0x0423c500  0x2400de05  0x04204500  
+0x04001e01  0xe4204500  0x861ffe03  0x00000000  
+0x308201fd  0x6c4107c8  0x00020005  0xc0000500  
+0x1400ee05  0x0423c500  0x2400de05  0x04204500  
+0x04001e01  0xe4204500  0x861ffe03  0x00000000  
+0x308301fd  0x6c4107c8  0x00020005  0xc0000500  
+0x1400e605  0x0423c500  0x2400de05  0x04204500  
+0x04001e01  0xe4204500  0x861ffe03  0x00000000  
+0x308401fd  0x6c4107c8  0x00020005  0xc0000500  
+0x1400e205  0x0423c500  0x2400de05  0x04204500  
+0x04001e01  0xe4204500  0x861ffe03  0x00000000  
+0x307c01fd  0x6c0107c8  0x00020005  0xc0000500  
+0x1400e005  0x0423c500  0x2400de05  0x04204500  
+0x04001e01  0xe4204500  0x861ffe03  0x00000000  
+0x307c01fd  0x6c0147c8  0x30000003  0x00000280  
+0x30020605  0xc4100780  0x1100fe00  0x2101f804  
+0xd00e0201  0xa0c00781  
+
+
+.nv.info._Z24solve_nqueen_cuda_kerneliiPjS_S_S_i	PROGBITS
+	<0x1>
+	Attribute:	EIATTR_SMEM_PARAM_SIZE
+	Format:	EIFMT_HVAL
+	Value:	0x2c
+	<0x2>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x6	Offset  : 0x28	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : SMEM	
+	<0x3>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x5	Offset  : 0x20	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : SMEM	
+	<0x4>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x4	Offset  : 0x18	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : SMEM	
+	<0x5>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x3	Offset  : 0x10	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : SMEM	
+	<0x6>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x2	Offset  : 0x8	Size    : 0x8
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : SMEM	
+	<0x7>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x1	Offset  : 0x4	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : SMEM	
+	<0x8>
+	Attribute:	EIATTR_KPARAM_INFO
+	Format:	EIFMT_SVAL
+	Value:	Index : 0x0	Ordinal : 0x0	Offset  : 0x0	Size    : 0x4
+		Pointee's logAlignment : 0x0	Space : 0x0	cbank : 0x1f	Parameter Space : SMEM	
+	<0x9>
+	Attribute:	EIATTR_SYNC_STACK
+	Format:	EIFMT_SVAL
+	Value:	0x230118 0x20 
+
+	code for sm_10
+		Function : _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i
+	/*0000*/     /*0xa0004c0d04200780*/ 	I2I.U32.U16 R3, g [0x6].U16;
+	/*0008*/     /*0x4007420500200780*/ 	IMUL.U16.U16 R1, g [0x1].U16, R3H;
+	/*0010*/     /*0x30100205c4100780*/ 	SHL R1, R1, 0x10;
+	/*0018*/     /*0xa000000104000780*/ 	I2I.U32.U16 R0, R0L;
+	/*0020*/     /*0x6006420500204780*/ 	IMAD.U16 R1, g [0x1].U16, R3L, R1;
+	/*0028*/     /*0x2000000504004780*/ 	IADD R1, R0, R1;
+	/*0030*/     /*0x3001ddfd6c20c7c8*/ 	ISET.S32.C0 o [0x7f], g [0xe], R1, LE;
+	/*0038*/     /*0xa005600300000000*/ 	SSY 0x2b0;
+	/*0040*/     /*0x1005400300000280*/ 	BRA C0.NE, 0x2a0;
+	/*0048*/     /*0x30020215c4100780*/ 	SHL R5, R1, 0x2;
+	/*0050*/     /*0x4068000500000003*/ 	IMUL32I.U24.U24 R1, R0, 0x28;
+	/*0058*/     /*0x2000cc0904214780*/ 	IADD R2, g [0x6], R5;
+	/*0060*/     /*0xd00e041180c00780*/ 	GLD.U32 R4, global14 [R2];
+	/*0068*/     /*0x00000205c0000780*/ 	R2A A1, R1;
+	/*0070*/     /*0x2000d00504214780*/ 	IADD R1, g [0x8], R5;
+	/*0078*/     /*0xd00e020980c00780*/ 	GLD.U32 R2, global14 [R1];
+	/*0080*/     /*0x2000d40504214780*/ 	IADD R1, g [0xa], R5;
+	/*0088*/     /*0xd00e020580c00780*/ 	GLD.U32 R1, global14 [R1];
+	/*0090*/     /*0x0400de01e4210780*/ 	R2G.U32.U32 g [A1+0x6f], R4;
+	/*0098*/     /*0xd002081104004780*/ 	LOP.OR R4, R4, R2;
+	/*00a0*/     /*0x040fde01e4208780*/ 	R2G.U32.U32 g [A1+0x7ef], R2;
+	/*00a8*/     /*0xd004021904004780*/ 	LOP.OR R6, R1, R4;
+	/*00b0*/     /*0x04085e01e4204780*/ 	R2G.U32.U32 g [A1+0x42f], R1;
+	/*00b8*/     /*0x1001801100000003*/ 	MVI R4, 0x1;
+	/*00c0*/     /*0x1000c8050423c780*/ 	MOV R1, g [0x4];
+	/*00c8*/     /*0x30030009c4100780*/ 	SHL R2, R0, 0x3;
+	/*00d0*/     /*0x30010015c4100780*/ 	SHL R5, R0, 0x1;
+	/*00d8*/     /*0x04175e01e4218780*/ 	R2G.U32.U32 g [A1+0xbaf], R6;
+	/*00e0*/     /*0x3001081dc4000780*/ 	SHL R7, R4, R1;
+	/*00e8*/     /*0x2000041904014780*/ 	IADD R6, R2, R5;
+	/*00f0*/     /*0xa005100300000000*/ 	SSY 0x288;
+	/*00f8*/     /*0x1000f8150403c780*/ 	MOV R5, R124;
+	/*0100*/     /*0x1000f8050403c780*/ 	MOV R1, R124;
+	/*0108*/     /*0x1000f8110403c780*/ 	MOV R4, R124;
+	/*0110*/     /*0x203f8e1d0fffffff*/ 	IADD32I R7, R7, 0xffffffff;
+	/*0118*/     /*0x20000a0904018780*/ 	IADD R2, R5, R6;
+	/*0120*/     /*0x00020405c0000780*/ 	R2A A1, R2, 0x2;
+	/*0128*/     /*0xd45d780920000780*/ 	ADA A2, A1, 0x2ebc;
+	/*0130*/     /*0xd807c02104200780*/ 	LOP.AND R8, g [A2+0x0], R7;
+	/*0138*/     /*0x202f8409000000bb*/ 	IADD32I R2, R2, 0xbaf;
+	/*0140*/     /*0x30080ffd640147c8*/ 	ISET.C0 o [0x7f], R7, R8, NE;
+	/*0148*/     /*0x00020409c0000780*/ 	R2A A2, R2, 0x2;
+	/*0150*/     /*0xa004f00300000000*/ 	SSY 0x278;
+	/*0158*/     /*0x1002f00300000280*/ 	BRA C0.NE, 0x178;
+	/*0160*/     /*0x203f82050fffffff*/ 	IADD32I R1, R1, 0xffffffff;
+	/*0168*/     /*0x203f8a150fffffff*/ 	IADD32I R5, R5, 0xffffffff;
+	/*0170*/     /*0x1004f00300000780*/ 	BRA 0x278;
+	/*0178*/     /*0x2901e00900000003*/ 	IADD32I R2, g [A2+0x0], 0x1;
+	/*0180*/     /*0xd802c02104210780*/ 	LOP.AND R8, ~g [A2+0x0], R2;
+	/*0188*/     /*0xd808c00904204780*/ 	LOP.OR R2, g [A2+0x0], R8;
+	/*0190*/     /*0xd00711fd040007c8*/ 	LOP.AND.C0 o [0x7f], R8, R7;
+	/*0198*/     /*0x08000001e4208780*/ 	R2G.U32.U32 g [A2+0x0], R2;
+	/*01a0*/     /*0x1004d00300000100*/ 	BRA C0.EQ, 0x268;
+	/*01a8*/     /*0x2001820900000003*/ 	IADD32I R2, R1, 0x1;
+	/*01b0*/     /*0x3002cbfd6c2147c8*/ 	ISET.S32.C0 o [0x7f], g [0x5], R2, NE;
+	/*01b8*/     /*0x1003c00300000280*/ 	BRA C0.NE, 0x1e0;
+	/*01c0*/     /*0x203f8a150fffffff*/ 	IADD32I R5, R5, 0xffffffff;
+	/*01c8*/     /*0x2001881100000003*/ 	IADD32I R4, R4, 0x1;
+	/*01d0*/     /*0x203f82050fffffff*/ 	IADD32I R1, R1, 0xffffffff;
+	/*01d8*/     /*0x1004f00300000780*/ 	BRA 0x278;
+	/*01e0*/     /*0xd403780d20000780*/ 	ADA A3, A1, 0x1bc;
+	/*01e8*/     /*0xdc08c00504204780*/ 	LOP.OR R1, g [A3+0x0], R8;
+	/*01f0*/     /*0xd43f780d20000780*/ 	ADA A3, A1, 0x1fbc;
+	/*01f8*/     /*0x0400e001e4204780*/ 	R2G.U32.U32 g [A1+0x70], R1;
+	/*0200*/     /*0xdc08c02504204780*/ 	LOP.OR R9, g [A3+0x0], R8;
+	/*0208*/     /*0x30011225c4100780*/ 	SHL R9, R9, 0x1;
+	/*0210*/     /*0xd421780d20000780*/ 	ADA A3, A1, 0x10bc;
+	/*0218*/     /*0x040fe001e4224780*/ 	R2G.U32.U32 g [A1+0x7f0], R9;
+	/*0220*/     /*0xdc08c02104204780*/ 	LOP.OR R8, g [A3+0x0], R8;
+	/*0228*/     /*0x30011021e4100780*/ 	SHR R8, R8, 0x1;
+	/*0230*/     /*0xd009020504004780*/ 	LOP.OR R1, R1, R9;
+	/*0238*/     /*0x04086001e4220780*/ 	R2G.U32.U32 g [A1+0x430], R8;
+	/*0240*/     /*0xd001100504004780*/ 	LOP.OR R1, R8, R1;
+	/*0248*/     /*0x08000201e4204780*/ 	R2G.U32.U32 g [A2+0x1], R1;
+	/*0250*/     /*0x20018a1500000003*/ 	IADD32I R5, R5, 0x1;
+	/*0258*/     /*0x100004050403c780*/ 	MOV R1, R2;
+	/*0260*/     /*0x1004f00300000780*/ 	BRA 0x278;
+	/*0268*/     /*0x203f82050fffffff*/ 	IADD32I R1, R1, 0xffffffff;
+	/*0270*/     /*0x203f8a150fffffff*/ 	IADD32I R5, R5, 0xffffffff;
+	/*0278*/     /*0x307c03fd6c0187ca*/ 	ISET.S.S32.C0 o [0x7f], R1, R124, GE;
+	/*0280*/     /*0x1002300300000280*/ 	BRA C0.NE, 0x118;
+	/*0288*/     /*0x00020005c0000782*/ 	R2A.S A1, R0, 0x2;
+	/*0290*/     /*0x04001e01e4210780*/ 	R2G.U32.U32 g [A1+0xf], R4;
+	/*0298*/     /*0x1005600300000780*/ 	BRA 0x2b0;
+	/*02a0*/     /*0x00020005c0000780*/ 	R2A A1, R0, 0x2;
+	/*02a8*/     /*0x04001e01e43f0780*/ 	R2G.U32.U32 g [A1+0xf], R124;
+	/*02b0*/     /*0xf0000001e0000002*/ 	NOP.S;
+	/*02b8*/     /*0x861ffe0300000000*/ 	BAR.ARV.WAIT b0, 0xfff;
+	/*02c0*/     /*0x308000056c40c7d0*/ 	ISET.S32.C1 R1, R0, c [0x1] [0x0], LE;
+	/*02c8*/     /*0xa00003fd0c0147c8*/ 	I2I.S32.S32.C0 o [0x7f], R1;
+	/*02d0*/     /*0x00020005c0001680*/ 	R2A A1 (C1.NEU), R0, 0x2;
+	/*02d8*/     /*0xd402780920001680*/ 	ADA A2 (C1.NEU), A1, 0x13c;
+	/*02e0*/     /*0x1800c0050423d680*/ 	MOV R1 (C1.NEU), g [A2+0x0];
+	/*02e8*/     /*0x2400de0504205680*/ 	IADD R1 (C1.NEU), g [A1+0xf], R1;
+	/*02f0*/     /*0x04001e01e4205680*/ 	R2G.U32.U32 g [A1+0xf] (C1.NEU), R1;
+	/*02f8*/     /*0x861ffe0300000000*/ 	BAR.ARV.WAIT b0, 0xfff;
+	/*0300*/     /*0x00020005c0000680*/ 	R2A A1 (C0.NEU), R0, 0x2;
+	/*0308*/     /*0xd401780920000680*/ 	ADA A2 (C0.NEU), A1, 0xbc;
+	/*0310*/     /*0x1800c0050423c680*/ 	MOV R1 (C0.NEU), g [A2+0x0];
+	/*0318*/     /*0x2400de0504204680*/ 	IADD R1 (C0.NEU), g [A1+0xf], R1;
+	/*0320*/     /*0x04001e01e4204680*/ 	R2G.U32.U32 g [A1+0xf] (C0.NEU), R1;
+	/*0328*/     /*0x861ffe0300000000*/ 	BAR.ARV.WAIT b0, 0xfff;
+	/*0330*/     /*0x308101fd6c4107c8*/ 	ISET.S32.C0 o [0x7f], R0, c [0x1] [0x1], GT;
+	/*0338*/     /*0x00020005c0000500*/ 	R2A A1 (C0.EQU), R0, 0x2;
+	/*0340*/     /*0x1400fe050423c500*/ 	MOV R1 (C0.EQU), g [A1+0x1f];
+	/*0348*/     /*0x2400de0504204500*/ 	IADD R1 (C0.EQU), g [A1+0xf], R1;
+	/*0350*/     /*0x04001e01e4204500*/ 	R2G.U32.U32 g [A1+0xf] (C0.EQU), R1;
+	/*0358*/     /*0x861ffe0300000000*/ 	BAR.ARV.WAIT b0, 0xfff;
+	/*0360*/     /*0x308201fd6c4107c8*/ 	ISET.S32.C0 o [0x7f], R0, c [0x1] [0x2], GT;
+	/*0368*/     /*0x00020005c0000500*/ 	R2A A1 (C0.EQU), R0, 0x2;
+	/*0370*/     /*0x1400ee050423c500*/ 	MOV R1 (C0.EQU), g [A1+0x17];
+	/*0378*/     /*0x2400de0504204500*/ 	IADD R1 (C0.EQU), g [A1+0xf], R1;
+	/*0380*/     /*0x04001e01e4204500*/ 	R2G.U32.U32 g [A1+0xf] (C0.EQU), R1;
+	/*0388*/     /*0x861ffe0300000000*/ 	BAR.ARV.WAIT b0, 0xfff;
+	/*0390*/     /*0x308301fd6c4107c8*/ 	ISET.S32.C0 o [0x7f], R0, c [0x1] [0x3], GT;
+	/*0398*/     /*0x00020005c0000500*/ 	R2A A1 (C0.EQU), R0, 0x2;
+	/*03a0*/     /*0x1400e6050423c500*/ 	MOV R1 (C0.EQU), g [A1+0x13];
+	/*03a8*/     /*0x2400de0504204500*/ 	IADD R1 (C0.EQU), g [A1+0xf], R1;
+	/*03b0*/     /*0x04001e01e4204500*/ 	R2G.U32.U32 g [A1+0xf] (C0.EQU), R1;
+	/*03b8*/     /*0x861ffe0300000000*/ 	BAR.ARV.WAIT b0, 0xfff;
+	/*03c0*/     /*0x308401fd6c4107c8*/ 	ISET.S32.C0 o [0x7f], R0, c [0x1] [0x4], GT;
+	/*03c8*/     /*0x00020005c0000500*/ 	R2A A1 (C0.EQU), R0, 0x2;
+	/*03d0*/     /*0x1400e2050423c500*/ 	MOV R1 (C0.EQU), g [A1+0x11];
+	/*03d8*/     /*0x2400de0504204500*/ 	IADD R1 (C0.EQU), g [A1+0xf], R1;
+	/*03e0*/     /*0x04001e01e4204500*/ 	R2G.U32.U32 g [A1+0xf] (C0.EQU), R1;
+	/*03e8*/     /*0x861ffe0300000000*/ 	BAR.ARV.WAIT b0, 0xfff;
+	/*03f0*/     /*0x307c01fd6c0107c8*/ 	ISET.S32.C0 o [0x7f], R0, R124, GT;
+	/*03f8*/     /*0x00020005c0000500*/ 	R2A A1 (C0.EQU), R0, 0x2;
+	/*0400*/     /*0x1400e0050423c500*/ 	MOV R1 (C0.EQU), g [A1+0x10];
+	/*0408*/     /*0x2400de0504204500*/ 	IADD R1 (C0.EQU), g [A1+0xf], R1;
+	/*0410*/     /*0x04001e01e4204500*/ 	R2G.U32.U32 g [A1+0xf] (C0.EQU), R1;
+	/*0418*/     /*0x861ffe0300000000*/ 	BAR.ARV.WAIT b0, 0xfff;
+	/*0420*/     /*0x307c01fd6c0147c8*/ 	ISET.S32.C0 o [0x7f], R0, R124, NE;
+	/*0428*/     /*0x3000000300000280*/ 	RET C0.NE;
+	/*0430*/     /*0x30020605c4100780*/ 	SHL R1, R3, 0x2;
+	/*0438*/     /*0x1100fe00        */ 	MOV32 R0, g [0xf];
+	/*043c*/     /*0x2101f804        */ 	IADD32 R1, g [0xc], R1;
+	/*0440*/     /*0xd00e0201a0c00781*/ 	GST.U32 global14 [R1], R0;
+		........................................................
+
+
+
+Fatbin ptx code:
+================
+arch = sm_10
+code version = [1,4]
+producer = cuda
+host = linux
+compile_size = 64bit
+identifier = nqueen.cu
+	.version 1.4
+.target sm_10, map_f64_to_f32
+
+	
+
+
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+
+.file	1	"<command-line>"
+.file	2	"/tmp/tmpxft_00003c06_00000000-18_nqueen.compute_10.cudafe2.gpu"
+.file	3	"/usr/lib/gcc/x86_64-linux-gnu/4.4.7/include/stddef.h"
+.file	4	"/usr/local/cuda/include/crt/device_runtime.h"
+.file	5	"/usr/local/cuda/include/host_defines.h"
+.file	6	"/usr/local/cuda/include/builtin_types.h"
+.file	7	"/usr/local/cuda/include/device_types.h"
+.file	8	"/usr/local/cuda/include/driver_types.h"
+.file	9	"/usr/local/cuda/include/surface_types.h"
+.file	10	"/usr/local/cuda/include/texture_types.h"
+.file	11	"/usr/local/cuda/include/vector_types.h"
+.file	12	"/usr/local/cuda/include/device_launch_parameters.h"
+.file	13	"/usr/local/cuda/include/crt/storage_class.h"
+.file	14	"nqueen.cu"
+.file	15	"/usr/local/cuda/include/common_functions.h"
+.file	16	"/usr/local/cuda/include/math_functions.h"
+.file	17	"/usr/local/cuda/include/math_constants.h"
+.file	18	"/usr/local/cuda/include/device_functions.h"
+.file	19	"/usr/local/cuda/include/sm_11_atomic_functions.h"
+.file	20	"/usr/local/cuda/include/sm_12_atomic_functions.h"
+.file	21	"/usr/local/cuda/include/sm_13_double_functions.h"
+.file	22	"/usr/local/cuda/include/sm_20_atomic_functions.h"
+.file	23	"/usr/local/cuda/include/sm_20_intrinsics.h"
+.file	24	"/usr/local/cuda/include/sm_30_intrinsics.h"
+.file	25	"/usr/local/cuda/include/surface_functions.h"
+.file	26	"/usr/local/cuda/include/texture_fetch_functions.h"
+.file	27	"/usr/local/cuda/include/math_functions_dbl_ptx1.h"
+
+
+.entry _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i (
+.param .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_n,
+.param .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_mark,
+.param .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_masks,
+.param .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_l_masks,
+.param .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_r_masks,
+.param .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_results,
+.param .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_conditions)
+{
+.reg .u32 %r<69>;
+.reg .u64 %rd<35>;
+.reg .pred %p<14>;
+.shared .align 4 .b8 __cuda___cuda_local_var_16562_39_non_const_sum44[384];
+.shared .align 4 .b8 __cuda___cuda_local_var_16557_39_non_const_mask428[3840];
+.shared .align 4 .b8 __cuda___cuda_local_var_16559_39_non_const_r_mask4268[3840];
+.shared .align 4 .b8 __cuda___cuda_local_var_16558_39_non_const_l_mask8108[3840];
+.shared .align 4 .b8 __cuda___cuda_local_var_16560_39_non_const_m11948[3840];
+.loc	14	323	0
+$LDWbegin__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i:
+cvt.s32.u16 %r1, %ctaid.x;
+cvt.u32.u16 %r2, %ntid.x;
+mul.lo.u32 %r3, %r1, %r2;
+cvt.s32.u16 %r4, %tid.x;
+cvt.s64.s32 %rd1, %r4;
+add.u32 %r5, %r4, %r3;
+mov.u64 %rd2, __cuda___cuda_local_var_16562_39_non_const_sum44;
+mul.wide.s32 %rd3, %r4, 4;
+add.u64 %rd4, %rd2, %rd3;
+ld.param.s32 %r6, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_conditions];
+setp.le.s32 %p1, %r6, %r5;
+@%p1 bra $Lt_0_10754;
+.loc	14	342	0
+mov.u64 %rd5, __cuda___cuda_local_var_16557_39_non_const_mask428;
+mov.u64 %rd6, __cuda___cuda_local_var_16559_39_non_const_r_mask4268;
+mov.u64 %rd7, __cuda___cuda_local_var_16558_39_non_const_l_mask8108;
+mov.u64 %rd8, __cuda___cuda_local_var_16560_39_non_const_m11948;
+mul.lo.u64 %rd9, %rd1, 40;
+cvt.s64.s32 %rd10, %r5;
+mul.wide.s32 %rd11, %r5, 4;
+ld.param.u64 %rd12, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_masks];
+add.u64 %rd13, %rd12, %rd11;
+ld.global.u32 %r7, [%rd13+0];
+add.u64 %rd14, %rd9, %rd5;
+st.shared.u32 [%rd14+0], %r7;
+.loc	14	343	0
+ld.param.u64 %rd15, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_l_masks];
+add.u64 %rd16, %rd15, %rd11;
+ld.global.u32 %r8, [%rd16+0];
+add.u64 %rd17, %rd9, %rd7;
+st.shared.u32 [%rd17+0], %r8;
+.loc	14	344	0
+ld.param.u64 %rd18, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_r_masks];
+add.u64 %rd19, %rd18, %rd11;
+ld.global.u32 %r9, [%rd19+0];
+add.u64 %rd20, %rd9, %rd6;
+st.shared.u32 [%rd20+0], %r9;
+.loc	14	345	0
+or.b32 %r10, %r7, %r8;
+or.b32 %r11, %r9, %r10;
+add.u64 %rd21, %rd9, %rd8;
+st.shared.u32 [%rd21+0], %r11;
+ld.param.s32 %r12, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_n];
+shl.b32 %r13, 1, %r12;
+sub.u32 %r14, %r13, 1;
+mov.s64 %rd22, 0;
+mul.lo.u64 %rd23, %rd1, 10;
+mov.s32 %r15, 0;
+mov.s32 %r16, 0;
+$Lt_0_11522:
+
+	add.u64 %rd24, %rd22, %rd23;
+mul.lo.u64 %rd25, %rd24, 4;
+add.u64 %rd26, %rd25, %rd8;
+ld.shared.u32 %r17, [%rd26+0];
+and.b32 %r18, %r14, %r17;
+setp.ne.u32 %p2, %r14, %r18;
+@%p2 bra $Lt_0_12034;
+.loc	14	349	0
+sub.s32 %r15, %r15, 1;
+sub.s64 %rd22, %rd22, 1;
+bra.uni $Lt_0_12290;
+$Lt_0_12034:
+.loc	14	345	0
+ld.shared.u32 %r17, [%rd26+0];
+.loc	14	352	0
+add.u32 %r19, %r17, 1;
+not.b32 %r20, %r17;
+and.b32 %r21, %r19, %r20;
+.loc	14	353	0
+or.b32 %r22, %r17, %r21;
+st.shared.u32 [%rd26+0], %r22;
+and.b32 %r23, %r14, %r21;
+mov.u32 %r24, 0;
+setp.eq.u32 %p3, %r23, %r24;
+@%p3 bra $Lt_0_12546;
+add.s32 %r25, %r15, 1;
+ld.param.s32 %r26, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_mark];
+setp.ne.s32 %p4, %r26, %r25;
+@%p4 bra $Lt_0_13058;
+.loc	14	356	0
+add.s32 %r16, %r16, 1;
+.loc	14	357	0
+sub.s32 %r15, %r15, 1;
+sub.s64 %rd22, %rd22, 1;
+bra.uni $Lt_0_12290;
+$Lt_0_13058:
+.loc	14	360	0
+add.u64 %rd27, %rd25, %rd5;
+ld.shared.u32 %r27, [%rd27+0];
+or.b32 %r28, %r27, %r21;
+st.shared.u32 [%rd27+4], %r28;
+.loc	14	361	0
+add.u64 %rd28, %rd25, %rd7;
+ld.shared.u32 %r29, [%rd28+0];
+or.b32 %r30, %r29, %r21;
+shl.b32 %r31, %r30, 1;
+st.shared.u32 [%rd28+4], %r31;
+.loc	14	362	0
+add.u64 %rd29, %rd25, %rd6;
+ld.shared.u32 %r32, [%rd29+0];
+or.b32 %r33, %r32, %r21;
+shr.u32 %r34, %r33, 1;
+st.shared.u32 [%rd29+4], %r34;
+.loc	14	363	0
+or.b32 %r35, %r28, %r31;
+or.b32 %r36, %r34, %r35;
+st.shared.u32 [%rd26+4], %r36;
+.loc	14	364	0
+mov.s32 %r15, %r25;
+add.s64 %rd22, %rd22, 1;
+bra.uni $Lt_0_12290;
+$Lt_0_12546:
+.loc	14	368	0
+sub.s32 %r15, %r15, 1;
+sub.s64 %rd22, %rd22, 1;
+$Lt_0_12290:
+$Lt_0_11778:
+mov.u32 %r37, 0;
+setp.ge.s32 %p5, %r15, %r37;
+@%p5 bra $Lt_0_11522;
+.loc	14	373	0
+st.shared.u32 [%rd4+0], %r16;
+bra.uni $Lt_0_10498;
+$Lt_0_10754:
+.loc	14	376	0
+mov.u32 %r38, 0;
+st.shared.u32 [%rd4+0], %r38;
+$Lt_0_10498:
+.loc	14	379	0
+bar.sync 0;
+mov.s32 %r39, 31;
+setp.le.s32 %p6, %r4, %r39;
+@!%p6 bra $Lt_0_13570;
+.loc	14	382	0
+ld.shared.u32 %r40, [%rd4+0];
+ld.shared.u32 %r41, [%rd4+256];
+add.u32 %r42, %r40, %r41;
+st.shared.u32 [%rd4+0], %r42;
+$Lt_0_13570:
+bar.sync 0;
+@!%p6 bra $Lt_0_14082;
+.loc	14	383	0
+ld.shared.u32 %r43, [%rd4+0];
+ld.shared.u32 %r44, [%rd4+128];
+add.u32 %r45, %r43, %r44;
+st.shared.u32 [%rd4+0], %r45;
+$Lt_0_14082:
+bar.sync 0;
+mov.u32 %r46, 15;
+setp.gt.s32 %p7, %r4, %r46;
+@%p7 bra $Lt_0_14594;
+.loc	14	384	0
+ld.shared.u32 %r47, [%rd4+0];
+ld.shared.u32 %r48, [%rd4+64];
+add.u32 %r49, %r47, %r48;
+st.shared.u32 [%rd4+0], %r49;
+$Lt_0_14594:
+bar.sync 0;
+mov.u32 %r50, 7;
+setp.gt.s32 %p8, %r4, %r50;
+@%p8 bra $Lt_0_15106;
+.loc	14	385	0
+ld.shared.u32 %r51, [%rd4+0];
+ld.shared.u32 %r52, [%rd4+32];
+add.u32 %r53, %r51, %r52;
+st.shared.u32 [%rd4+0], %r53;
+$Lt_0_15106:
+bar.sync 0;
+mov.u32 %r54, 3;
+setp.gt.s32 %p9, %r4, %r54;
+@%p9 bra $Lt_0_15618;
+.loc	14	386	0
+ld.shared.u32 %r55, [%rd4+0];
+ld.shared.u32 %r56, [%rd4+16];
+add.u32 %r57, %r55, %r56;
+st.shared.u32 [%rd4+0], %r57;
+$Lt_0_15618:
+bar.sync 0;
+mov.u32 %r58, 1;
+setp.gt.s32 %p10, %r4, %r58;
+@%p10 bra $Lt_0_16130;
+.loc	14	387	0
+ld.shared.u32 %r59, [%rd4+0];
+ld.shared.u32 %r60, [%rd4+8];
+add.u32 %r61, %r59, %r60;
+st.shared.u32 [%rd4+0], %r61;
+$Lt_0_16130:
+bar.sync 0;
+mov.u32 %r62, 0;
+setp.gt.s32 %p11, %r4, %r62;
+@%p11 bra $Lt_0_16642;
+.loc	14	388	0
+ld.shared.u32 %r63, [%rd4+0];
+ld.shared.u32 %r64, [%rd4+4];
+add.u32 %r65, %r63, %r64;
+st.shared.u32 [%rd4+0], %r65;
+$Lt_0_16642:
+bar.sync 0;
+mov.u32 %r66, 0;
+setp.ne.s32 %p12, %r4, %r66;
+@%p12 bra $Lt_0_17154;
+.loc	14	391	0
+ld.shared.u32 %r67, [__cuda___cuda_local_var_16562_39_non_const_sum44+0];
+ld.param.u64 %rd30, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_results];
+cvt.s64.s32 %rd31, %r1;
+mul.wide.s32 %rd32, %r1, 4;
+add.u64 %rd33, %rd30, %rd32;
+st.global.u32 [%rd33+0], %r67;
+$Lt_0_17154:
+.loc	14	393	0
+exit;
+$LDWend__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i:
+} 
+

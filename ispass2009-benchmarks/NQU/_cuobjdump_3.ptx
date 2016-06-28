@@ -1,0 +1,282 @@
+
+	.version 1.4
+.target sm_10, map_f64_to_f32
+
+	
+
+
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+
+.file	1	"<command-line>"
+.file	2	"/tmp/tmpxft_00003c06_00000000-18_nqueen.compute_10.cudafe2.gpu"
+.file	3	"/usr/lib/gcc/x86_64-linux-gnu/4.4.7/include/stddef.h"
+.file	4	"/usr/local/cuda/include/crt/device_runtime.h"
+.file	5	"/usr/local/cuda/include/host_defines.h"
+.file	6	"/usr/local/cuda/include/builtin_types.h"
+.file	7	"/usr/local/cuda/include/device_types.h"
+.file	8	"/usr/local/cuda/include/driver_types.h"
+.file	9	"/usr/local/cuda/include/surface_types.h"
+.file	10	"/usr/local/cuda/include/texture_types.h"
+.file	11	"/usr/local/cuda/include/vector_types.h"
+.file	12	"/usr/local/cuda/include/device_launch_parameters.h"
+.file	13	"/usr/local/cuda/include/crt/storage_class.h"
+.file	14	"nqueen.cu"
+.file	15	"/usr/local/cuda/include/common_functions.h"
+.file	16	"/usr/local/cuda/include/math_functions.h"
+.file	17	"/usr/local/cuda/include/math_constants.h"
+.file	18	"/usr/local/cuda/include/device_functions.h"
+.file	19	"/usr/local/cuda/include/sm_11_atomic_functions.h"
+.file	20	"/usr/local/cuda/include/sm_12_atomic_functions.h"
+.file	21	"/usr/local/cuda/include/sm_13_double_functions.h"
+.file	22	"/usr/local/cuda/include/sm_20_atomic_functions.h"
+.file	23	"/usr/local/cuda/include/sm_20_intrinsics.h"
+.file	24	"/usr/local/cuda/include/sm_30_intrinsics.h"
+.file	25	"/usr/local/cuda/include/surface_functions.h"
+.file	26	"/usr/local/cuda/include/texture_fetch_functions.h"
+.file	27	"/usr/local/cuda/include/math_functions_dbl_ptx1.h"
+
+
+.entry _Z24solve_nqueen_cuda_kerneliiPjS_S_S_i (
+.param .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_n,
+.param .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_mark,
+.param .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_masks,
+.param .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_l_masks,
+.param .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_r_masks,
+.param .u64 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_results,
+.param .s32 __cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_conditions)
+{
+.reg .u32 %r<69>;
+.reg .u64 %rd<35>;
+.reg .pred %p<14>;
+.shared .align 4 .b8 __cuda___cuda_local_var_16562_39_non_const_sum44[384];
+.shared .align 4 .b8 __cuda___cuda_local_var_16557_39_non_const_mask428[3840];
+.shared .align 4 .b8 __cuda___cuda_local_var_16559_39_non_const_r_mask4268[3840];
+.shared .align 4 .b8 __cuda___cuda_local_var_16558_39_non_const_l_mask8108[3840];
+.shared .align 4 .b8 __cuda___cuda_local_var_16560_39_non_const_m11948[3840];
+.loc	14	323	0
+$LDWbegin__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i:
+cvt.s32.u16 %r1, %ctaid.x;
+cvt.u32.u16 %r2, %ntid.x;
+mul.lo.u32 %r3, %r1, %r2;
+cvt.s32.u16 %r4, %tid.x;
+cvt.s64.s32 %rd1, %r4;
+add.u32 %r5, %r4, %r3;
+mov.u64 %rd2, __cuda___cuda_local_var_16562_39_non_const_sum44;
+mul.wide.s32 %rd3, %r4, 4;
+add.u64 %rd4, %rd2, %rd3;
+ld.param.s32 %r6, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_conditions];
+setp.le.s32 %p1, %r6, %r5;
+@%p1 bra $Lt_0_10754;
+.loc	14	342	0
+mov.u64 %rd5, __cuda___cuda_local_var_16557_39_non_const_mask428;
+mov.u64 %rd6, __cuda___cuda_local_var_16559_39_non_const_r_mask4268;
+mov.u64 %rd7, __cuda___cuda_local_var_16558_39_non_const_l_mask8108;
+mov.u64 %rd8, __cuda___cuda_local_var_16560_39_non_const_m11948;
+mul.lo.u64 %rd9, %rd1, 40;
+cvt.s64.s32 %rd10, %r5;
+mul.wide.s32 %rd11, %r5, 4;
+ld.param.u64 %rd12, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_masks];
+add.u64 %rd13, %rd12, %rd11;
+ld.global.u32 %r7, [%rd13+0];
+add.u64 %rd14, %rd9, %rd5;
+st.shared.u32 [%rd14+0], %r7;
+.loc	14	343	0
+ld.param.u64 %rd15, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_l_masks];
+add.u64 %rd16, %rd15, %rd11;
+ld.global.u32 %r8, [%rd16+0];
+add.u64 %rd17, %rd9, %rd7;
+st.shared.u32 [%rd17+0], %r8;
+.loc	14	344	0
+ld.param.u64 %rd18, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_total_r_masks];
+add.u64 %rd19, %rd18, %rd11;
+ld.global.u32 %r9, [%rd19+0];
+add.u64 %rd20, %rd9, %rd6;
+st.shared.u32 [%rd20+0], %r9;
+.loc	14	345	0
+or.b32 %r10, %r7, %r8;
+or.b32 %r11, %r9, %r10;
+add.u64 %rd21, %rd9, %rd8;
+st.shared.u32 [%rd21+0], %r11;
+ld.param.s32 %r12, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_n];
+shl.b32 %r13, 1, %r12;
+sub.u32 %r14, %r13, 1;
+mov.s64 %rd22, 0;
+mul.lo.u64 %rd23, %rd1, 10;
+mov.s32 %r15, 0;
+mov.s32 %r16, 0;
+$Lt_0_11522:
+
+	add.u64 %rd24, %rd22, %rd23;
+mul.lo.u64 %rd25, %rd24, 4;
+add.u64 %rd26, %rd25, %rd8;
+ld.shared.u32 %r17, [%rd26+0];
+and.b32 %r18, %r14, %r17;
+setp.ne.u32 %p2, %r14, %r18;
+@%p2 bra $Lt_0_12034;
+.loc	14	349	0
+sub.s32 %r15, %r15, 1;
+sub.s64 %rd22, %rd22, 1;
+bra.uni $Lt_0_12290;
+$Lt_0_12034:
+.loc	14	345	0
+ld.shared.u32 %r17, [%rd26+0];
+.loc	14	352	0
+add.u32 %r19, %r17, 1;
+not.b32 %r20, %r17;
+and.b32 %r21, %r19, %r20;
+.loc	14	353	0
+or.b32 %r22, %r17, %r21;
+st.shared.u32 [%rd26+0], %r22;
+and.b32 %r23, %r14, %r21;
+mov.u32 %r24, 0;
+setp.eq.u32 %p3, %r23, %r24;
+@%p3 bra $Lt_0_12546;
+add.s32 %r25, %r15, 1;
+ld.param.s32 %r26, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_mark];
+setp.ne.s32 %p4, %r26, %r25;
+@%p4 bra $Lt_0_13058;
+.loc	14	356	0
+add.s32 %r16, %r16, 1;
+.loc	14	357	0
+sub.s32 %r15, %r15, 1;
+sub.s64 %rd22, %rd22, 1;
+bra.uni $Lt_0_12290;
+$Lt_0_13058:
+.loc	14	360	0
+add.u64 %rd27, %rd25, %rd5;
+ld.shared.u32 %r27, [%rd27+0];
+or.b32 %r28, %r27, %r21;
+st.shared.u32 [%rd27+4], %r28;
+.loc	14	361	0
+add.u64 %rd28, %rd25, %rd7;
+ld.shared.u32 %r29, [%rd28+0];
+or.b32 %r30, %r29, %r21;
+shl.b32 %r31, %r30, 1;
+st.shared.u32 [%rd28+4], %r31;
+.loc	14	362	0
+add.u64 %rd29, %rd25, %rd6;
+ld.shared.u32 %r32, [%rd29+0];
+or.b32 %r33, %r32, %r21;
+shr.u32 %r34, %r33, 1;
+st.shared.u32 [%rd29+4], %r34;
+.loc	14	363	0
+or.b32 %r35, %r28, %r31;
+or.b32 %r36, %r34, %r35;
+st.shared.u32 [%rd26+4], %r36;
+.loc	14	364	0
+mov.s32 %r15, %r25;
+add.s64 %rd22, %rd22, 1;
+bra.uni $Lt_0_12290;
+$Lt_0_12546:
+.loc	14	368	0
+sub.s32 %r15, %r15, 1;
+sub.s64 %rd22, %rd22, 1;
+$Lt_0_12290:
+$Lt_0_11778:
+mov.u32 %r37, 0;
+setp.ge.s32 %p5, %r15, %r37;
+@%p5 bra $Lt_0_11522;
+.loc	14	373	0
+st.shared.u32 [%rd4+0], %r16;
+bra.uni $Lt_0_10498;
+$Lt_0_10754:
+.loc	14	376	0
+mov.u32 %r38, 0;
+st.shared.u32 [%rd4+0], %r38;
+$Lt_0_10498:
+.loc	14	379	0
+bar.sync 0;
+mov.s32 %r39, 31;
+setp.le.s32 %p6, %r4, %r39;
+@!%p6 bra $Lt_0_13570;
+.loc	14	382	0
+ld.shared.u32 %r40, [%rd4+0];
+ld.shared.u32 %r41, [%rd4+256];
+add.u32 %r42, %r40, %r41;
+st.shared.u32 [%rd4+0], %r42;
+$Lt_0_13570:
+bar.sync 0;
+@!%p6 bra $Lt_0_14082;
+.loc	14	383	0
+ld.shared.u32 %r43, [%rd4+0];
+ld.shared.u32 %r44, [%rd4+128];
+add.u32 %r45, %r43, %r44;
+st.shared.u32 [%rd4+0], %r45;
+$Lt_0_14082:
+bar.sync 0;
+mov.u32 %r46, 15;
+setp.gt.s32 %p7, %r4, %r46;
+@%p7 bra $Lt_0_14594;
+.loc	14	384	0
+ld.shared.u32 %r47, [%rd4+0];
+ld.shared.u32 %r48, [%rd4+64];
+add.u32 %r49, %r47, %r48;
+st.shared.u32 [%rd4+0], %r49;
+$Lt_0_14594:
+bar.sync 0;
+mov.u32 %r50, 7;
+setp.gt.s32 %p8, %r4, %r50;
+@%p8 bra $Lt_0_15106;
+.loc	14	385	0
+ld.shared.u32 %r51, [%rd4+0];
+ld.shared.u32 %r52, [%rd4+32];
+add.u32 %r53, %r51, %r52;
+st.shared.u32 [%rd4+0], %r53;
+$Lt_0_15106:
+bar.sync 0;
+mov.u32 %r54, 3;
+setp.gt.s32 %p9, %r4, %r54;
+@%p9 bra $Lt_0_15618;
+.loc	14	386	0
+ld.shared.u32 %r55, [%rd4+0];
+ld.shared.u32 %r56, [%rd4+16];
+add.u32 %r57, %r55, %r56;
+st.shared.u32 [%rd4+0], %r57;
+$Lt_0_15618:
+bar.sync 0;
+mov.u32 %r58, 1;
+setp.gt.s32 %p10, %r4, %r58;
+@%p10 bra $Lt_0_16130;
+.loc	14	387	0
+ld.shared.u32 %r59, [%rd4+0];
+ld.shared.u32 %r60, [%rd4+8];
+add.u32 %r61, %r59, %r60;
+st.shared.u32 [%rd4+0], %r61;
+$Lt_0_16130:
+bar.sync 0;
+mov.u32 %r62, 0;
+setp.gt.s32 %p11, %r4, %r62;
+@%p11 bra $Lt_0_16642;
+.loc	14	388	0
+ld.shared.u32 %r63, [%rd4+0];
+ld.shared.u32 %r64, [%rd4+4];
+add.u32 %r65, %r63, %r64;
+st.shared.u32 [%rd4+0], %r65;
+$Lt_0_16642:
+bar.sync 0;
+mov.u32 %r66, 0;
+setp.ne.s32 %p12, %r4, %r66;
+@%p12 bra $Lt_0_17154;
+.loc	14	391	0
+ld.shared.u32 %r67, [__cuda___cuda_local_var_16562_39_non_const_sum44+0];
+ld.param.u64 %rd30, [__cudaparm__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i_results];
+cvt.s64.s32 %rd31, %r1;
+mul.wide.s32 %rd32, %r1, 4;
+add.u64 %rd33, %rd30, %rd32;
+st.global.u32 [%rd33+0], %r67;
+$Lt_0_17154:
+.loc	14	393	0
+exit;
+$LDWend__Z24solve_nqueen_cuda_kerneliiPjS_S_S_i:
+} 
+
