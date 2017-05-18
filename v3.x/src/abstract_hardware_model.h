@@ -788,6 +788,8 @@ public:
         m_mem_accesses_created=false;
         m_cache_hit=false;
         m_is_printf=false;
+        issue_pipe = 0;
+        dependency_chain = false;
     }
     virtual ~warp_inst_t(){
     }
@@ -810,6 +812,9 @@ public:
         cycles = initiation_interval;
         m_cache_hit=false;
         m_empty=false;
+        if(this->dependency_chain && issue_pipe==) {
+
+        }
     }
     const active_mask_t & get_active_mask() const
     {
@@ -927,6 +932,44 @@ public:
     void print( FILE *fout ) const;
     unsigned get_uid() const { return m_uid; }
 
+
+    // @JD
+    // denotes the pipeline lane the inst is issued into
+    // issued in direct pipe, value = unit0
+    // issued in the dependecny pipe, value = unit1
+    enum issue_pipe_t issue_pipe;
+
+    // denotes the dependency chain in the given warp instruction
+    // true if involved in a dependency chain of inst
+    // false otherwise
+    bool dependency_chain;
+
+    // function to get whether next inst is dependent on current inst output
+    bool is_next_inst_dependent()
+    {
+        // TODO check next inst source !!
+        const warp_inst_t* next_inst = ptx_fetch_inst(pc+this->isize);
+        for (int i = 0; i < MAX_REG_OPERANDS/2; i++)
+        {
+            if(next_inst->in[i] > 0) {
+                for (int j = 0; j < MAX_REG_OPERANDS / 2; j++)
+                {
+                    if(this->out[j] > 0) {
+                        if (next_inst->in[i] == this->out[j]) {
+                            this->dependency_chain = true;
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+//    bool can_issue_dependency_chain()
+
+
+
 protected:
 
     unsigned m_uid;
@@ -961,6 +1004,9 @@ protected:
 void move_warp( warp_inst_t *&dst, warp_inst_t *&src );
 
 size_t get_kernel_code_size( class function_info *entry );
+
+// @JD
+enum issue_pipe_t {pipe0, pipe1};
 
 /*
  * This abstract class used as a base for functional and performance and simulation, it has basic functional simulation

@@ -159,6 +159,78 @@ bool Scoreboard::checkCollision( unsigned wid, const class inst_t *inst ) const
 	return false;
 }
 
+// @JD
+// Return T if current inst has next inst dependent and can be issued in the chain
+bool Scoreboard::checkdependencyRegister( unsigned wid1, const class inst_t *inst1, unsigned wid2, const class inst_t *inst2) const
+{
+    // Only resolve dependencies in the same warp
+    if (wid1 != wid2){
+        return false;
+    }
+
+    // check for dependency detected flags raised
+    if(inst1->)
+
+    // Get list of all input and output registers from both instructions
+    std::set<int> inst1_regs;
+    std::set<int> inst2_regs;
+
+//    if(inst1->out[0] > 0) inst1_regs.insert(inst1->out[0]);
+//    if(inst1->out[1] > 0) inst1_regs.insert(inst1->out[1]);
+//    if(inst1->out[2] > 0) inst1_regs.insert(inst1->out[2]);
+//    if(inst1->out[3] > 0) inst1_regs.insert(inst1->out[3]);
+//    if(inst1->in[0] > 0) inst1_regs.insert(inst1->in[0]);
+//    if(inst1->in[1] > 0) inst1_regs.insert(inst1->in[1]);
+//    if(inst1->in[2] > 0) inst1_regs.insert(inst1->in[2]);
+//    if(inst1->in[3] > 0) inst1_regs.insert(inst1->in[3]);
+//    if(inst1->pred > 0) inst1_regs.insert(inst1->pred);
+//    if(inst1->ar1 > 0) inst1_regs.insert(inst1->ar1);
+//    if(inst1->ar2 > 0) inst1_regs.insert(inst1->ar2);
+//
+//    if(inst2->out[0] > 0) inst2_regs.insert(inst2->out[0]);
+//    if(inst2->out[1] > 0) inst2_regs.insert(inst2->out[1]);
+//    if(inst2->out[2] > 0) inst2_regs.insert(inst2->out[2]);
+//    if(inst2->out[3] > 0) inst2_regs.insert(inst2->out[3]);
+//    if(inst2->in[0] > 0) inst2_regs.insert(inst2->in[0]);
+//    if(inst2->in[1] > 0) inst2_regs.insert(inst2->in[1]);
+//    if(inst2->in[2] > 0) inst2_regs.insert(inst2->in[2]);
+//    if(inst2->in[3] > 0) inst2_regs.insert(inst2->in[3]);
+//    if(inst2->pred > 0) inst2_regs.insert(inst2->pred);
+//    if(inst2->ar1 > 0) inst2_regs.insert(inst2->ar1);
+//    if(inst2->ar2 > 0) inst2_regs.insert(inst2->ar2);
+
+    // Search for RAW hazard inst1 write reg read by inst2 read operand
+    std::set<int>::const_iterator it1;
+    for ( it1=inst1_regs.begin() ; it1 != inst1_regs.end(); it1++ )
+            if(reg_table[wid1].find(*it1) != reg_table[wid1].end()) {
+            return true;
+        }
+
+
+}
+
+// @JD
+// Func to check if operand in other chained instruction is not stalled due to another data dependency
+bool Scoreboard::checkpartialCollision(unsigned int wid, const class inst_t *inst, unsigned int *reg_index)
+{
+    std::set<int> inst_regs;
+
+    for(int j = 0; j<MAX_REG_OPERANDS/4; j++)
+    {
+        if(inst->in[reg_index[j]] > 0){
+            inst_regs.insert(inst->in[j]);
+        }
+    }
+
+    // to check if remaining operands of the dependent inst are free
+    std::set<int>::const_iterator it;
+    for ( it=inst_regs.begin() ; it != inst_regs.end(); it++ )
+        if(reg_table[wid].find(*it) != reg_table[wid].end()) {
+            return true;
+        }
+    return false;
+}
+
 bool Scoreboard::pendingWrites(unsigned wid) const
 {
 	return !reg_table[wid].empty();
