@@ -87,6 +87,8 @@ public:
     bool m_active;
 };
 
+
+// Added flag to detect dependency chain
 class shd_warp_t {
 public:
     shd_warp_t( class shader_core_ctx *shader, unsigned warp_size)
@@ -109,6 +111,7 @@ public:
         m_done_exit=true;
         m_last_fetch=0;
         m_next=0;
+        inst_dependency = false;
     }
     void init( address_type start_pc,
                unsigned cta_id,
@@ -125,6 +128,7 @@ public:
         n_completed   -= active.count(); // active threads are not yet completed
         m_active_threads = active;
         m_done_exit=false;
+        inst_dependency = false;
     }
 
     bool functional_done() const;
@@ -214,6 +218,23 @@ public:
     unsigned get_dynamic_warp_id() const { return m_dynamic_warp_id; }
     unsigned get_warp_id() const { return m_warp_id; }
 
+    // @JD detect dependency chain in warp fetched instructions
+    bool detect_dependency()
+    {
+        const warp_inst_t *pI = this->ibuffer_next_inst();
+//        if(ibuffer_next_valid())
+        if(m_ibuffer[m_next].m_valid) {
+            if(m_ibuffer[(m_next+1)%IBUFFER_SIZE].m_valid){
+                inst_dependency = pI->is_next_inst_dependent(see_ibuffer_next_inst((m_next+1)%IBUFFER_SIZE));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const warp_inst_t *see_ibuffer_next_inst(unsigned int index) { return m_ibuffer[index].m_inst; }
+
+
 private:
     static const unsigned IBUFFER_SIZE=2;
     class shader_core_ctx *m_shader;
@@ -245,6 +266,10 @@ private:
 
     unsigned m_stores_outstanding; // number of store requests sent but not yet acknowledged
     unsigned m_inst_in_pipeline;
+
+    // @JD
+    bool inst_dependency;  // Acknowledges dependency chain if existing in the warp instructions
+
 };
 
 

@@ -788,7 +788,7 @@ public:
         m_mem_accesses_created=false;
         m_cache_hit=false;
         m_is_printf=false;
-        issue_pipe = 0;
+        issue_pipe = NULL;
         dependency_chain = false;
     }
     virtual ~warp_inst_t(){
@@ -944,20 +944,21 @@ public:
     // false otherwise
     bool dependency_chain;
 
-    // function to get whether next inst is dependent on current inst output
-    bool is_next_inst_dependent()
+    // function to detect whether next inst operand is dependent on current inst output
+    bool is_next_inst_dependent(const warp_inst_t *next_inst) const
     {
         // TODO check next inst source !!
-        const warp_inst_t* next_inst = ptx_fetch_inst(pc+this->isize);
-        for (int i = 0; i < MAX_REG_OPERANDS/2; i++)
-        {
-            if(next_inst->in[i] > 0) {
-                for (int j = 0; j < MAX_REG_OPERANDS / 2; j++)
-                {
-                    if(this->out[j] > 0) {
-                        if (next_inst->in[i] == this->out[j]) {
-                            this->dependency_chain = true;
-                            return true;
+
+        if(oprnd_type == SP__OP or oprnd_type == SFU__OP) {
+//            const warp_inst_t *next_inst = ptx_fetch_inst(pc + this->isize);
+            for (int i = 0; i < MAX_REG_OPERANDS / 2; i++) {
+                if (next_inst->in[i] > 0) {
+                    for (int j = 0; j < MAX_REG_OPERANDS / 2; j++) {
+                        if (this->out[j] > 0) {
+                            if (next_inst->in[i] == this->out[j]) {
+//                                this->dependency_chain = true;
+                                return true;
+                            }
                         }
                     }
                 }
@@ -966,8 +967,15 @@ public:
         return false;
     }
 
-//    bool can_issue_dependency_chain()
+    // Set dependency chain flag true for current instruction
+    void set_dependency_chain_flag(){
+        this->dependency_chain = true;
+    }
 
+    // Reset flag
+    void reset_dependency_chain_flag(){
+        this->dependency_chain = false;
+    }
 
 
 protected:

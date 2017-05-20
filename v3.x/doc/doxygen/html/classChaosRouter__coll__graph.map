@@ -1,9 +1,0 @@
-<map id="ChaosRouter" name="ChaosRouter">
-<area shape="rect" id="node2" href="$classRouter.html" title="Router" alt="" coords="1090,1168,1150,1195"/>
-<area shape="rect" id="node3" href="$classTimedModule.html" title="TimedModule" alt="" coords="751,1185,851,1212"/>
-<area shape="rect" id="node4" href="$classModule.html" title="Module" alt="" coords="383,1091,447,1117"/>
-<area shape="rect" id="node18" href="$classPipelineFIFO.html" title="PipelineFIFO\&lt; Flit \&gt;" alt="" coords="1051,661,1189,688"/>
-<area shape="rect" id="node11" href="$classint.html" title="int" alt="" coords="90,325,129,352"/>
-<area shape="rect" id="node20" href="$structFlit.html" title="Flit" alt="" coords="781,524,821,551"/>
-<area shape="rect" id="node22" href="$classOutputSet.html" title="OutputSet" alt="" coords="374,872,455,899"/>
-</map>

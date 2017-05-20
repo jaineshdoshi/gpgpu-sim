@@ -1,9 +1,0 @@
-<map id="Network" name="Network">
-<area shape="rect" id="node2" href="$classTimedModule.html" title="TimedModule" alt="" coords="634,1633,734,1660"/>
-<area shape="rect" id="node13" href="$classRouter.html" title="Router" alt="" coords="1002,1248,1062,1275"/>
-<area shape="rect" id="node3" href="$classModule.html" title="Module" alt="" coords="317,1175,381,1201"/>
-<area shape="rect" id="node8" href="$classCredit.html" title="Credit" alt="" coords="1004,281,1060,308"/>
-<area shape="rect" id="node11" href="$classint.html" title="int" alt="" coords="330,651,369,677"/>
-<area shape="rect" id="node22" href="$structFlit.html" title="Flit" alt="" coords="1012,651,1052,677"/>
-<area shape="rect" id="node24" href="$classOutputSet.html" title="OutputSet" alt="" coords="643,763,725,789"/>
-</map>

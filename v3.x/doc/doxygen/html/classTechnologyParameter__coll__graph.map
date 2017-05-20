@@ -1,6 +1,0 @@
-<map id="TechnologyParameter" name="TechnologyParameter">
-<area shape="rect" id="node4" href="$classTechnologyParameter_1_1ScalingFactor.html" title="TechnologyParameter\l::ScalingFactor" alt="" coords="249,326,397,367"/>
-<area shape="rect" id="node5" href="$classTechnologyParameter_1_1MemoryType.html" title="TechnologyParameter\l::MemoryType" alt="" coords="249,421,397,462"/>
-<area shape="rect" id="node6" href="$classTechnologyParameter_1_1DeviceType.html" title="TechnologyParameter\l::DeviceType" alt="" coords="249,598,397,639"/>
-<area shape="rect" id="node7" href="$classTechnologyParameter_1_1InterconnectType.html" title="TechnologyParameter\l::InterconnectType" alt="" coords="249,775,397,817"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="SeparableInputFirstAllocator" name="SeparableInputFirstAllocator">
-<area shape="rect" id="node2" href="$classSeparableAllocator.html" title="SeparableAllocator" alt="" coords="32,229,161,256"/>
-<area shape="rect" id="node3" href="$classSparseAllocator.html" title="SparseAllocator" alt="" coords="41,155,153,181"/>
-<area shape="rect" id="node4" href="$classAllocator.html" title="Allocator" alt="" coords="61,80,133,107"/>
-<area shape="rect" id="node5" href="$classModule.html" title="Module" alt="" coords="65,5,129,32"/>
-</map>

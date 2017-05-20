@@ -34,8 +34,8 @@
       <file leaf-file-name="shader.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1245">
-              <caret line="1195" column="0" lean-forward="false" selection-start-line="1195" selection-start-column="0" selection-end-line="1195" selection-end-column="0" />
+            <state relative-caret-position="365">
+              <caret line="956" column="21" lean-forward="true" selection-start-line="956" selection-start-column="21" selection-end-line="956" selection-end-column="21" />
               <folding>
                 <element signature="e#37447#37458#0" expanded="true" />
               </folding>
@@ -43,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shader.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="shader.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="1010" column="29" lean-forward="true" selection-start-line="1010" selection-start-column="29" selection-end-line="1010" selection-end-column="29" />
+            <state relative-caret-position="294">
+              <caret line="221" column="0" lean-forward="false" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
               <folding>
                 <element signature="e#1688#1706#0" expanded="true" />
                 <element signature="e#1941#1964#0" expanded="true" />
@@ -56,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scoreboard.cc" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scoreboard.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="210" column="0" lean-forward="true" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+            <state relative-caret-position="525">
+              <caret line="210" column="0" lean-forward="false" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -69,8 +69,8 @@
       <file leaf-file-name="scoreboard.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+            <state relative-caret-position="1134">
+              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -79,8 +79,8 @@
       <file leaf-file-name="abstract_hardware_model.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abstract_hardware_model.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1188">
-              <caret line="966" column="0" lean-forward="false" selection-start-line="966" selection-start-column="0" selection-end-line="966" selection-end-column="0" />
+            <state relative-caret-position="231">
+              <caret line="947" column="0" lean-forward="false" selection-start-line="947" selection-start-column="0" selection-end-line="947" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -100,11 +100,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>translate_local_memaddr</find>
-      <find>do_on_warp_issued</find>
-      <find>sp_unit</find>
-      <find>execute</find>
-      <find>ibuffer_step</find>
       <find>release</find>
       <find>num_result_bus</find>
       <find>cycle()</find>
@@ -124,12 +119,17 @@
       <find>simt</find>
       <find>pipe</find>
       <find>priority</find>
-      <find>warp_waiting_at_barrier</find>
-      <find>waiting</find>
       <find>sort</find>
       <find>pipeline_stage_name_t</find>
       <find>ptx_fet</find>
+      <find>warp_waiting_at_barrier</find>
+      <find>waiting</find>
       <find>sort_warps_by_oldest_dynamic_id</find>
+      <find>type</find>
+      <find>IBUFFER_SIZE</find>
+      <find>special_ops</find>
+      <find>warp_size</find>
+      <find>execute</find>
     </findStrings>
     <replaceStrings>
       <replace>debug</replace>
@@ -143,11 +143,11 @@
         <option value="$PROJECT_DIR$/src/abstract_hardware_model.cc" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/../../gpgpu-sim-original/v3.x/src/gpgpu-sim/shader.h" />
-        <option value="$PROJECT_DIR$/src/gpgpu-sim/shader.cc" />
         <option value="$PROJECT_DIR$/src/gpgpu-sim/scoreboard.h" />
         <option value="$PROJECT_DIR$/src/gpgpu-sim/scoreboard.cc" />
-        <option value="$PROJECT_DIR$/src/gpgpu-sim/shader.h" />
+        <option value="$PROJECT_DIR$/src/gpgpu-sim/shader.cc" />
         <option value="$PROJECT_DIR$/src/abstract_hardware_model.h" />
+        <option value="$PROJECT_DIR$/src/gpgpu-sim/shader.h" />
       </list>
     </option>
   </component>
@@ -159,9 +159,10 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="y" value="-4" />
-    <option name="width" value="1366" />
-    <option name="height" value="772" />
+    <option name="x" value="-1" />
+    <option name="y" value="-11" />
+    <option name="width" value="1368" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -244,7 +245,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cuda-sim" />
+              <option name="myItemId" value="gpgpu-sim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -558,36 +559,38 @@
       <workItem from="1492177262748" duration="62862000" />
       <workItem from="1493209024263" duration="62538000" />
       <workItem from="1494522007537" duration="1924000" />
-      <workItem from="1494523967876" duration="81353000" />
+      <workItem from="1494523967876" duration="87996000" />
+      <workItem from="1495219839052" duration="14425000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="399354000" />
+    <option name="totallyTimeSpent" value="420422000" />
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
     <todo-panel id="all">
       <are-packages-shown value="true" />
+      <are-modules-shown value="true" />
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-4" width="1366" height="772" extended-state="6" />
+    <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1530303" sideWeight="0.48963732" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271605" sideWeight="0.4969697" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36419752" sideWeight="0.51363635" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28703704" sideWeight="0.48636365" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15075758" sideWeight="0.5103627" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -624,23 +627,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="e#37447#37458#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6786">
@@ -921,7 +907,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -929,7 +914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="65" column="13" lean-forward="false" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -945,7 +929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="1211" column="26" lean-forward="false" selection-start-line="1211" selection-start-column="26" selection-end-line="1211" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,28 +954,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
           <caret line="748" column="48" lean-forward="false" selection-start-line="748" selection-start-column="48" selection-end-line="748" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.h">
+    <entry file="file://$PROJECT_DIR$/build/gcc-4.4.7/cuda-4000/debug/cuda-sim/lex.ptxinfo_.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="1010" column="29" lean-forward="true" selection-start-line="1010" selection-start-column="29" selection-end-line="1010" selection-end-column="29" />
-          <folding>
-            <element signature="e#1688#1706#0" expanded="true" />
-            <element signature="e#1941#1964#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="1518" column="7" lean-forward="false" selection-start-line="1518" selection-start-column="7" selection-end-line="1518" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.cc">
+    <entry file="file://$PROJECT_DIR$/build/gcc-4.4.7/cuda-4000/debug/cuda-sim/lex.ptx_.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
-          <caret line="1195" column="0" lean-forward="false" selection-start-line="1195" selection-start-column="0" selection-end-line="1195" selection-end-column="0" />
-          <folding>
-            <element signature="e#37447#37458#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="3557" column="7" lean-forward="false" selection-start-line="3557" selection-start-column="7" selection-end-line="3557" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1006,25 +989,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/abstract_hardware_model.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1188">
-          <caret line="966" column="0" lean-forward="false" selection-start-line="966" selection-start-column="0" selection-end-line="966" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        <state relative-caret-position="231">
+          <caret line="947" column="0" lean-forward="false" selection-start-line="947" selection-start-column="0" selection-end-line="947" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="210" column="0" lean-forward="true" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+        <state relative-caret-position="525">
+          <caret line="210" column="0" lean-forward="false" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="956" column="21" lean-forward="true" selection-start-line="956" selection-start-column="21" selection-end-line="956" selection-end-column="21" />
+          <folding>
+            <element signature="e#37447#37458#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="221" column="0" lean-forward="false" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+          <folding>
+            <element signature="e#1688#1706#0" expanded="true" />
+            <element signature="e#1941#1964#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

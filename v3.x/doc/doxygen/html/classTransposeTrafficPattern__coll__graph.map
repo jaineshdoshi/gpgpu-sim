@@ -1,6 +1,0 @@
-<map id="TransposeTrafficPattern" name="TransposeTrafficPattern">
-<area shape="rect" id="node2" href="$classBitPermutationTrafficPattern.html" title="BitPermutationTrafficPattern" alt="" coords="88,251,272,277"/>
-<area shape="rect" id="node3" href="$classPermutationTrafficPattern.html" title="PermutationTrafficPattern" alt="" coords="103,173,271,200"/>
-<area shape="rect" id="node4" href="$classTrafficPattern.html" title="TrafficPattern" alt="" coords="95,96,193,123"/>
-<area shape="rect" id="node5" href="$classint.html" title="int" alt="" coords="61,5,99,32"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="SparseAllocator" name="SparseAllocator">
-<area shape="rect" id="node4" href="$classiSLIP__Sparse.html" title="iSLIP_Sparse" alt="" coords="5,229,107,256"/>
-<area shape="rect" id="node5" href="$classSelAlloc.html" title="SelAlloc" alt="" coords="131,229,201,256"/>
-<area shape="rect" id="node6" href="$classSeparableAllocator.html" title="SeparableAllocator" alt="" coords="225,229,355,256"/>
-<area shape="rect" id="node2" href="$classAllocator.html" title="Allocator" alt="" coords="130,80,203,107"/>
-<area shape="rect" id="node3" href="$classModule.html" title="Module" alt="" coords="135,5,199,32"/>
-<area shape="rect" id="node7" href="$classSeparableInputFirstAllocator.html" title="SeparableInputFirstAllocator" alt="" coords="91,304,276,331"/>
-<area shape="rect" id="node8" href="$classSeparableOutputFirstAllocator.html" title="SeparableOutputFirstAllocator" alt="" coords="301,304,496,331"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="DenseAllocator" name="DenseAllocator">
-<area shape="rect" id="node4" href="$classLOA.html" title="LOA" alt="" coords="5,229,53,256"/>
-<area shape="rect" id="node5" href="$classMaxSizeMatch.html" title="MaxSizeMatch" alt="" coords="77,229,184,256"/>
-<area shape="rect" id="node6" href="$classPIM.html" title="PIM" alt="" coords="209,229,255,256"/>
-<area shape="rect" id="node7" href="$classWavefront.html" title="Wavefront" alt="" coords="280,229,359,256"/>
-<area shape="rect" id="node2" href="$classAllocator.html" title="Allocator" alt="" coords="145,80,217,107"/>
-<area shape="rect" id="node3" href="$classModule.html" title="Module" alt="" coords="149,5,213,32"/>
-</map>

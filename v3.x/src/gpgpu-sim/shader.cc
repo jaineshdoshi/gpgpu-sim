@@ -925,6 +925,25 @@ void scheduler_unit::do_on_warp_issued( unsigned warp_id,
     warp(warp_id).ibuffer_step();
 }
 
+//@ JD
+//bool scheduler_unit::sort_warps_by_oldest_dynamic_id(shd_warp_t* lhs, shd_warp_t* rhs)
+//{
+//    if (rhs && lhs) {
+//        if ( lhs->done_exit() || lhs->waiting() ) {
+//            return false;
+//        } else if ( rhs->done_exit() || rhs->waiting() ) {
+//            return true;
+//        } else {
+//            return lhs->get_dynamic_warp_id() < rhs->get_dynamic_warp_id();
+//        }
+//    } else {
+//        return lhs < rhs;
+//    }
+//}
+
+// Changed in order to account for higher priority of dependent inst in warps
+// T if lhs is to be ordered earlier than rhs in sorting algo
+
 bool scheduler_unit::sort_warps_by_oldest_dynamic_id(shd_warp_t* lhs, shd_warp_t* rhs)
 {
     if (rhs && lhs) {
@@ -932,7 +951,12 @@ bool scheduler_unit::sort_warps_by_oldest_dynamic_id(shd_warp_t* lhs, shd_warp_t
             return false;
         } else if ( rhs->done_exit() || rhs->waiting() ) {
             return true;
-        } else {
+        }
+        // check for dependent instructions
+        else if (lhs->detect_dependency() && !rhs->detect_dependency()) {
+            if(lhs->)
+        }
+        else {
             return lhs->get_dynamic_warp_id() < rhs->get_dynamic_warp_id();
         }
     } else {
