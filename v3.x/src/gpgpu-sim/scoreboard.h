@@ -50,9 +50,9 @@ public:
     const bool islongop(unsigned warp_id, unsigned regnum);
 
     // get common accessed register by dependent inst
-    std::set<int> Scoreboard::getdependencyRegister( unsigned int wid, const class inst_t *inst1, const class inst_t *inst2) const;
+    void getdependencyRegister(const class inst_t *inst1, const class inst_t *inst2, std::set<int> common_registers) const;
     // reserve registers for dependency chain of inst
-    void Scoreboard::reservedepRegisters(unsigned int wid, const class warp_inst_t* inst, std::set<int> common_register);
+    void reservedepRegisters(const class warp_inst_t* inst, std::set<int> common_register);
 
 
 private:
