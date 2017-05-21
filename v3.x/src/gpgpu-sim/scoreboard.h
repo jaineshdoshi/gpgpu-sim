@@ -50,7 +50,8 @@ public:
     const bool islongop(unsigned warp_id, unsigned regnum);
 
     // Extra func introduced for dependency checks
-    bool Scoreboard::checkdependencyRegister( unsigned wid1, const class inst_t *inst1, unsigned wid2, const class inst_t *inst2) const;
+    bool Scoreboard::checkdependencyRegister( unsigned wid1, const class inst_t *inst1, const class inst_t *inst2) const;
+    // check operand of dependent inst is not reserved in scoreboard
     bool Scoreboard::checkpartialCollision(unsigned int wid, const class inst_t *inst, unsigned int *reg);
 
 

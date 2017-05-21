@@ -812,9 +812,6 @@ public:
         cycles = initiation_interval;
         m_cache_hit=false;
         m_empty=false;
-        if(this->dependency_chain && issue_pipe==) {
-
-        }
     }
     const active_mask_t & get_active_mask() const
     {

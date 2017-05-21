@@ -73,6 +73,9 @@
 //Set a hard limit of 32 CTAs per shader [cuda only has 8]
 #define MAX_CTA_PER_SHADER 32
 
+// define ibuffer size for whole program
+#define ibuffer_size 2
+
 class thread_ctx_t {
 public:
     unsigned m_cta_id; // hardware CTA this thread belongs
@@ -112,6 +115,7 @@ public:
         m_last_fetch=0;
         m_next=0;
         inst_dependency = false;
+        to_be_issued_inst_dep_chain = 0;
     }
     void init( address_type start_pc,
                unsigned cta_id,
@@ -129,6 +133,7 @@ public:
         m_active_threads = active;
         m_done_exit=false;
         inst_dependency = false;
+        to_be_issued_inst_dep_chain = 0;
     }
 
     bool functional_done() const;
@@ -221,22 +226,52 @@ public:
     // @JD detect dependency chain in warp fetched instructions
     bool detect_dependency()
     {
-        const warp_inst_t *pI = this->ibuffer_next_inst();
-//        if(ibuffer_next_valid())
-        if(m_ibuffer[m_next].m_valid) {
-            if(m_ibuffer[(m_next+1)%IBUFFER_SIZE].m_valid){
-                inst_dependency = pI->is_next_inst_dependent(see_ibuffer_next_inst((m_next+1)%IBUFFER_SIZE));
-                return true;
+        if (~inst_dependency) {
+            const warp_inst_t *pI = this->ibuffer_next_inst();
+            //        if(ibuffer_next_valid())
+            if (m_ibuffer[m_next].m_valid) {
+                if (m_ibuffer[(m_next + 1) % IBUFFER_SIZE].m_valid) {
+                    inst_dependency = pI->is_next_inst_dependent(see_ibuffer_next_inst((m_next + 1) % IBUFFER_SIZE));
+                    set_to_be_issued_inst_in_dependency_chain();
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    const warp_inst_t *see_ibuffer_next_inst(unsigned int index) { return m_ibuffer[index].m_inst; }
+    // does it contain dependency chain
+    bool check_dependency_flag() { return inst_dependency; }
 
+    // use desired index in ibuffer to access required inst
+    const warp_inst_t *see_ibuffer_next_inst(unsigned int index) { return m_ibuffer[index].m_inst; }
+    bool see_ibuffer_next_valid(unsigned int index) { return m_ibuffer[index].m_valid; }
+    unsigned int get_m_next() { return m_next;}
+
+    // set num of inst in dependency chain to be issued
+    void set_to_be_issued_inst_in_dependency_chain()
+    {
+        assert(to_be_issued_inst_dep_chain==0);
+        // currently only for dependency chain of 2
+        to_be_issued_inst_dep_chain = 2;
+    }
+
+    // decrement when an inst in dependency chain is issued
+    void dec_to_be_issued_inst_in_dependency_chain()
+    {
+        assert(to_be_issued_inst_dep_chain-1>-1);
+        to_be_issued_inst_dep_chain = to_be_issued_inst_dep_chain - 1;
+    }
+
+    // return number of inst in dependency chain to be issued
+    unsigned int get_to_be_issued_inst_in_dependency_chain() { return to_be_issued_inst_dep_chain; }
+
+
+//    static const unsigned IBUFFER_SIZE=2;
+// need other classes to access buffer size too
+    static const unsigned IBUFFER_SIZE=ibuffer_size;
 
 private:
-    static const unsigned IBUFFER_SIZE=2;
     class shader_core_ctx *m_shader;
     unsigned m_cta_id;
     unsigned m_warp_id;
@@ -269,7 +304,7 @@ private:
 
     // @JD
     bool inst_dependency;  // Acknowledges dependency chain if existing in the warp instructions
-
+    unsigned int to_be_issued_inst_dep_chain;     // keep track of inst in dependency chain issued for execution
 };
 
 

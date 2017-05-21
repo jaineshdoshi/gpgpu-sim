@@ -161,12 +161,12 @@ bool Scoreboard::checkCollision( unsigned wid, const class inst_t *inst ) const
 
 // @JD
 // Return T if current inst has next inst dependent and can be issued in the chain
-bool Scoreboard::checkdependencyRegister( unsigned wid1, const class inst_t *inst1, unsigned wid2, const class inst_t *inst2) const
+bool Scoreboard::checkdependencyRegister( unsigned wid1, const class inst_t *inst1, const class inst_t *inst2) const
 {
-    // Only resolve dependencies in the same warp
-    if (wid1 != wid2){
-        return false;
-    }
+//     Only resolve dependencies in the same warp
+//    if (wid1 != wid2){
+//        return false;
+//    }
 
     // check for dependency detected flags raised
     if(inst1->)
@@ -205,8 +205,6 @@ bool Scoreboard::checkdependencyRegister( unsigned wid1, const class inst_t *ins
             if(reg_table[wid1].find(*it1) != reg_table[wid1].end()) {
             return true;
         }
-
-
 }
 
 // @JD

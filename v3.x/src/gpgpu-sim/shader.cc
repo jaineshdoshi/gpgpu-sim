@@ -854,10 +854,33 @@ void scheduler_unit::cycle()
                             bool sfu_pipe_avail = m_sfu_out->has_free();
                             if( sp_pipe_avail && (pI->op != SFU_OP) ) {
                                 // always prefer SP pipe for operations that can use both SP and SFU pipelines
-                                m_shader->issue_warp(*m_sp_out,pI,active_mask,warp_id);
-                                issued++;
-                                issued_inst=true;
-                                warp_inst_issued = true;
+                                // check for dependency chain
+                                if(warp(warp_id).check_dependency_flag()){
+                                    // check for remaining to be issued inst in dependency chain
+                                    if(warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 2) {
+                                        unsigned int index = (warp(warp_id).get_m_next() + 1) % ibuffer_size;
+                                        if (warp(warp_id).see_ibuffer_next_valid(index) ) {
+                                            warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
+                                            m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
+//                                            pI->issue_pipe = pipe0;
+                                            issued++;
+                                            issued_inst = true;
+                                            warp_inst_issued = true;
+                                        } else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){
+                                            warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
+                                            m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
+//                                            pI->issue_pipe = pipe1;
+                                            issued++;
+                                            issued_inst = true;
+                                            warp_inst_issued = true;
+                                        }
+                                    }
+                                } else {
+                                    m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
+                                    issued++;
+                                    issued_inst = true;
+                                    warp_inst_issued = true;
+                                }
                             } else if ( (pI->op == SFU_OP) || (pI->op == ALU_SFU_OP) ) {
                                 if( sfu_pipe_avail ) {
                                     m_shader->issue_warp(*m_sfu_out,pI,active_mask,warp_id);
@@ -943,7 +966,6 @@ void scheduler_unit::do_on_warp_issued( unsigned warp_id,
 
 // Changed in order to account for higher priority of dependent inst in warps
 // T if lhs is to be ordered earlier than rhs in sorting algo
-
 bool scheduler_unit::sort_warps_by_oldest_dynamic_id(shd_warp_t* lhs, shd_warp_t* rhs)
 {
     if (rhs && lhs) {
@@ -954,7 +976,13 @@ bool scheduler_unit::sort_warps_by_oldest_dynamic_id(shd_warp_t* lhs, shd_warp_t
         }
         // check for dependent instructions
         else if (lhs->detect_dependency() && !rhs->detect_dependency()) {
-            if(lhs->)
+            return true;
+        }
+        else if (!lhs->detect_dependency() && rhs->detect_dependency()) {
+            return false;
+        }
+        else if (lhs->detect_dependency() && rhs->detect_dependency()) {
+            return true;
         }
         else {
             return lhs->get_dynamic_warp_id() < rhs->get_dynamic_warp_id();
