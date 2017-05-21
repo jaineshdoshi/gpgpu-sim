@@ -241,18 +241,16 @@ public:
                     if(inst_dependency) {
 //                        pI->set_dependency_chain_flag();
                         set_to_be_issued_inst_in_dependency_chain();
-//                        next_issue_cycle = gpu_sim_cycle + pI->latency;
-//                        set_dependency_next_issue_cycle(pI->latency);
-                        return true;
                     }
+                    return inst_dependency;
                 }
             }
         }
         // only dependent inst is yet to be issued in dependency chain
-        else if(inst_dependency && !to_be_issued_inst_dep_chain){
-            assert(to_be_issued_inst_dep_chain==1);
+        else if(inst_dependency && !to_be_issued_inst_dep_chain) {
+            assert(to_be_issued_inst_dep_chain == 1);
             if (gpu_sim_cycle == next_issue_cycle);
-                return true;
+            return true;
         }
         return false;
     }

@@ -160,74 +160,89 @@ bool Scoreboard::checkCollision( unsigned wid, const class inst_t *inst ) const
 }
 
 // @JD
-// Return T if current inst has next inst dependent and can be issued in the chain
-bool Scoreboard::checkdependencyRegister( unsigned wid1, const class inst_t *inst1, const class inst_t *inst2) const
+// Return T if current inst has next inst dependent and can be issued as a chain
+std::set<int> Scoreboard::getdependencyRegister( unsigned int wid, const class inst_t *inst1, const class inst_t *inst2) const
 {
 //     Only resolve dependencies in the same warp
 //    if (wid1 != wid2){
 //        return false;
 //    }
 
-    // check for dependency detected flags raised
-    if(inst1->)
+    // TODO check for dependency detected flags raised
+    // ensured at call times that called only if flags are raised
 
     // Get list of all input and output registers from both instructions
-    std::set<int> inst1_regs;
-    std::set<int> inst2_regs;
+    std::set<int> register_list;
 
-//    if(inst1->out[0] > 0) inst1_regs.insert(inst1->out[0]);
-//    if(inst1->out[1] > 0) inst1_regs.insert(inst1->out[1]);
-//    if(inst1->out[2] > 0) inst1_regs.insert(inst1->out[2]);
-//    if(inst1->out[3] > 0) inst1_regs.insert(inst1->out[3]);
-//    if(inst1->in[0] > 0) inst1_regs.insert(inst1->in[0]);
-//    if(inst1->in[1] > 0) inst1_regs.insert(inst1->in[1]);
-//    if(inst1->in[2] > 0) inst1_regs.insert(inst1->in[2]);
-//    if(inst1->in[3] > 0) inst1_regs.insert(inst1->in[3]);
-//    if(inst1->pred > 0) inst1_regs.insert(inst1->pred);
-//    if(inst1->ar1 > 0) inst1_regs.insert(inst1->ar1);
-//    if(inst1->ar2 > 0) inst1_regs.insert(inst1->ar2);
-//
-//    if(inst2->out[0] > 0) inst2_regs.insert(inst2->out[0]);
-//    if(inst2->out[1] > 0) inst2_regs.insert(inst2->out[1]);
-//    if(inst2->out[2] > 0) inst2_regs.insert(inst2->out[2]);
-//    if(inst2->out[3] > 0) inst2_regs.insert(inst2->out[3]);
-//    if(inst2->in[0] > 0) inst2_regs.insert(inst2->in[0]);
-//    if(inst2->in[1] > 0) inst2_regs.insert(inst2->in[1]);
-//    if(inst2->in[2] > 0) inst2_regs.insert(inst2->in[2]);
-//    if(inst2->in[3] > 0) inst2_regs.insert(inst2->in[3]);
-//    if(inst2->pred > 0) inst2_regs.insert(inst2->pred);
-//    if(inst2->ar1 > 0) inst2_regs.insert(inst2->ar1);
-//    if(inst2->ar2 > 0) inst2_regs.insert(inst2->ar2);
 
-    // Search for RAW hazard inst1 write reg read by inst2 read operand
-    std::set<int>::const_iterator it1;
-    for ( it1=inst1_regs.begin() ; it1 != inst1_regs.end(); it1++ )
-            if(reg_table[wid1].find(*it1) != reg_table[wid1].end()) {
-            return true;
-        }
-}
+// already checked for collision for inst 1 operands
 
-// @JD
-// Func to check if operand in other chained instruction is not stalled due to another data dependency
-bool Scoreboard::checkpartialCollision(unsigned int wid, const class inst_t *inst, unsigned int *reg_index)
-{
-    std::set<int> inst_regs;
+//    if(inst1->out[0] > 0) register_list.insert(inst1->out[0]);
+//    if(inst1->out[1] > 0) register_list.insert(inst1->out[1]);
+//    if(inst1->out[2] > 0) register_list.insert(inst1->out[2]);
+//    if(inst1->out[3] > 0) register_list.insert(inst1->out[3]);
+//    if(inst1->in[0] > 0) register_list.insert(inst1->in[0]);
+//    if(inst1->in[1] > 0) register_list.insert(inst1->in[1]);
+//    if(inst1->in[2] > 0) register_list.insert(inst1->in[2]);
+//    if(inst1->in[3] > 0) register_list.insert(inst1->in[3]);
+//    if(inst1->pred > 0) register_list.insert(inst1->pred);
+//    if(inst1->ar1 > 0) register_list.insert(inst1->ar1);
+//    if(inst1->ar2 > 0) register_list.insert(inst1->ar2);
 
-    for(int j = 0; j<MAX_REG_OPERANDS/4; j++)
-    {
-        if(inst->in[reg_index[j]] > 0){
-            inst_regs.insert(inst->in[j]);
+    if(inst2->out[0] > 0) register_list.insert(inst2->out[0]);
+    if(inst2->out[1] > 0) register_list.insert(inst2->out[1]);
+    if(inst2->out[2] > 0) register_list.insert(inst2->out[2]);
+    if(inst2->out[3] > 0) register_list.insert(inst2->out[3]);
+    if(inst2->in[0] > 0) register_list.insert(inst2->in[0]);
+    if(inst2->in[1] > 0) register_list.insert(inst2->in[1]);
+    if(inst2->in[2] > 0) register_list.insert(inst2->in[2]);
+    if(inst2->in[3] > 0) register_list.insert(inst2->in[3]);
+    if(inst2->pred > 0) register_list.insert(inst2->pred);
+    if(inst2->ar1 > 0) register_list.insert(inst2->ar1);
+    if(inst2->ar2 > 0) register_list.insert(inst2->ar2);
+
+    std::set<int> common_registers;
+
+    // find register used commonly by inst1 Writeback and inst2 Read
+    if(inst1->oprnd_type == SP__OP or inst1->oprnd_type == SFU__OP) {
+//            const warp_inst_t *next_inst = ptx_fetch_inst(pc + this->isize);
+        for (int i = 0; i < MAX_REG_OPERANDS / 2; i++) {
+            if (inst2->in[i] > 0) {
+                for (int j = 0; j < MAX_REG_OPERANDS / 2; j++) {
+                    if (inst1->out[j] > 0) {
+                        if (inst2->in[i] == inst1->out[j]) {
+                            common_registers.insert(inst1->out[j]);
+                        }
+                    }
+                }
+            }
         }
     }
-
-    // to check if remaining operands of the dependent inst are free
-    std::set<int>::const_iterator it;
-    for ( it=inst_regs.begin() ; it != inst_regs.end(); it++ )
-        if(reg_table[wid].find(*it) != reg_table[wid].end()) {
-            return true;
-        }
-    return false;
+    // only 1 common register value can be forwarded
+    assert(common_registers.size()==1);
+    return common_registers;
 }
+
+
+void Scoreboard::reservedepRegisters(unsigned int wid, const class warp_inst_t* inst, std::set<int> common_register)
+{
+    // does not reserve common dependent registers shared by instruction chain
+    for( unsigned r=0; r < 4; r++) {
+        if(inst->out[r] > 0) {
+            std::set<int>::const_iterator it;
+            for ( it=common_register.begin() ; it != common_register.end(); it++ ) {
+                if (*it != inst->out[r]) {
+                    reserveRegister(inst->warp_id(), inst->out[r]);
+                    SHADER_DPRINTF(SCOREBOARD,
+                                   "Reserved register - warp:%d, reg: %d\n",
+                                   inst->warp_id(),
+                                   inst->out[r]);
+                }
+            }
+        }
+    }
+}
+
 
 bool Scoreboard::pendingWrites(unsigned wid) const
 {

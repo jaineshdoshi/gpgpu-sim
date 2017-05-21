@@ -693,6 +693,14 @@ void shader_core_ctx::issue_warp( register_set& pipe_reg_set, const warp_inst_t*
         m_warp[warp_id].set_membar();
 
     updateSIMTStack(warp_id,*pipe_reg);
+
+    if(m_warp[warp_id].check_dependency_flag()){
+        // already decreased inst to be issued in chain at scheduler
+        if(m_warp[warp_id].get_to_be_issued_inst_in_dependency_chain()==1) {
+
+        }
+    }
+    // reserve registers via scoreboard in usual case ie no inst dependency
     m_scoreboard->reserveRegisters(*pipe_reg);
     m_warp[warp_id].set_next_pc(next_inst->pc + next_inst->isize);
 }
@@ -862,13 +870,17 @@ void scheduler_unit::cycle()
                                     if(warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 2) {
                                         unsigned int index = (warp(warp_id).get_m_next() + 1) % ibuffer_size;
                                         if (warp(warp_id).see_ibuffer_next_valid(index) ) {
-                                            warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
-                                            m_sp_out->set_issue_pipe0();
-                                            m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
-                                            warp(warp_id).set_dependency_issue_cycle();
-                                            issued++;
-                                            issued_inst = true;
-                                            warp_inst_issued = true;
+                                            const warp_inst_t* pJ = warp(warp_id).see_ibuffer_next_inst(index);
+                                            // check scoreboard for next inst is also free & reserve
+                                            if(m_scoreboard->checkCollision(warp_id, pJ)) {
+                                                warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
+                                                m_sp_out->set_issue_pipe0();
+                                                m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
+                                                warp(warp_id).set_dependency_issue_cycle();
+                                                issued++;
+                                                issued_inst = true;
+                                                warp_inst_issued = true;
+                                            }
                                         }
                                         // second dependent inst in chain to be issued
                                         else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){
@@ -902,13 +914,17 @@ void scheduler_unit::cycle()
                                         if(warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 2) {
                                             unsigned int index = (warp(warp_id).get_m_next() + 1) % ibuffer_size;
                                             if (warp(warp_id).see_ibuffer_next_valid(index) ) {
-                                                warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
-                                                m_sfu_out->set_issue_pipe0();
-                                                m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
-                                                warp(warp_id).set_dependency_issue_cycle();
-                                                issued++;
-                                                issued_inst = true;
-                                                warp_inst_issued = true;
+                                                const warp_inst_t* pJ = warp(warp_id).see_ibuffer_next_inst(index);
+                                                // check scoreboard for next inst is also free & reserve
+                                                if(m_scoreboard->checkCollision(warp_id, pJ)) {
+                                                    warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
+                                                    m_sfu_out->set_issue_pipe0();
+                                                    m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
+                                                    warp(warp_id).set_dependency_issue_cycle();
+                                                    issued++;
+                                                    issued_inst = true;
+                                                    warp_inst_issued = true;
+                                                }
                                             }
                                                 // second dependent inst in chain to be issued
                                             else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){

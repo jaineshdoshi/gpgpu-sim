@@ -49,10 +49,10 @@ public:
     void printContents() const;
     const bool islongop(unsigned warp_id, unsigned regnum);
 
-    // Extra func introduced for dependency checks
-    bool Scoreboard::checkdependencyRegister( unsigned wid1, const class inst_t *inst1, const class inst_t *inst2) const;
-    // check operand of dependent inst is not reserved in scoreboard
-    bool Scoreboard::checkpartialCollision(unsigned int wid, const class inst_t *inst, unsigned int *reg);
+    // get common accessed register by dependent inst
+    std::set<int> Scoreboard::getdependencyRegister( unsigned int wid, const class inst_t *inst1, const class inst_t *inst2) const;
+    // reserve registers for dependency chain of inst
+    void Scoreboard::reservedepRegisters(unsigned int wid, const class warp_inst_t* inst, std::set<int> common_register);
 
 
 private:
