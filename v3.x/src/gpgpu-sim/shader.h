@@ -1039,12 +1039,7 @@ public:
     // modifiers
     virtual void issue( register_set& source_reg ) {
         source_reg.move_out_to(m_dispatch_reg);
-        if( !m_dispatch_reg->empty() && !dependecy_chain[wid] && !dependency issued[wid])
-            occupied.set(m_dispatch_reg->latency);
-        if(!m_dispatch_reg->empty() && dependency_chain[wid] && dependency_issued[wid])
-            occupied.set(m_dispatch_reg->latency);
-        else if(!m_dispatch_reg->empty() && dependency_chain[wid] && dependency_issued[wid])
-            occupied.set(m_dispatch_reg->latency);
+        occupied.set(m_dispatch_reg->latency);
     }
     virtual void cycle() = 0;
     virtual void active_lanes_in_pipeline() = 0;
@@ -1082,81 +1077,100 @@ public:
     pipelined_simd_unit( register_set* result_port, const shader_core_config *config, unsigned max_latency, shader_core_ctx *core );
 
     //modifiers
-    virtual void cycle() {
-        // NEED warp ID in dependency variables
-//        unsigned int wid = wid_from_hw_tid
-        unsigned int wid;
 
-        // for sub pipe A main pipe & B dependency pipe
 
-        // Check for conflict in m_result_bus
+//    virtual void cycle() {
+//
+//        // NEED warp ID in dependency variables
+////        unsigned int wid = wid_from_hw_tid
+//
+//        unsigned int wid;
+//
+//        // for sub pipe A main pipe & B dependency pipe
+//
+//        // Check for conflict in m_result_bus
+//
+//        // go to result bus if only coming out of pipe 0
+//        if( !m_pipeline_reg[0]->empty() && !dependency_chain[wid]){
+//            m_result_port->move_in(m_pipeline_reg[0]);
+//        }
+//        // go to result bus if only coming out of pipe 1
+//        // dependent instruction executed !!
+//        if( !m_pipeline_reg[0]->empty() && dependency_chain[wid]){
+//            m_result_port->move_in(m_pipeline_reg[0]);
+//        }
+//        // dependency coming out of A into B
+//        if((*m_pipeline_reg[0])->dependency_chain[wid]) {
+//            int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
+//            if (!m_pipeline_regA[0]->empty() && m_pipeline_regB[start_stage]->empty() && !dependency_issued[wid]) {
+//                move_warp(m_pipeline_regB[start_stage], m_pipeline_regA[0]);
+//            }
+//        }
+//
+//        // for both not empty need to check what to do!!!!
+//        // TODO
+//
+//        for( unsigned stage=0; (stage+1)<m_pipeline_depth; stage++ ) {
+//            move_warp(m_pipeline_regA[stage], m_pipeline_regA[stage + 1]);
+//            move_warp(m_pipeline_regB[stage], m_pipeline_regB[stage + 1]);
+//        }
+//
+//        // condition for issue to warp A
+//        // No dependency chain flag
+//        if( !m_dispatch_reg->empty() && !dependecy_chain[wid] && !dependency issued[wid]) {
+//            if( !m_dispatch_reg->dispatch_delay()) {
+//                int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
+//                move_warp(m_pipeline_regA[start_stage],m_dispatch_reg);
+//            }
+//        }
+//        // Dependency chain issue 1st inst in A
+//        else{
+//            if(!m_dispatch_reg->empty() && dependency_chain[wid] && dependency_issued[wid]) {
+//                if( !m_dispatch_reg->dispatch_delay()) {
+//                    int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
+//                    move_warp(m_pipeline_regA[start_stage], m_dispatch_reg);
+//                    dependency_issued[wid]--;
+//                }
+//            }
+//        }
+//
+//        // Dependency chain issue 2nd dep inst in B
+//        // Ensure dependent inst is issued at apt latency difference
+//        else if(!m_dispatch_reg->empty() && dependency_chain[wid] && dependency_issued[wid]) {
+//            if (!m_dispatch_reg->dispatch_delay()) {
+//                int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
+//                move_warp(m_pipeline_regB[start_stage],m_dispatch_reg);
+//                dependency_issued[wid]--;
+//            }
+//        }
+//        occupied >>=1;
+//    }
 
-        // go to result bus if only coming out of pipe 0
-        if( !m_pipeline_reg[0]->empty() && !dependency_chain[wid]){
+    virtual void cycle()
+    {
+        if( !m_pipeline_reg[0]->empty() ){
             m_result_port->move_in(m_pipeline_reg[0]);
         }
-        // go to result bus if only coming out of pipe 1
-        // dependent instruction executed !!
-        if( !m_pipeline_reg[0]->empty() && dependency_chain[wid]){
-            m_result_port->move_in(m_pipeline_reg[0]);
-        }
-        // dependency coming out of A into B
-        if((*m_pipeline_reg[0])->dependency_chain[wid]) {
-            int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
-            if (!m_pipeline_regA[0]->empty() && m_pipeline_regB[start_stage]->empty() && !dependency_issued[wid]) {
-                move_warp(m_pipeline_regB[start_stage], m_pipeline_regA[0]);
-            }
-        }
-
-        // for both not empty need to check what to do!!!!
-        // TODO
-
-        for( unsigned stage=0; (stage+1)<m_pipeline_depth; stage++ ) {
-            move_warp(m_pipeline_regA[stage], m_pipeline_regA[stage + 1]);
-            move_warp(m_pipeline_regB[stage], m_pipeline_regB[stage + 1]);
-        }
-
-        // condition for issue to warp A
-        // No dependency chain flag
-        if( !m_dispatch_reg->empty() && !dependecy_chain[wid] && !dependency issued[wid]) {
+        for( unsigned stage=0; (stage+1)<m_pipeline_depth; stage++ )
+            move_warp(m_pipeline_reg[stage], m_pipeline_reg[stage+1]);
+        if( !m_dispatch_reg->empty() ) {
             if( !m_dispatch_reg->dispatch_delay()) {
                 int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
-                move_warp(m_pipeline_regA[start_stage],m_dispatch_reg);
-            }
-        }
-        // Dependency chain issue 1st inst in A
-        else{
-            if(!m_dispatch_reg->empty() && dependency_chain[wid] && dependency_issued[wid]) {
-                if( !m_dispatch_reg->dispatch_delay()) {
-                    int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
-                    move_warp(m_pipeline_regA[start_stage], m_dispatch_reg);
-                    dependency_issued[wid]--;
-                }
-            }
-        }
-
-        // Dependency chain issue 2nd dep inst in B
-        // Ensure dependent inst is issued at apt latency difference
-        else if(!m_dispatch_reg->empty() && dependency_chain[wid] && dependency_issued[wid]) {
-            if (!m_dispatch_reg->dispatch_delay()) {
-                int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
-                move_warp(m_pipeline_regB[start_stage],m_dispatch_reg);
-                dependency_issued[wid]--;
+                move_warp(m_pipeline_reg[start_stage],m_dispatch_reg);
             }
         }
         occupied >>=1;
+        return;
     }
 
     virtual void issue( register_set& source_reg );
     virtual unsigned get_active_lanes_in_pipeline()
     {
-        // only count active lanes in the furthest instruction in the pipeline
         active_mask_t active_lanes;
         active_lanes.reset();
-        for( unsigned stage=0; (stage+1)<m_pipeline_depth; stage++ ) {
-            if( m_pipeline_regA[stage]->empty() && !m_pipeline_regB[stage]->empty())
-            if( !m_pipeline_regA[stage]->empty() && m_pipeline_regB[stage]->empty())
-                active_lanes|=m_pipeline_regA[stage]->get_active_mask();
+        for( unsigned stage=0; (stage+1)<m_pipeline_depth; stage++ ){
+            if( !m_pipeline_reg[stage]->empty() )
+                active_lanes|=m_pipeline_reg[stage]->get_active_mask();
         }
         return active_lanes.count();
     }
@@ -1967,8 +1981,7 @@ private:
     std::vector<shd_warp_t>   m_warp;   // per warp information array
     barrier_set_t             m_barriers;
     ifetch_buffer_t           m_inst_fetch_buffer;
-    std::vector<register_set> m_pipeline_regA;
-    std::vector<register_set> m_pipeline_regB;
+    std::vector<register_set> m_pipeline_reg;
     Scoreboard               *m_scoreboard;
     opndcoll_rfu_t            m_operand_collector;
 

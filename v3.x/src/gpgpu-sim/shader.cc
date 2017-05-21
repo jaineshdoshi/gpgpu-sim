@@ -702,6 +702,9 @@ void shader_core_ctx::issue_warp( register_set& pipe_reg_set, const warp_inst_t*
             unsigned int index = (m_warp[warp_id].get_m_next() + 1) % ibuffer_size;
             std::set<int> common_register;
             if (m_warp[warp_id].see_ibuffer_next_valid(index) ) {
+                // double check for issue in pipe0
+                assert(pipe_reg_set.get_issue_pipe() == pipe0);
+                (*pipe_reg)->set_issue_inst_pipe(pipe_reg_set.get_issue_pipe());
                 const warp_inst_t *next_next_inst = m_warp[warp_id].see_ibuffer_next_inst(index);
                 // find common register between dependency
                 m_scoreboard->getdependencyRegister(next_inst, next_next_inst, common_register);
@@ -709,11 +712,17 @@ void shader_core_ctx::issue_warp( register_set& pipe_reg_set, const warp_inst_t*
                 m_scoreboard->reservedepRegisters(*pipe_reg, common_register);
             }
         } else if (m_warp[warp_id].get_to_be_issued_inst_in_dependency_chain()==1){
+            // double check for issue in pipe1
+            assert(pipe_reg_set.get_issue_pipe() == pipe1);
+            (*pipe_reg)->set_issue_inst_pipe(pipe_reg_set.get_issue_pipe());
             m_warp[warp_id].dec_to_be_issued_inst_in_dependency_chain();
             m_scoreboard->reserveRegisters(*pipe_reg);
         }
     }
     else {
+        // double check for issue in pipe0
+        assert(pipe_reg_set.get_issue_pipe() == pipe0);
+        (*pipe_reg)->set_issue_inst_pipe(pipe_reg_set.get_issue_pipe());
         // reserve registers via scoreboard in usual case ie no inst dependency
         m_scoreboard->reserveRegisters(*pipe_reg);
     }
@@ -1288,21 +1297,10 @@ void shader_core_ctx::execute()
             m_fu[n]->cycle();
         m_fu[n]->active_lanes_in_pipeline();
         enum pipeline_stage_name_t issue_port = m_issue_port[n];
-        // condition for issue to warp A
-        // No dependency chain flag
-        if(!dependecy_chain[wid] && !dependency issued[wid]) {
-            register_set &issue_inst = m_pipeline_regA[issue_port];
-        }
-        // Dependency chain issue 1st inst in A
-        else if( dependency_chain[wid] && dependency_issued[wid])) {
-            register_set &issue_inst = m_pipeline_regA[issue_port];
-        }
-        // Dependency chain issue 2nd dep inst in B
-        // Ensure dependent inst is issued at apt latency difference
-        else if( dependency_chain[wid] && dependency_issued[wid]) {
-            register_set &issue_inst = m_pipeline_regB[issue_port];
-        }
-
+        // not needed to distinguish at execute ie latency modeling
+        // cause issue in different pipes already taken care of in
+        // m_pipeline_reg[issue_port].get_issue_pipe()
+        register_set& issue_inst = m_pipeline_reg[ issue_port ];
         warp_inst_t** ready_reg = issue_inst.get_ready();
         if( issue_inst.has_ready() && m_fu[n]->can_issue( **ready_reg ) ) {
             bool schedule_wb_now = !m_fu[n]->stallable();

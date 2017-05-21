@@ -788,7 +788,7 @@ public:
         m_mem_accesses_created=false;
         m_cache_hit=false;
         m_is_printf=false;
-//        issue_pipe = NULL;
+        issue_inst_pipe = NULL;
         dependency_chain = false;
     }
     virtual ~warp_inst_t(){
@@ -812,6 +812,7 @@ public:
         cycles = initiation_interval;
         m_cache_hit=false;
         m_empty=false;
+        // TODO assert issue pipe here
     }
     const active_mask_t & get_active_mask() const
     {
@@ -934,7 +935,7 @@ public:
     // denotes the pipeline lane the inst is issued into
     // issued in direct pipe, value = unit0
     // issued in the dependecny pipe, value = unit1
-//    enum issue_pipe_t issue_pipe;
+    enum issue_pipe_t issue_inst_pipe;
 
     // denotes the dependency chain in the given warp instruction
     // true if involved in a dependency chain of inst
@@ -974,6 +975,16 @@ public:
         this->dependency_chain = false;
     }
 
+    // set issue pipe
+    void set_issue_inst_pipe(issue_pipe_t p){
+        assert(p!=NULL);
+        issue_inst_pipe = p;
+    }
+
+    // get issue pipe
+    issue_pipe_t get_issue_inst_pipe(){ return issue_inst_pipe;}
+
+    void reset_issue_inst_pipe(){issue_inst_pipe = NULL;}
 
 protected:
 
@@ -1139,6 +1150,7 @@ public:
 
     void set_issue_pipe0(){issue_pipe = pipe0;}
     void set_issue_pipe1(){issue_pipe = pipe1;}
+    issue_pipe_t get_issue_pipe(){ return issue_pipe;}
     void reset_issue_pipe(){issue_pipe = NULL;}
 
 private:
