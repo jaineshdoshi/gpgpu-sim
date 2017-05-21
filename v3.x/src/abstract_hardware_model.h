@@ -788,7 +788,7 @@ public:
         m_mem_accesses_created=false;
         m_cache_hit=false;
         m_is_printf=false;
-        issue_pipe = NULL;
+//        issue_pipe = NULL;
         dependency_chain = false;
     }
     virtual ~warp_inst_t(){
@@ -934,7 +934,7 @@ public:
     // denotes the pipeline lane the inst is issued into
     // issued in direct pipe, value = unit0
     // issued in the dependecny pipe, value = unit1
-    enum issue_pipe_t issue_pipe;
+//    enum issue_pipe_t issue_pipe;
 
     // denotes the dependency chain in the given warp instruction
     // true if involved in a dependency chain of inst
@@ -1137,9 +1137,19 @@ public:
 		return NULL;
 	}
 
+    void set_issue_pipe0(){issue_pipe = pipe0;}
+    void set_issue_pipe1(){issue_pipe = pipe1;}
+    void reset_issue_pipe(){issue_pipe = NULL;}
+
 private:
 	std::vector<warp_inst_t*> regs;
 	const char* m_name;
+
+    // @JD
+    // denotes the pipeline lane the inst is issued into
+    // issued in direct pipe, value = unit0
+    // issued in the dependecny pipe, value = unit1
+    enum issue_pipe_t issue_pipe;
 };
 
 #endif // #ifdef __cplusplus

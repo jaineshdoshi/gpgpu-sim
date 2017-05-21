@@ -857,25 +857,36 @@ void scheduler_unit::cycle()
                                 // check for dependency chain
                                 if(warp(warp_id).check_dependency_flag()){
                                     // check for remaining to be issued inst in dependency chain
+                                    // first inst in chain to be issued
+                                    // TODO should I check active mask here??
                                     if(warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 2) {
                                         unsigned int index = (warp(warp_id).get_m_next() + 1) % ibuffer_size;
                                         if (warp(warp_id).see_ibuffer_next_valid(index) ) {
                                             warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
+                                            m_sp_out->set_issue_pipe0();
                                             m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
-//                                            pI->issue_pipe = pipe0;
-                                            issued++;
-                                            issued_inst = true;
-                                            warp_inst_issued = true;
-                                        } else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){
-                                            warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
-                                            m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
-//                                            pI->issue_pipe = pipe1;
+                                            warp(warp_id).set_dependency_issue_cycle();
                                             issued++;
                                             issued_inst = true;
                                             warp_inst_issued = true;
                                         }
+                                        // second dependent inst in chain to be issued
+                                        else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){
+                                            warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
+                                            m_sp_out->set_issue_pipe1();
+                                            assert(gpu_sim_cycle==warp(warp_id).get_dependency_next_issue_cycle());
+                                            m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
+                                            issued++;
+                                            issued_inst = true;
+                                            warp_inst_issued = true;
+                                            // since only considering dependency chain length of 2 reset here
+                                            warp(warp_id).reset_dependency_flag();
+                                            warp(warp_id).reset_dependency_issue_cycle();
+                                            warp(warp_id).reset_dependency_next_issue_cycle();
+                                        }
                                     }
                                 } else {
+                                    m_sp_out->set_issue_pipe0();
                                     m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
                                     issued++;
                                     issued_inst = true;
@@ -883,10 +894,44 @@ void scheduler_unit::cycle()
                                 }
                             } else if ( (pI->op == SFU_OP) || (pI->op == ALU_SFU_OP) ) {
                                 if( sfu_pipe_avail ) {
-                                    m_shader->issue_warp(*m_sfu_out,pI,active_mask,warp_id);
-                                    issued++;
-                                    issued_inst=true;
-                                    warp_inst_issued = true;
+                                    // check for dependency chain
+                                    if(warp(warp_id).check_dependency_flag()){
+                                        // check for remaining to be issued inst in dependency chain
+                                        // first inst in chain to be issued
+                                        // TODO should I check active mask here??
+                                        if(warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 2) {
+                                            unsigned int index = (warp(warp_id).get_m_next() + 1) % ibuffer_size;
+                                            if (warp(warp_id).see_ibuffer_next_valid(index) ) {
+                                                warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
+                                                m_sfu_out->set_issue_pipe0();
+                                                m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
+                                                warp(warp_id).set_dependency_issue_cycle();
+                                                issued++;
+                                                issued_inst = true;
+                                                warp_inst_issued = true;
+                                            }
+                                                // second dependent inst in chain to be issued
+                                            else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){
+                                                warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
+                                                m_sfu_out->set_issue_pipe1();
+                                                assert(gpu_sim_cycle==warp(warp_id).get_dependency_next_issue_cycle());
+                                                m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
+                                                issued++;
+                                                issued_inst = true;
+                                                warp_inst_issued = true;
+                                                // since only considering dependency chain length of 2 reset here
+                                                warp(warp_id).reset_dependency_flag();
+                                                warp(warp_id).reset_dependency_issue_cycle();
+                                                warp(warp_id).reset_dependency_next_issue_cycle();
+                                            }
+                                        }
+                                    } else {
+                                        m_sfu_out->set_issue_pipe0();
+                                        m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
+                                        issued++;
+                                        issued_inst = true;
+                                        warp_inst_issued = true;
+                                    }
                                 }
                             }
                         }
@@ -968,6 +1013,7 @@ void scheduler_unit::do_on_warp_issued( unsigned warp_id,
 // T if lhs is to be ordered earlier than rhs in sorting algo
 bool scheduler_unit::sort_warps_by_oldest_dynamic_id(shd_warp_t* lhs, shd_warp_t* rhs)
 {
+    // TODO verify this !!!!
     if (rhs && lhs) {
         if ( lhs->done_exit() || lhs->waiting() ) {
             return false;

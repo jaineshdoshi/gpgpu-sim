@@ -116,6 +116,8 @@ public:
         m_next=0;
         inst_dependency = false;
         to_be_issued_inst_dep_chain = 0;
+        reset_dependency_issue_cycle();
+        reset_dependency_next_issue_cycle();
     }
     void init( address_type start_pc,
                unsigned cta_id,
@@ -134,6 +136,8 @@ public:
         m_done_exit=false;
         inst_dependency = false;
         to_be_issued_inst_dep_chain = 0;
+        reset_dependency_issue_cycle();
+        reset_dependency_next_issue_cycle();
     }
 
     bool functional_done() const;
@@ -223,7 +227,9 @@ public:
     unsigned get_dynamic_warp_id() const { return m_dynamic_warp_id; }
     unsigned get_warp_id() const { return m_warp_id; }
 
-    // @JD detect dependency chain in warp fetched instructions
+    // @JD
+    // detect dependency chain in warp fetched instructions
+    // essentially gives a higher priority to warps with impending dependencies
     bool detect_dependency()
     {
         if (~inst_dependency) {
@@ -232,16 +238,29 @@ public:
             if (m_ibuffer[m_next].m_valid) {
                 if (m_ibuffer[(m_next + 1) % IBUFFER_SIZE].m_valid) {
                     inst_dependency = pI->is_next_inst_dependent(see_ibuffer_next_inst((m_next + 1) % IBUFFER_SIZE));
-                    set_to_be_issued_inst_in_dependency_chain();
-                    return true;
+                    if(inst_dependency) {
+//                        pI->set_dependency_chain_flag();
+                        set_to_be_issued_inst_in_dependency_chain();
+//                        next_issue_cycle = gpu_sim_cycle + pI->latency;
+//                        set_dependency_next_issue_cycle(pI->latency);
+                        return true;
+                    }
                 }
             }
+        }
+        // only dependent inst is yet to be issued in dependency chain
+        else if(inst_dependency && !to_be_issued_inst_dep_chain){
+            assert(to_be_issued_inst_dep_chain==1);
+            if (gpu_sim_cycle == next_issue_cycle);
+                return true;
         }
         return false;
     }
 
     // does it contain dependency chain
     bool check_dependency_flag() { return inst_dependency; }
+    // reset flag
+    void reset_dependency_flag() { inst_dependency = false; }
 
     // use desired index in ibuffer to access required inst
     const warp_inst_t *see_ibuffer_next_inst(unsigned int index) { return m_ibuffer[index].m_inst; }
@@ -266,6 +285,20 @@ public:
     // return number of inst in dependency chain to be issued
     unsigned int get_to_be_issued_inst_in_dependency_chain() { return to_be_issued_inst_dep_chain; }
 
+    // set/reset dependency chain issue cycle
+    void set_dependency_issue_cycle(){ dependency_issue_cycle = gpu_sim_cycle;}
+    void reset_dependency_issue_cycle(){ dependency_issue_cycle = NULL;}
+
+    // set/reset dependency chain next issue cycle
+    void set_dependency_next_issue_cycle(unsigned int inst_latency){
+        assert(dependency_issue_cycle!=NULL);
+        next_issue_cycle = dependency_issue_cycle + inst_latency;}
+    void reset_dependency_next_issue_cycle(){ next_issue_cycle = NULL;}
+
+    unsigned long long int get_dependency_next_issue_cycle(){
+        assert(next_issue_cycle!=NULL);
+        return next_issue_cycle;
+    }
 
 //    static const unsigned IBUFFER_SIZE=2;
 // need other classes to access buffer size too
@@ -305,6 +338,8 @@ private:
     // @JD
     bool inst_dependency;  // Acknowledges dependency chain if existing in the warp instructions
     unsigned int to_be_issued_inst_dep_chain;     // keep track of inst in dependency chain issued for execution
+    unsigned long long int dependency_issue_cycle; // keep track of cycle when first inst of dependency chain is issued
+    unsigned int next_issue_cycle;  // hold the cycle wherein the next dependent inst must be issued eliminating writeback of inst
 };
 
 
