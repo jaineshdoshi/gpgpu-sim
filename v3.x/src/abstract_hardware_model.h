@@ -126,6 +126,16 @@ enum _memory_op_t {
 	memory_store
 };
 
+// @JD
+// for deciding inst issued in which chained unit 0 or 1
+enum issue_pipe_t{
+    unknown = 0,
+    pipe0=1,
+    pipe1
+};
+//typedef enum issue_pipe_t issue_in_pipe;
+
+
 #include <bitset>
 #include <list>
 #include <vector>
@@ -788,7 +798,7 @@ public:
         m_mem_accesses_created=false;
         m_cache_hit=false;
         m_is_printf=false;
-        issue_inst_pipe = NULL;
+        issue_inst_pipe = unknown;
         dependency_chain = false;
     }
     virtual ~warp_inst_t(){
@@ -933,9 +943,9 @@ public:
 
     // @JD
     // denotes the pipeline lane the inst is issued into
-    // issued in direct pipe, value = unit0
-    // issued in the dependecny pipe, value = unit1
-    enum issue_pipe_t issue_inst_pipe;
+    // issued in direct pipe, value = pipe0
+    // issued in the dependecny pipe, value = pipe1
+    issue_pipe_t issue_inst_pipe;
 
     // denotes the dependency chain in the given warp instruction
     // true if involved in a dependency chain of inst
@@ -981,14 +991,14 @@ public:
 
     // set issue pipe
     void set_issue_inst_pipe(issue_pipe_t p){
-        assert(p!=NULL);
+        assert(p!=unknown);
         issue_inst_pipe = p;
     }
 
     // get issue pipe
     issue_pipe_t get_issue_inst_pipe(){ return issue_inst_pipe;}
 
-    void reset_issue_inst_pipe(){issue_inst_pipe = NULL;}
+    void reset_issue_inst_pipe(){issue_inst_pipe = unknown;}
 
 protected:
 
@@ -1024,9 +1034,6 @@ protected:
 void move_warp( warp_inst_t *&dst, warp_inst_t *&src );
 
 size_t get_kernel_code_size( class function_info *entry );
-
-// @JD
-enum issue_pipe_t {pipe0, pipe1};
 
 /*
  * This abstract class used as a base for functional and performance and simulation, it has basic functional simulation
@@ -1155,7 +1162,7 @@ public:
     void set_issue_pipe0(){issue_pipe = pipe0;}
     void set_issue_pipe1(){issue_pipe = pipe1;}
     issue_pipe_t get_issue_pipe(){ return issue_pipe;}
-    void reset_issue_pipe(){issue_pipe = NULL;}
+    void reset_issue_pipe(){issue_pipe = unknown;}
 
 private:
 	std::vector<warp_inst_t*> regs;
@@ -1165,7 +1172,7 @@ private:
     // denotes the pipeline lane the inst is issued into
     // issued in direct pipe, value = unit0
     // issued in the dependecny pipe, value = unit1
-    enum issue_pipe_t issue_pipe;
+    issue_pipe_t issue_pipe;
 };
 
 #endif // #ifdef __cplusplus
