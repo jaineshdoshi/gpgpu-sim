@@ -957,7 +957,7 @@ public:
     {
         // TODO check next inst source !!
 
-        if(oprnd_type == SP__OP or oprnd_type == SFU__OP) {
+        if(oprnd_type == INT__OP or oprnd_type == FP__OP) {
 //            const warp_inst_t *next_inst = ptx_fetch_inst(pc + this->isize);
             for (int i = 0; i < MAX_REG_OPERANDS / 2; i++) {
                 if (next_inst->in[i] > 0) {

@@ -230,7 +230,7 @@ public:
     // @JD
     // detect dependency chain in warp fetched instructions
     // essentially gives a higher priority to warps with impending dependencies
-    bool detect_dependency()
+    bool detect_dependency(unsigned long long int gpu_cycle)
     {
         if (~inst_dependency) {
             const warp_inst_t *pI = this->ibuffer_next_inst();
@@ -249,7 +249,7 @@ public:
         // only dependent inst is yet to be issued in dependency chain
         else if(inst_dependency && !to_be_issued_inst_dep_chain) {
             assert(to_be_issued_inst_dep_chain == 1);
-            if (gpu_sim_cycle == next_issue_cycle);
+            if (gpu_cycle == next_issue_cycle);
             return true;
         }
         return false;
@@ -284,7 +284,7 @@ public:
     unsigned int get_to_be_issued_inst_in_dependency_chain() { return to_be_issued_inst_dep_chain; }
 
     // set/reset dependency chain issue cycle
-    void set_dependency_issue_cycle(){ dependency_issue_cycle = gpu_sim_cycle;}
+    void set_dependency_issue_cycle(unsigned long long int gpu_cycle){ dependency_issue_cycle = gpu_cycle;}
     void reset_dependency_issue_cycle(){ dependency_issue_cycle = NULL;}
 
     // set/reset dependency chain next issue cycle
@@ -337,7 +337,7 @@ private:
     bool inst_dependency;  // Acknowledges dependency chain if existing in the warp instructions
     unsigned int to_be_issued_inst_dep_chain;     // keep track of inst in dependency chain issued for execution
     unsigned long long int dependency_issue_cycle; // keep track of cycle when first inst of dependency chain is issued
-    unsigned int next_issue_cycle;  // hold the cycle wherein the next dependent inst must be issued eliminating writeback of inst
+    unsigned long long int next_issue_cycle;  // hold the cycle wherein the next dependent inst must be issued eliminating writeback of inst
 };
 
 

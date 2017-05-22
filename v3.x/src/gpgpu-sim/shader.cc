@@ -906,7 +906,8 @@ void scheduler_unit::cycle()
 //                                                warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
                                                 m_sp_out->set_issue_pipe0();
                                                 m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
-                                                warp(warp_id).set_dependency_issue_cycle();
+                                                warp(warp_id).set_dependency_issue_cycle(gpu_sim_cycle);
+                                                warp(warp_id).set_dependency_next_issue_cycle(pI->latency);
                                                 issued++;
                                                 issued_inst = true;
                                                 warp_inst_issued = true;
@@ -953,7 +954,8 @@ void scheduler_unit::cycle()
 //                                                    warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
                                                     m_sfu_out->set_issue_pipe0();
                                                     m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
-                                                    warp(warp_id).set_dependency_issue_cycle();
+                                                    warp(warp_id).set_dependency_issue_cycle(gpu_sim_cycle);
+                                                    warp(warp_id).set_dependency_next_issue_cycle(pI->latency);
                                                     issued++;
                                                     issued_inst = true;
                                                     warp_inst_issued = true;
@@ -1072,13 +1074,13 @@ bool scheduler_unit::sort_warps_by_oldest_dynamic_id(shd_warp_t* lhs, shd_warp_t
             return true;
         }
         // check for dependent instructions
-        else if (lhs->detect_dependency() && !rhs->detect_dependency()) {
+        else if (lhs->detect_dependency(gpu_sim_cycle) && !rhs->detect_dependency(gpu_sim_cycle)) {
             return true;
         }
-        else if (!lhs->detect_dependency() && rhs->detect_dependency()) {
+        else if (!lhs->detect_dependency(gpu_sim_cycle) && rhs->detect_dependency(gpu_sim_cycle)) {
             return false;
         }
-        else if (lhs->detect_dependency() && rhs->detect_dependency()) {
+        else if (lhs->detect_dependency(gpu_sim_cycle) && rhs->detect_dependency(gpu_sim_cycle)) {
             return true;
         }
         else {
