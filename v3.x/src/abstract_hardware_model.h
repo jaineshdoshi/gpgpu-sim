@@ -970,6 +970,10 @@ public:
         this->dependency_chain = true;
     }
 
+    bool get_dependency_chain_flag(){
+        return dependency_chain;
+    }
+
     // Reset flag
     void reset_dependency_chain_flag(){
         this->dependency_chain = false;

@@ -705,6 +705,7 @@ void shader_core_ctx::issue_warp( register_set& pipe_reg_set, const warp_inst_t*
                 // double check for issue in pipe0
                 assert(pipe_reg_set.get_issue_pipe() == pipe0);
                 (*pipe_reg)->set_issue_inst_pipe(pipe_reg_set.get_issue_pipe());
+                (*pipe_reg)->set_dependency_chain_flag();
                 const warp_inst_t *next_next_inst = m_warp[warp_id].see_ibuffer_next_inst(index);
                 // find common register between dependency
                 m_scoreboard->getdependencyRegister(next_inst, next_next_inst, common_register);
@@ -715,14 +716,17 @@ void shader_core_ctx::issue_warp( register_set& pipe_reg_set, const warp_inst_t*
             // double check for issue in pipe1
             assert(pipe_reg_set.get_issue_pipe() == pipe1);
             (*pipe_reg)->set_issue_inst_pipe(pipe_reg_set.get_issue_pipe());
+            assert((*pipe_reg)->get_dependency_chain_flag());
             m_warp[warp_id].dec_to_be_issued_inst_in_dependency_chain();
             m_scoreboard->reserveRegisters(*pipe_reg);
         }
     }
+    // NO dependency in inst
     else {
         // double check for issue in pipe0
         assert(pipe_reg_set.get_issue_pipe() == pipe0);
         (*pipe_reg)->set_issue_inst_pipe(pipe_reg_set.get_issue_pipe());
+        assert(~(*pipe_reg)->get_dependency_chain_flag());
         // reserve registers via scoreboard in usual case ie no inst dependency
         m_scoreboard->reserveRegisters(*pipe_reg);
     }
@@ -1399,9 +1403,20 @@ void shader_core_ctx::writeback()
          * To handle this case, we ignore the return value (thus allowing
          * no stalling).
          */
-        m_operand_collector.writeback(*pipe_reg);
+        if(pipe_reg->get_dependency_chain_flag() && (pipe_reg->get_issue_inst_pipe()==pipe0)){
+            // NO write back for 1st instruction in dependency chain
+            m_scoreboard->releaseRegisters( pipe_reg );
+        }
+        else if (pipe_reg->get_dependency_chain_flag() && (pipe_reg->get_issue_inst_pipe()==pipe1)){
+            // Write back normally for the dependent instruction
+            m_operand_collector.writeback(*pipe_reg);
+            m_scoreboard->releaseRegisters(pipe_reg);
+        }
+        else {
+            m_operand_collector.writeback(*pipe_reg);
+            m_scoreboard->releaseRegisters(pipe_reg);
+        }
         unsigned warp_id = pipe_reg->warp_id();
-        m_scoreboard->releaseRegisters( pipe_reg );
         m_warp[warp_id].dec_inst_in_pipeline();
         warp_inst_complete(*pipe_reg);
         m_gpu->gpu_sim_insn_last_update_sid = m_sid;
