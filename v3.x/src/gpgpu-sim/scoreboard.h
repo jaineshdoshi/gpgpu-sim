@@ -50,9 +50,13 @@ public:
     const bool islongop(unsigned warp_id, unsigned regnum);
 
     // get common accessed register by dependent inst
-    void getdependencyRegister(const class inst_t *inst1, const class inst_t *inst2, std::set<int> common_registers) const;
+    void getdependencyRegister(const class inst_t *inst1, const class inst_t *inst2, unsigned int &common_register) const;
     // reserve registers for dependency chain of inst
-    void reservedepRegisters(const class warp_inst_t* inst, std::set<int> common_register);
+    void reservedepRegisters(const class warp_inst_t* inst, int common_register);
+    // Collision checker modified to take care of dependency chain reservation of registers
+    bool checkdepCollision( unsigned wid, const class inst_t *inst, int common_register) const;
+// Release registers for an instruction dependency chain without releasing the common register
+    void releasedepRegisters(const class warp_inst_t *inst, unsigned int common_register);
 
 
 private:

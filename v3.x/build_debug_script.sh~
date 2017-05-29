@@ -1,0 +1,9 @@
+
+echo "Cleaning GPGPU-sim"
+make clean
+echo "Making GPGPU-sim"
+make
+echo "Running benchmark BFS in gdb debug mode with graph4096.txt as input"
+cd ../ispass2009-benchmarks/BFS/
+gdb --args ./../bin/release/BFS ./data/graph4096.txt
+

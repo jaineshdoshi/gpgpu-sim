@@ -372,6 +372,13 @@ void shader_core_stats::print( FILE* fout ) const
         thread_icount_uarch += m_num_sim_insn[i];
         warp_icount_uarch += m_num_sim_winsn[i];
     }
+    // print number of dependency chains resolved
+    fprintf(fout,"gpgpu_n_dependency_chains = \n");
+    for (int j = 0; j < m_config->num_shader(); ++j) {
+        fprintf(fout," %ld ", n_dep_chains[j]);
+    }
+    fprintf(fout,"\n");
+
     fprintf(fout,"gpgpu_n_tot_thrd_icount = %lld\n", thread_icount_uarch);
     fprintf(fout,"gpgpu_n_tot_w_icount = %lld\n", warp_icount_uarch);
 
@@ -700,7 +707,7 @@ void shader_core_ctx::issue_warp( register_set& pipe_reg_set, const warp_inst_t*
         if(m_warp[warp_id].get_to_be_issued_inst_in_dependency_chain()==2) {
             m_warp[warp_id].dec_to_be_issued_inst_in_dependency_chain();
             unsigned int index = (m_warp[warp_id].get_m_next() + 1) % ibuffer_size;
-            std::set<int> common_register;
+            unsigned int common_register;
             if (m_warp[warp_id].see_ibuffer_next_valid(index) ) {
                 // double check for issue in pipe0
                 assert(pipe_reg_set.get_issue_pipe() == pipe0);
@@ -709,16 +716,25 @@ void shader_core_ctx::issue_warp( register_set& pipe_reg_set, const warp_inst_t*
                 const warp_inst_t *next_next_inst = m_warp[warp_id].see_ibuffer_next_inst(index);
                 // find common register between dependency
                 m_scoreboard->getdependencyRegister(next_inst, next_next_inst, common_register);
-                // reserve except common register for given inst in chain
-                m_scoreboard->reservedepRegisters(*pipe_reg, common_register);
+                // add operands of dep inst to current inst to be fetched earlier
+                (*pipe_reg)->extract_dep_inst_operands(common_register);
+                (*pipe_reg)->add_register_operands();
+                m_warp[warp_id].set_common_register(common_register);
+                // reserve normally register for given inst in chain
+                m_scoreboard->reserveRegisters(*pipe_reg);
             }
         } else if (m_warp[warp_id].get_to_be_issued_inst_in_dependency_chain()==1){
             // double check for issue in pipe1
             assert(pipe_reg_set.get_issue_pipe() == pipe1);
             (*pipe_reg)->set_issue_inst_pipe(pipe_reg_set.get_issue_pipe());
-            assert((*pipe_reg)->get_dependency_chain_flag());
+            (*pipe_reg)->set_dependency_chain_flag();
             m_warp[warp_id].dec_to_be_issued_inst_in_dependency_chain();
-            m_scoreboard->reserveRegisters(*pipe_reg);
+            unsigned int common_reg = m_warp[warp_id].get_common_register();
+            (*pipe_reg)->set_common_register(common_reg);
+            // remove already fetched operands
+            (*pipe_reg)->delete_register_operands_dep_inst();
+            m_warp[warp_id].reset_common_register();
+            m_scoreboard->reservedepRegisters(*pipe_reg, common_reg);
         }
     }
     // NO dependency in inst
@@ -841,6 +857,7 @@ void scheduler_unit::cycle()
     bool issued_inst = false; // of these we issued one
 
     order_warps();
+//    print_next_cycle_prioritized_warps(stdout);
     for ( std::vector< shd_warp_t* >::const_iterator iter = m_next_cycle_prioritized_warps.begin();
           iter != m_next_cycle_prioritized_warps.end();
           iter++ ) {
@@ -873,7 +890,7 @@ void scheduler_unit::cycle()
                     warp(warp_id).ibuffer_flush();
                 } else {
                     valid_inst = true;
-                    if ( !m_scoreboard->checkCollision(warp_id, pI) ) {
+                    if ( !m_scoreboard->checkdepCollision(warp_id, pI, warp(warp_id).get_common_register()) ) {
                         SCHED_DPRINTF( "Warp (warp_id %u, dynamic_warp_id %u) passes scoreboard\n",
                                        (*iter)->get_warp_id(), (*iter)->get_dynamic_warp_id() );
                         ready_inst = true;
@@ -898,37 +915,42 @@ void scheduler_unit::cycle()
                                     // TODO should I check active mask here??
                                     if(warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 2) {
                                         unsigned int index = (warp(warp_id).get_m_next() + 1) % ibuffer_size;
-                                        if (warp(warp_id).see_ibuffer_next_valid(index) ) {
-                                            const warp_inst_t* pJ = warp(warp_id).see_ibuffer_next_inst(index);
+                                        if (warp(warp_id).see_ibuffer_next_valid(index)) {
+                                            const warp_inst_t *pJ = warp(warp_id).see_ibuffer_next_inst(index);
+                                            unsigned int common_register;
+                                            m_scoreboard->getdependencyRegister(pI, pJ, common_register);
+                                            warp(warp_id).set_common_register(common_register);
                                             // check scoreboard for next inst is also free & reserve
-                                            if(m_scoreboard->checkCollision(warp_id, pJ)) {
+                                            if (!m_scoreboard->checkdepCollision(warp_id, pJ,
+                                                                                 warp(warp_id).get_common_register())) {
                                                 // update this value after issue in issue func
 //                                                warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
                                                 m_sp_out->set_issue_pipe0();
                                                 m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
                                                 warp(warp_id).set_dependency_issue_cycle(gpu_sim_cycle);
-                                                warp(warp_id).set_dependency_next_issue_cycle(pI->latency);
+                                                warp(warp_id).set_dependency_next_issue_cycle(pI);
                                                 issued++;
                                                 issued_inst = true;
                                                 warp_inst_issued = true;
                                             }
                                         }
-                                        // second dependent inst in chain to be issued
-                                        else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){
-                                            // not needed to check collision as already checked earlier twice
-                                            // update this value after issue in issue func
+                                    }
+                                    // second dependent inst in chain to be issued
+                                    else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1) {
+                                        // not needed to check collision as already checked earlier twice
+                                        // update this value after issue in issue func
 //                                            warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
-                                            m_sp_out->set_issue_pipe1();
-                                            assert(gpu_sim_cycle==warp(warp_id).get_dependency_next_issue_cycle());
-                                            m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
-                                            issued++;
-                                            issued_inst = true;
-                                            warp_inst_issued = true;
-                                            // since only considering dependency chain length of 2 reset here
-                                            warp(warp_id).reset_dependency_flag();
-                                            warp(warp_id).reset_dependency_issue_cycle();
-                                            warp(warp_id).reset_dependency_next_issue_cycle();
-                                        }
+                                        m_sp_out->set_issue_pipe1();
+//                                        assert(gpu_sim_cycle==warp(warp_id).get_dependency_next_issue_cycle());
+                                        m_shader->issue_warp(*m_sp_out, pI, active_mask, warp_id);
+                                        issued++;
+                                        issued_inst = true;
+                                        warp_inst_issued = true;
+                                        // since only considering dependency chain length of 2 reset here
+                                        warp(warp_id).reset_dependency_flag();
+                                        warp(warp_id).reset_dependency_issue_cycle();
+                                        warp(warp_id).reset_dependency_next_issue_cycle();
+                                        warp(warp_id).reset_dependency_execute_cycle();
                                     }
                                 } else {
                                     m_sp_out->set_issue_pipe0();
@@ -946,37 +968,43 @@ void scheduler_unit::cycle()
                                         // TODO should I check active mask here??
                                         if(warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 2) {
                                             unsigned int index = (warp(warp_id).get_m_next() + 1) % ibuffer_size;
-                                            if (warp(warp_id).see_ibuffer_next_valid(index) ) {
-                                                const warp_inst_t* pJ = warp(warp_id).see_ibuffer_next_inst(index);
+                                            if (warp(warp_id).see_ibuffer_next_valid(index)) {
+                                                const warp_inst_t *pJ = warp(warp_id).see_ibuffer_next_inst(index);
                                                 // check scoreboard for next inst is also free & reserve
-                                                if(m_scoreboard->checkCollision(warp_id, pJ)) {
+                                                unsigned int common_register;
+                                                m_scoreboard->getdependencyRegister(pI, pJ, common_register);
+                                                warp(warp_id).set_common_register(common_register);
+                                                // check scoreboard for next inst is also free & reserve
+                                                if (!m_scoreboard->checkdepCollision(warp_id, pJ,
+                                                                                     warp(warp_id).get_common_register())) {
                                                     // update this value after issue in issue func
 //                                                    warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
                                                     m_sfu_out->set_issue_pipe0();
                                                     m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
                                                     warp(warp_id).set_dependency_issue_cycle(gpu_sim_cycle);
-                                                    warp(warp_id).set_dependency_next_issue_cycle(pI->latency);
+                                                    warp(warp_id).set_dependency_next_issue_cycle(pI);
                                                     issued++;
                                                     issued_inst = true;
                                                     warp_inst_issued = true;
                                                 }
                                             }
-                                                // second dependent inst in chain to be issued
-                                            else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){
-                                                // not needed to check collision as already checked earlier twice
-                                                // update this value after issue in issue func
+                                        }
+                                            // second dependent inst in chain to be issued
+                                        else if (warp(warp_id).get_to_be_issued_inst_in_dependency_chain() == 1){
+                                            // not needed to check collision as already checked earlier twice
+                                            // update this value after issue in issue func
 //                                                warp(warp_id).dec_to_be_issued_inst_in_dependency_chain();
-                                                m_sfu_out->set_issue_pipe1();
-                                                assert(gpu_sim_cycle==warp(warp_id).get_dependency_next_issue_cycle());
-                                                m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
-                                                issued++;
-                                                issued_inst = true;
-                                                warp_inst_issued = true;
-                                                // since only considering dependency chain length of 2 reset here
-                                                warp(warp_id).reset_dependency_flag();
-                                                warp(warp_id).reset_dependency_issue_cycle();
-                                                warp(warp_id).reset_dependency_next_issue_cycle();
-                                            }
+                                            m_sfu_out->set_issue_pipe1();
+//                                            assert(gpu_sim_cycle==warp(warp_id).get_dependency_next_issue_cycle());
+                                            m_shader->issue_warp(*m_sfu_out, pI, active_mask, warp_id);
+                                            issued++;
+                                            issued_inst = true;
+                                            warp_inst_issued = true;
+                                            // since only considering dependency chain length of 2 reset here
+                                            warp(warp_id).reset_dependency_flag();
+                                            warp(warp_id).reset_dependency_issue_cycle();
+                                            warp(warp_id).reset_dependency_next_issue_cycle();
+                                            warp(warp_id).reset_dependency_execute_cycle();
                                         }
                                     } else {
                                         m_sfu_out->set_issue_pipe0();
@@ -984,6 +1012,8 @@ void scheduler_unit::cycle()
                                         issued++;
                                         issued_inst = true;
                                         warp_inst_issued = true;
+                                        // to check if any bypasses occur
+                                        assert(~warp(warp_id).check_dependency_flag());
                                     }
                                 }
                             }
@@ -1074,13 +1104,15 @@ bool scheduler_unit::sort_warps_by_oldest_dynamic_id(shd_warp_t* lhs, shd_warp_t
             return true;
         }
         // check for dependent instructions
-        else if (lhs->detect_dependency(gpu_sim_cycle) && !rhs->detect_dependency(gpu_sim_cycle)) {
+        else if (lhs->check_dependency_flag() && lhs->get_dependency_next_issue_cycle()==gpu_sim_cycle && lhs->get_to_be_issued_inst_in_dependency_chain()==1){ return true;}
+        else if (rhs->check_dependency_flag() && rhs->get_dependency_next_issue_cycle()==gpu_sim_cycle && rhs->get_to_be_issued_inst_in_dependency_chain()==1) { return false;}
+        else if (lhs->detect_dependency() && !rhs->detect_dependency()) {
             return true;
         }
-        else if (!lhs->detect_dependency(gpu_sim_cycle) && rhs->detect_dependency(gpu_sim_cycle)) {
+        else if (!lhs->detect_dependency() && rhs->detect_dependency()) {
             return false;
         }
-        else if (lhs->detect_dependency(gpu_sim_cycle) && rhs->detect_dependency(gpu_sim_cycle)) {
+        else if (lhs->detect_dependency() && rhs->detect_dependency()) {
             return true;
         }
         else {
@@ -1311,11 +1343,20 @@ void shader_core_ctx::execute()
         if( issue_inst.has_ready() && m_fu[n]->can_issue( **ready_reg ) ) {
             bool schedule_wb_now = !m_fu[n]->stallable();
             int resbus = -1;
+            unsigned int warp_id = (*ready_reg)->warp_id();
             if( schedule_wb_now && (resbus=test_res_bus( (*ready_reg)->latency ))!=-1 ) {
                 assert( (*ready_reg)->latency < MAX_ALU_LATENCY );
                 m_result_bus[resbus]->set( (*ready_reg)->latency );
                 m_fu[n]->issue( issue_inst );
+                if((*ready_reg)->get_dependency_chain_flag() && (m_warp[warp_id].get_to_be_issued_inst_in_dependency_chain()==1)){
+                    // TODO transfer to be issued inst to warp_inst_t
+                    m_warp[warp_id].set_dependency_execute_cycle(gpu_sim_cycle);
+                    // not a good idea to set issue cycle of dependency inst from here
+                    // Rule :=  t_issue2 = t_issue1 + num_reg_op + latency + 2
+//                    m_warp[warp_id].set_dependency_next_issue_cycle((*ready_reg)->latency-4);
+                }
             } else if( !schedule_wb_now ) {
+                // Stalls for Load store type inst hoing to LDST unit
                 m_fu[n]->issue( issue_inst );
             } else {
                 // stall issue (cannot reserve result bus)
@@ -1405,20 +1446,26 @@ void shader_core_ctx::writeback()
          * To handle this case, we ignore the return value (thus allowing
          * no stalling).
          */
+        unsigned warp_id = pipe_reg->warp_id();
         if(pipe_reg->get_dependency_chain_flag() && (pipe_reg->get_issue_inst_pipe()==pipe0)){
-            // NO write back for 1st instruction in dependency chain
-            m_scoreboard->releaseRegisters( pipe_reg );
+            // write back for 1st instruction result in dependency chain as it might be used by future instructions
+            m_operand_collector.writeback(*pipe_reg);
+            unsigned int c_reg = pipe_reg->get_common_register();
+            m_scoreboard->releasedepRegisters( pipe_reg , c_reg);
+            pipe_reg->reset_dependency_chain_flag();
         }
         else if (pipe_reg->get_dependency_chain_flag() && (pipe_reg->get_issue_inst_pipe()==pipe1)){
             // Write back normally for the dependent instruction
             m_operand_collector.writeback(*pipe_reg);
             m_scoreboard->releaseRegisters(pipe_reg);
+            pipe_reg->reset_dependency_chain_flag();
+            m_stats->n_dep_chains[m_sid] = m_stats->n_dep_chains[m_sid] + 1;
         }
         else {
             m_operand_collector.writeback(*pipe_reg);
             m_scoreboard->releaseRegisters(pipe_reg);
+            pipe_reg->reset_dependency_chain_flag();
         }
-        unsigned warp_id = pipe_reg->warp_id();
         m_warp[warp_id].dec_inst_in_pipeline();
         warp_inst_complete(*pipe_reg);
         m_gpu->gpu_sim_insn_last_update_sid = m_sid;

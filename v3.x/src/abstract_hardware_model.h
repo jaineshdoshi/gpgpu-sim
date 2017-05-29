@@ -800,6 +800,7 @@ public:
         m_is_printf=false;
         issue_inst_pipe = unknown;
         dependency_chain = false;
+        reset_dep_inst_operands();
     }
     virtual ~warp_inst_t(){
     }
@@ -952,26 +953,30 @@ public:
     // false otherwise
     bool dependency_chain;
 
+    // store common shared register by the dependency chain
+    unsigned int com_reg;
+
     // function to detect whether next inst operand is dependent on current inst output
     bool is_next_inst_dependent(const warp_inst_t *next_inst) const
     {
         // TODO check next inst source !!
-
-        if(oprnd_type == INT__OP or oprnd_type == FP__OP) {
-//            const warp_inst_t *next_inst = ptx_fetch_inst(pc + this->isize);
-            for (int i = 0; i < MAX_REG_OPERANDS / 2; i++) {
-                if (next_inst->in[i] > 0) {
-                    for (int j = 0; j < MAX_REG_OPERANDS / 2; j++) {
-                        if (this->out[j] > 0) {
-                            if (next_inst->in[i] == this->out[j]) {
-//                                this->dependency_chain = true;
-                                return true;
+//        if(next_inst->latency>=4){
+            if(oprnd_type == INT_OP or oprnd_type == FP_OP) {
+    //            const warp_inst_t *next_inst = ptx_fetch_inst(pc + this->isize);
+                for (int i = 0; i < MAX_REG_OPERANDS / 2; i++) {
+                    if (next_inst->in[i] > 0) {
+                        for (int j = 0; j < MAX_REG_OPERANDS / 2; j++) {
+                            if (this->out[j] > 0) {
+                                if (next_inst->in[i] == this->out[j]) {
+    //                                this->dependency_chain = true;
+                                    return true;
+                                }
                             }
                         }
                     }
                 }
             }
-        }
+//        }
         return false;
     }
 
@@ -999,6 +1004,83 @@ public:
     issue_pipe_t get_issue_inst_pipe(){ return issue_inst_pipe;}
 
     void reset_issue_inst_pipe(){issue_inst_pipe = unknown;}
+
+    // Set common shared register in the dependency chain
+    void set_common_register(unsigned int reg){
+        assert(dependency_chain);
+        com_reg = reg;
+    }
+
+    unsigned int get_common_register(){
+        return com_reg;
+    }
+
+    // Reset common reg
+    void reset_common_register(){
+        com_reg = 0;
+    }
+
+    // contains the operands to be also fetched from the register file for the next dependent instruction
+    unsigned int dep_inst_operands[MAX_REG_OPERANDS];
+
+    void extract_dep_inst_operands(unsigned int common_register)
+    {
+        int j = 0;
+        for (int i = 0; i < MAX_REG_OPERANDS; ++i) {
+            if(in[i]>0 && in[i] != common_register){
+                dep_inst_operands[j] = in[i];
+                j++;
+            }
+        }
+        return;
+    }
+
+    void reset_dep_inst_operands(){
+        for (int i = 0; i < MAX_REG_OPERANDS; ++i) {
+            dep_inst_operands[i] = 0;
+        }
+    }
+
+
+    // add operands from dependent inst to earlier inst in the chain to fetch register operands early from the Register File
+    void add_register_operands()
+    {
+        int j = 0;
+        for (int i = 0; i < MAX_REG_OPERANDS ; i++) {
+            if(dep_inst_operands[i] > 0){
+                while(j<MAX_REG_OPERANDS){
+                    if(in[j] == 0){
+                        in[j] = dep_inst_operands[i];
+                        j++;
+                        break; // test that it breaks outside the while loop only
+                    }
+                    else{
+                        j++;
+                    }
+                }
+            }
+        }
+        return;
+    }
+
+    // remove all read operations from the register file as they are already read by the earlier inst
+    void delete_register_operands_dep_inst()
+    {
+        for (int i = 0; i < MAX_REG_OPERANDS; ++i) {
+            if(in[i] > 0){ in[i] = 0;}
+            assert(in[i]==0);
+        }
+        return;
+    }
+
+    // count number of operands in the inst to be read from the register file
+    int number_of_reg_op() const {
+        int count = 0;
+        for (int i = 0; i < MAX_REG_OPERANDS; ++i) {
+            if(in[i]>0){count++;}
+        }
+        return count;
+    }
 
 protected:
 

@@ -118,6 +118,7 @@ public:
         to_be_issued_inst_dep_chain = 0;
         reset_dependency_issue_cycle();
         reset_dependency_next_issue_cycle();
+//        reset_dependency_stall_cycle();
     }
     void init( address_type start_pc,
                unsigned cta_id,
@@ -138,6 +139,7 @@ public:
         to_be_issued_inst_dep_chain = 0;
         reset_dependency_issue_cycle();
         reset_dependency_next_issue_cycle();
+//        reset_dependency_stall_cycle();
     }
 
     bool functional_done() const;
@@ -230,27 +232,38 @@ public:
     // @JD
     // detect dependency chain in warp fetched instructions
     // essentially gives a higher priority to warps with impending dependencies
-    bool detect_dependency(unsigned long long int gpu_cycle)
+    bool detect_dependency()
     {
         if (~inst_dependency) {
             const warp_inst_t *pI = this->ibuffer_next_inst();
-            //        if(ibuffer_next_valid())
-            if (m_ibuffer[m_next].m_valid) {
-                if (m_ibuffer[(m_next + 1) % IBUFFER_SIZE].m_valid) {
-                    inst_dependency = pI->is_next_inst_dependent(see_ibuffer_next_inst((m_next + 1) % IBUFFER_SIZE));
-                    if(inst_dependency) {
+                if (m_ibuffer[m_next].m_valid) {
+                    if((pI->latency) >= 4) {
+                        if (m_ibuffer[(m_next + 1) % IBUFFER_SIZE].m_valid) {
+                            inst_dependency = pI->is_next_inst_dependent(see_ibuffer_next_inst((m_next + 1) % IBUFFER_SIZE));
+                        if (inst_dependency) {
 //                        pI->set_dependency_chain_flag();
-                        set_to_be_issued_inst_in_dependency_chain();
+                            set_to_be_issued_inst_in_dependency_chain();
+                        }
+                        return inst_dependency;
                     }
-                    return inst_dependency;
                 }
             }
         }
-        // only dependent inst is yet to be issued in dependency chain
-        else if(inst_dependency && !to_be_issued_inst_dep_chain) {
-            assert(to_be_issued_inst_dep_chain == 1);
-            if (gpu_cycle == next_issue_cycle);
+        else if (inst_dependency){
             return true;
+        }
+        return false;
+    }
+
+    bool issue_dependency_now(unsigned long long int gpu_cycle){
+        // Issue next dependent inst in thedependency chain
+        if(inst_dependency && !to_be_issued_inst_dep_chain) {
+            if (to_be_issued_inst_dep_chain == 1) {
+                if (gpu_cycle == next_issue_cycle)
+                    return true;
+            }
+            else if(to_be_issued_inst_dep_chain == 2)
+                return false;
         }
         return false;
     }
@@ -268,37 +281,54 @@ public:
     // set num of inst in dependency chain to be issued
     void set_to_be_issued_inst_in_dependency_chain()
     {
-        assert(to_be_issued_inst_dep_chain==0);
-        // currently only for dependency chain of 2
-        to_be_issued_inst_dep_chain = 2;
+        if(to_be_issued_inst_dep_chain==0)
+            // currently only for dependency chain of 2
+            to_be_issued_inst_dep_chain = 2;
     }
 
     // decrement when an inst in dependency chain is issued
     void dec_to_be_issued_inst_in_dependency_chain()
     {
-        assert(to_be_issued_inst_dep_chain-1>-1);
+        assert((to_be_issued_inst_dep_chain-1)>=0);
         to_be_issued_inst_dep_chain = to_be_issued_inst_dep_chain - 1;
     }
 
     // return number of inst in dependency chain to be issued
     unsigned int get_to_be_issued_inst_in_dependency_chain() { return to_be_issued_inst_dep_chain; }
 
-    // set/reset dependency chain issue cycle
     void set_dependency_issue_cycle(unsigned long long int gpu_cycle){ dependency_issue_cycle = gpu_cycle;}
-    void reset_dependency_issue_cycle(){ dependency_issue_cycle = NULL;}
+    void reset_dependency_issue_cycle(){ dependency_issue_cycle = 0;}
 
     // set/reset dependency chain next issue cycle
-    void set_dependency_next_issue_cycle(unsigned int inst_latency){
-        assert(dependency_issue_cycle!=NULL);
-        next_issue_cycle = dependency_issue_cycle + inst_latency;}
-    void reset_dependency_next_issue_cycle(){ next_issue_cycle = NULL;}
+    void set_dependency_next_issue_cycle(const warp_inst_t* inst){
+        assert(dependency_issue_cycle!=0);
+        next_issue_cycle = dependency_issue_cycle + inst->number_of_reg_op() + inst->latency + 2;}
+
+    void reset_dependency_next_issue_cycle(){ next_issue_cycle = 0;}
 
     unsigned long long int get_dependency_next_issue_cycle(){
-        assert(next_issue_cycle!=NULL);
+//        assert(next_issue_cycle!=0);
         return next_issue_cycle;
     }
 
-//    static const unsigned IBUFFER_SIZE=2;
+//     Not needed after operand merging done
+//    void incr_dependency_stall_cycle(unsigned long long int stall_cycles){ dependency_stall_cycles = dependency_issue_cycle + 1;}
+//    void reset_dependency_stall_cycle(){ dependency_stall_cycles = 0;}
+
+    // set/reset dependency chain first inst execute cycle
+    void set_dependency_execute_cycle(unsigned long long int gpu_cycle){ dependency_execute_cycle = gpu_cycle;}
+    void reset_dependency_execute_cycle(){ dependency_execute_cycle = 0;}
+
+    // set/reset common shared register in the dependency chain
+    void set_common_register(unsigned int &reg_num){
+        assert(reg_num>0);
+        common_register = reg_num;
+        }
+    unsigned int get_common_register(){ return common_register;}
+    void reset_common_register(){ common_register = 0;}
+
+
+    //    static const unsigned IBUFFER_SIZE=2;
 // need other classes to access buffer size too
     static const unsigned IBUFFER_SIZE=ibuffer_size;
 
@@ -338,6 +368,9 @@ private:
     unsigned int to_be_issued_inst_dep_chain;     // keep track of inst in dependency chain issued for execution
     unsigned long long int dependency_issue_cycle; // keep track of cycle when first inst of dependency chain is issued
     unsigned long long int next_issue_cycle;  // hold the cycle wherein the next dependent inst must be issued eliminating writeback of inst
+    unsigned long long int dependency_execute_cycle; // Keep track of cycle at which first inst of dependency chain is put in the execution pipe
+//    unsigned long long int dependency_stall_cycles; // account for stall while reading register operands from Register File
+    unsigned int common_register; // store reg access index of common shared register in inst dependency chain
 };
 
 
@@ -432,6 +465,20 @@ public:
     // Derived classes can override this function to populate
     // m_supervised_warps with their scheduling policies
     virtual void order_warps() = 0;
+
+    // print warp queue
+    void print_next_cycle_prioritized_warps(FILE *fout) {
+//        if (m_shader->m_sid == 4) {
+//            fprintf(fout, "%llu", gpu_sim_cycle);
+            for (std::vector<shd_warp_t *>::const_iterator iter = m_next_cycle_prioritized_warps.begin();
+                 iter != m_next_cycle_prioritized_warps.end(); iter++) {
+                if ((*iter)->get_warp_id() != -1) {
+                    fprintf(fout, "w%d ", (*iter)->get_warp_id());
+                }
+            }
+            fprintf(fout, "\n");
+//        }
+    }
 
 protected:
     virtual void do_on_warp_issued( unsigned warp_id,
@@ -1155,6 +1202,7 @@ public:
             move_warp(m_pipeline_reg[stage], m_pipeline_reg[stage+1]);
         if( !m_dispatch_reg->empty() ) {
             if( !m_dispatch_reg->dispatch_delay()) {
+                // TODO check this latency is covered in pipeline stages while initiation is taken care of at dispatch reg
                 int start_stage = m_dispatch_reg->latency - m_dispatch_reg->initiation_interval;
                 move_warp(m_pipeline_reg[start_stage],m_dispatch_reg);
             }
@@ -1582,6 +1630,9 @@ struct shader_core_stats_pod {
     unsigned *gpgpu_n_shmem_bank_access;
     long *n_simt_to_mem; // Interconnect power stats
     long *n_mem_to_simt;
+
+    long *n_dep_chains;  // count number of dependency chains simulated
+
 };
 
 class shader_core_stats : public shader_core_stats_pod {
@@ -1641,6 +1692,9 @@ public:
 
         m_shader_dynamic_warp_issue_distro.resize( config->num_shader() );
         m_shader_warp_slot_issue_distro.resize( config->num_shader() );
+
+        n_dep_chains = (long *)calloc(config->num_shader(), sizeof(long));
+
     }
 
     ~shader_core_stats()
@@ -1685,6 +1739,8 @@ private:
     std::vector<unsigned> m_last_shader_dynamic_warp_issue_distro;
     std::vector< std::vector<unsigned> > m_shader_warp_slot_issue_distro;
     std::vector<unsigned> m_last_shader_warp_slot_issue_distro;
+
+
 
     friend class power_stat_t;
     friend class shader_core_ctx;

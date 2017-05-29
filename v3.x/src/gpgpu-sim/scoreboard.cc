@@ -127,7 +127,24 @@ void Scoreboard::releaseRegisters(const class warp_inst_t *inst)
     }
 }
 
-/** 
+
+// Release registers for an instruction dependency chain without releasing the common register
+void Scoreboard::releasedepRegisters(const class warp_inst_t *inst, unsigned int common_register)
+{
+    for( unsigned r=0; r < 4; r++) {
+        if(inst->out[r] > 0 && inst->out[r]!=common_register) {
+            SHADER_DPRINTF( SCOREBOARD,
+                            "Register Released - warp:%d, reg: %d\n",
+                            inst->warp_id(),
+                            inst->out[r] );
+            releaseRegister(inst->warp_id(), inst->out[r]);
+            longopregs[inst->warp_id()].erase(inst->out[r]);
+        }
+    }
+}
+
+
+/**
  * Checks to see if registers used by an instruction are reserved in the scoreboard
  *  
  * @return 
@@ -159,9 +176,45 @@ bool Scoreboard::checkCollision( unsigned wid, const class inst_t *inst ) const
 	return false;
 }
 
+
+
+// @JD
+/**
+ * Checks to see if registers used by an instruction are reserved in the scoreboard
+ *
+ * @return
+ * true if WAW or RAW hazard (no WAR since in-order issue)
+ **/
+// Collision checker modified to take care of dependency chain reservation of registers
+bool Scoreboard::checkdepCollision( unsigned wid, const class inst_t *inst, int common_register) const
+{
+    // Get list of all input and output registers
+    std::set<int> inst_regs;
+
+    if(inst->out[0] > 0 && inst->out[0]!=common_register) inst_regs.insert(inst->out[0]);
+    if(inst->out[1] > 0 && inst->out[1]!=common_register) inst_regs.insert(inst->out[1]);
+    if(inst->out[2] > 0 && inst->out[2]!=common_register) inst_regs.insert(inst->out[2]);
+    if(inst->out[3] > 0 && inst->out[3]!=common_register) inst_regs.insert(inst->out[3]);
+    if(inst->in[0] > 0 && inst->in[0]!=common_register) inst_regs.insert(inst->in[0]);
+    if(inst->in[1] > 0 && inst->in[1]!=common_register) inst_regs.insert(inst->in[1]);
+    if(inst->in[2] > 0 && inst->in[2]!=common_register) inst_regs.insert(inst->in[2]);
+    if(inst->in[3] > 0 && inst->in[3]!=common_register) inst_regs.insert(inst->in[3]);
+    if(inst->pred > 0 && inst->pred!=common_register) inst_regs.insert(inst->pred);
+    if(inst->ar1 > 0 && inst->ar1!=common_register) inst_regs.insert(inst->ar1);
+    if(inst->ar2 > 0 && inst->ar2!=common_register) inst_regs.insert(inst->ar2);
+
+    // Check for collision, get the intersection of reserved registers and instruction registers
+    std::set<int>::const_iterator it2;
+    for ( it2=inst_regs.begin() ; it2 != inst_regs.end(); it2++ )
+        if(reg_table[wid].find(*it2) != reg_table[wid].end()) {
+            return true;
+        }
+    return false;
+}
+
 // @JD
 // Return T if current inst has next inst dependent and can be issued as a chain
-void Scoreboard::getdependencyRegister(const class inst_t *inst1, const class inst_t *inst2, std::set<int> common_registers) const
+void Scoreboard::getdependencyRegister(const class inst_t *inst1, const class inst_t *inst2, unsigned int &common_register) const
 {
 //     Only resolve dependencies in the same warp
 //    if (wid1 != wid2){
@@ -173,10 +226,12 @@ void Scoreboard::getdependencyRegister(const class inst_t *inst1, const class in
 
     // Get list of all input and output registers from both instructions
 //    std::set<int> register_list;
+
     // check that there are no earlier
-    if(~common_registers.empty()){
-        common_registers.clear();
-    };
+//    if(~common_registers.empty()){
+//        common_registers.clear();
+//    };
+    common_register = NULL;
 
 
 
@@ -209,14 +264,17 @@ void Scoreboard::getdependencyRegister(const class inst_t *inst1, const class in
 //    std::set<int> common_registers;
 
     // find register used commonly by inst1 Writeback and inst2 Read
-    if(inst1->oprnd_type == SP__OP or inst1->oprnd_type == SFU__OP) {
+    // Use oprnd_type in more detail
+    if(inst1->oprnd_type == INT_OP or inst1->oprnd_type == FP_OP) {
 //            const warp_inst_t *next_inst = ptx_fetch_inst(pc + this->isize);
         for (int i = 0; i < MAX_REG_OPERANDS / 2; i++) {
             if (inst2->in[i] > 0) {
                 for (int j = 0; j < MAX_REG_OPERANDS / 2; j++) {
                     if (inst1->out[j] > 0) {
                         if (inst2->in[i] == inst1->out[j]) {
-                            common_registers.insert(inst1->out[j]);
+                            common_register = inst1->out[j];
+                            assert(common_register!=NULL);
+                            return;
                         }
                     }
                 }
@@ -224,24 +282,21 @@ void Scoreboard::getdependencyRegister(const class inst_t *inst1, const class in
         }
     }
     // only 1 common register value can be forwarded
-    assert(common_registers.size()==1);
 }
 
 
-void Scoreboard::reservedepRegisters(const class warp_inst_t* inst, std::set<int> common_register)
+// does not reserve common dependent registers shared by instruction chain
+void Scoreboard::reservedepRegisters(const class warp_inst_t* inst, int common_register)
 {
-    // does not reserve common dependent registers shared by instruction chain
     for( unsigned r=0; r < 4; r++) {
         if(inst->out[r] > 0) {
-            std::set<int>::const_iterator it;
-            for ( it=common_register.begin() ; it != common_register.end(); it++ ) {
-                if (*it != inst->out[r]) {
-                    reserveRegister(inst->warp_id(), inst->out[r]);
+            if(inst->out[r] != common_register)
+            {
+                reserveRegister(inst->warp_id(), inst->out[r]);
                     SHADER_DPRINTF(SCOREBOARD,
                                    "Reserved register - warp:%d, reg: %d\n",
                                    inst->warp_id(),
                                    inst->out[r]);
-                }
             }
         }
     }

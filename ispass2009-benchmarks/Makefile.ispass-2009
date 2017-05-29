@@ -17,13 +17,14 @@ noinline?=0
 .PHONY: check_environment
 default: check_environment common 
 	$(SETENV) make noinline=$(noinline) -C BFS
-	$(SETENV) make noinline=$(noinline) -C LIB
-	$(SETENV) make noinline=$(noinline) -C LPS
-	$(SETENV) make noinline=$(noinline) -C MUM
-	$(SETENV) make noinline=$(noinline) -C NN
-	$(SETENV) make noinline=$(noinline) -C NQU
-	$(SETENV) make noinline=$(noinline) -C RAY
-	$(SETENV) make noinline=$(noinline) -C STO
+#	$(SETENV) make noinline=$(noinline) -C LIB
+#	$(SETENV) make noinline=$(noinline) -C LPS
+#	$(SETENV) make noinline=$(noinline) -C MUM
+#	$(SETENV) make noinline=$(noinline) -C NN
+#	$(SETENV) make noinline=$(noinline) -C NQU
+#	$(SETENV) make noinline=$(noinline) -C RAY
+#	$(SETENV) make noinline=$(noinline) -C STO
+
 
 check_environment:
 	 @if [ ! -n "$(CUDA_INSTALL_PATH)" ]; then \
@@ -54,9 +55,9 @@ check_environment:
 		else true; \
 		fi \
 	 fi
-
+	
 common:
-	rm -f ../common; ln -s $(NVIDIA_COMPUTE_SDK_LOCATION)/C/common ../common;
+	rm -rf ../common; ln -s $(NVIDIA_COMPUTE_SDK_LOCATION)/C/common ../common;
 
 clean: check_environment common
 	$(SETENV) make clean -C BFS

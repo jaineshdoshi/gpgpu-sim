@@ -34,10 +34,10 @@
       <file leaf-file-name="shader.cc" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="1081" column="0" lean-forward="false" selection-start-line="1081" selection-start-column="0" selection-end-line="1081" selection-end-column="0" />
+            <state relative-caret-position="-7413">
+              <caret line="375" column="0" lean-forward="false" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
               <folding>
-                <element signature="e#39477#39488#0" expanded="true" />
+                <element signature="e#40270#40281#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,19 +46,17 @@
       <file leaf-file-name="shader.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="249" column="0" lean-forward="false" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
+            <state relative-caret-position="20869">
+              <caret line="1595" column="5" lean-forward="true" selection-start-line="1595" selection-start-column="5" selection-end-line="1595" selection-end-column="5" />
               <folding>
                 <element signature="e#1688#1706#0" expanded="true" />
                 <element signature="e#1941#1964#0" expanded="true" />
-                <element signature="e#13225#17330#1" expanded="false" />
-                <element signature="e#17333#18016#1" expanded="false" />
-                <element signature="e#18019#18705#1" expanded="false" />
-                <element signature="e#18709#20829#1" expanded="false" />
-                <element signature="e#20866#21589#1" expanded="false" />
-                <element signature="e#21594#34280#1" expanded="false" />
-                <element signature="e#34283#35170#1" expanded="false" />
-                <element signature="e#35248#35582#1" expanded="false" />
+                <element signature="e#19426#20109#1" expanded="false" />
+                <element signature="e#20112#20798#1" expanded="false" />
+                <element signature="e#20802#22922#1" expanded="false" />
+                <element signature="e#22959#23682#1" expanded="false" />
+                <element signature="e#36376#37263#1" expanded="false" />
+                <element signature="e#37341#37675#1" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -67,9 +65,11 @@
       <file leaf-file-name="scoreboard.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-672">
-              <caret line="180" column="0" lean-forward="true" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-492">
+              <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
+              <folding>
+                <element signature="e#1621#1644#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -77,8 +77,8 @@
       <file leaf-file-name="scoreboard.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state relative-caret-position="21">
+              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -87,8 +87,8 @@
       <file leaf-file-name="abstract_hardware_model.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abstract_hardware_model.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="960" column="0" lean-forward="false" selection-start-line="960" selection-start-column="0" selection-end-line="960" selection-end-column="0" />
+            <state relative-caret-position="201">
+              <caret line="1046" column="5" lean-forward="true" selection-start-line="1046" selection-start-column="5" selection-end-line="1046" selection-end-column="5" />
               <folding>
                 <element signature="e#2258#2277#0" expanded="true" />
               </folding>
@@ -99,8 +99,8 @@
       <file leaf-file-name="abstract_hardware_model.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/abstract_hardware_model.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="634" column="87" lean-forward="false" selection-start-line="634" selection-start-column="75" selection-end-line="634" selection-end-column="87" />
+            <state relative-caret-position="-13">
+              <caret line="634" column="87" lean-forward="false" selection-start-line="634" selection-start-column="87" selection-end-line="634" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -110,36 +110,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>m_issue_port</find>
-      <find>sfu</find>
-      <find>m_dispatch_reg</find>
-      <find>pipelined_simd_unit::issue</find>
-      <find>simd_function_unit::issue</find>
-      <find>func_exec_inst</find>
-      <find>execute_</find>
-      <find>execute_warp_inst_t</find>
+      <find>shader_core_ctx::shade`</find>
+      <find>sfu(</find>
+      <find>reset_depe</find>
+      <find>pipelined_simd_unit</find>
+      <find>stallable</find>
+      <find>cycle</find>
+      <find>set_dependency_chain_flag</find>
+      <find>initiation_interval</find>
+      <find>set_comm</find>
       <find>writeback</find>
-      <find>set_depe</find>
-      <find>set_dependency</find>
-      <find>dependency_chain</find>
-      <find>set_dependency_c</find>
-      <find>mem_access_type</find>
-      <find>_memory_space_t</find>
-      <find>FuncCache</find>
-      <find>uarch_op_t</find>
-      <find>operation_pipeline_t</find>
-      <find>mem_operation_t</find>
-      <find>_memory_op_t</find>
-      <find>address_type</find>
-      <find>address</find>
-      <find>issue_pipe_t</find>
-      <find>mem_operation</find>
-      <find>issue_pipe</find>
-      <find>enum</find>
-      <find>SP__OP</find>
-      <find>types_of_operands</find>
-      <find>oprnd_type</find>
-      <find>gpu_sim</find>
+      <find>set_dependency_ne</find>
+      <find>set_dependency_issue_cycle</find>
+      <find>stall</find>
+      <find>incr_dependency_stall_cycle</find>
+      <find>dependency_stall_cycles</find>
+      <find>m_pipeline_duty_cycle</find>
+      <find>set_dependency_cha</find>
+      <find>reset_dependency_flag</find>
+      <find>reset_dependency_chain_flag</find>
+      <find>extract</find>
+      <find>kernel_launch_uid</find>
+      <find>kernel_la</find>
+      <find>executed_kernel_info_string</find>
+      <find>n_mem_read_local</find>
+      <find>gpgpu_n_mem_read_local</find>
+      <find>m_last_num_sim_insn</find>
+      <find>m_num_sfu_committed</find>
+      <find>n_dep</find>
+      <find>n_dep_</find>
+      <find>core_cycle</find>
     </findStrings>
     <replaceStrings>
       <replace>debug</replace>
@@ -156,8 +156,8 @@
         <option value="$PROJECT_DIR$/../../gpgpu-sim-original/v3.x/src/gpgpu-sim/shader.h" />
         <option value="$PROJECT_DIR$/src/gpgpu-sim/scoreboard.h" />
         <option value="$PROJECT_DIR$/src/gpgpu-sim/scoreboard.cc" />
-        <option value="$PROJECT_DIR$/src/abstract_hardware_model.h" />
         <option value="$PROJECT_DIR$/src/gpgpu-sim/shader.h" />
+        <option value="$PROJECT_DIR$/src/abstract_hardware_model.h" />
         <option value="$PROJECT_DIR$/src/gpgpu-sim/shader.cc" />
       </list>
     </option>
@@ -555,12 +555,13 @@
       <workItem from="1494523967876" duration="87996000" />
       <workItem from="1495219839052" duration="24265000" />
       <workItem from="1495358010987" duration="12122000" />
-      <workItem from="1495373594186" duration="20306000" />
+      <workItem from="1495373594186" duration="79833000" />
+      <workItem from="1495732032213" duration="34907000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="462690000" />
+    <option name="totallyTimeSpent" value="557124000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -617,24 +618,17 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6786">
-          <caret line="377" column="25" lean-forward="false" selection-start-line="377" selection-start-column="25" selection-end-line="377" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="864">
           <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -658,7 +652,7 @@
         <state relative-caret-position="864">
           <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -682,7 +676,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -692,7 +686,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -709,7 +703,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -726,7 +720,7 @@
         <state relative-caret-position="32706">
           <caret line="1817" column="25" lean-forward="false" selection-start-line="1817" selection-start-column="25" selection-end-line="1817" selection-end-column="25" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -750,7 +744,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -774,7 +768,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -791,7 +785,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -815,7 +809,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -846,13 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="241" column="55" lean-forward="false" selection-start-line="241" selection-start-column="55" selection-end-line="241" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/gpu-sim.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="1161" column="4" lean-forward="false" selection-start-line="1161" selection-start-column="4" selection-end-line="1161" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -959,69 +946,84 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="276" column="8" lean-forward="false" selection-start-line="276" selection-start-column="8" selection-end-line="276" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-672">
-          <caret line="180" column="0" lean-forward="true" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+        <state relative-caret-position="-492">
+          <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
+          <folding>
+            <element signature="e#1621#1644#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/scoreboard.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/abstract_hardware_model.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="634" column="87" lean-forward="false" selection-start-line="634" selection-start-column="75" selection-end-line="634" selection-end-column="87" />
+        <state relative-caret-position="-13">
+          <caret line="634" column="87" lean-forward="false" selection-start-line="634" selection-start-column="87" selection-end-line="634" selection-end-column="87" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gpgpusim_entrypoint.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12">
+          <caret line="115" column="12" lean-forward="false" selection-start-line="115" selection-start-column="12" selection-end-line="115" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/gpu-sim.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="1153" column="18" lean-forward="true" selection-start-line="1153" selection-start-column="18" selection-end-line="1153" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20869">
+          <caret line="1595" column="5" lean-forward="true" selection-start-line="1595" selection-start-column="5" selection-end-line="1595" selection-end-column="5" />
+          <folding>
+            <element signature="e#1688#1706#0" expanded="true" />
+            <element signature="e#1941#1964#0" expanded="true" />
+            <element signature="e#19426#20109#1" expanded="false" />
+            <element signature="e#20112#20798#1" expanded="false" />
+            <element signature="e#20802#22922#1" expanded="false" />
+            <element signature="e#22959#23682#1" expanded="false" />
+            <element signature="e#36376#37263#1" expanded="false" />
+            <element signature="e#37341#37675#1" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/abstract_hardware_model.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="960" column="0" lean-forward="false" selection-start-line="960" selection-start-column="0" selection-end-line="960" selection-end-column="0" />
+        <state relative-caret-position="201">
+          <caret line="1046" column="5" lean-forward="true" selection-start-line="1046" selection-start-column="5" selection-end-line="1046" selection-end-column="5" />
           <folding>
             <element signature="e#2258#2277#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="249" column="0" lean-forward="false" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
-          <folding>
-            <element signature="e#1688#1706#0" expanded="true" />
-            <element signature="e#1941#1964#0" expanded="true" />
-            <element signature="e#13225#17330#1" expanded="false" />
-            <element signature="e#17333#18016#1" expanded="false" />
-            <element signature="e#18019#18705#1" expanded="false" />
-            <element signature="e#18709#20829#1" expanded="false" />
-            <element signature="e#20866#21589#1" expanded="false" />
-            <element signature="e#21594#34280#1" expanded="false" />
-            <element signature="e#34283#35170#1" expanded="false" />
-            <element signature="e#35248#35582#1" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gpgpu-sim/shader.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="1081" column="0" lean-forward="false" selection-start-line="1081" selection-start-column="0" selection-end-line="1081" selection-end-column="0" />
+        <state relative-caret-position="-7413">
+          <caret line="375" column="0" lean-forward="false" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
           <folding>
-            <element signature="e#39477#39488#0" expanded="true" />
+            <element signature="e#40270#40281#0" expanded="true" />
           </folding>
         </state>
       </provider>
