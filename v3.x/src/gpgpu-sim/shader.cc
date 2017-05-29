@@ -717,7 +717,7 @@ void shader_core_ctx::issue_warp( register_set& pipe_reg_set, const warp_inst_t*
                 // find common register between dependency
                 m_scoreboard->getdependencyRegister(next_inst, next_next_inst, common_register);
                 // add operands of dep inst to current inst to be fetched earlier
-                (*pipe_reg)->extract_dep_inst_operands(common_register);
+                (*pipe_reg)->extract_dep_inst_operands(common_register, next_next_inst);
                 (*pipe_reg)->add_register_operands();
                 m_warp[warp_id].set_common_register(common_register);
                 // reserve normally register for given inst in chain

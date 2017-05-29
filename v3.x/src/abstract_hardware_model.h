@@ -1023,12 +1023,12 @@ public:
     // contains the operands to be also fetched from the register file for the next dependent instruction
     unsigned int dep_inst_operands[MAX_REG_OPERANDS];
 
-    void extract_dep_inst_operands(unsigned int common_register)
+    void extract_dep_inst_operands(unsigned int common_register, const warp_inst_t *next_inst)
     {
         int j = 0;
         for (int i = 0; i < MAX_REG_OPERANDS; ++i) {
-            if(in[i]>0 && in[i] != common_register){
-                dep_inst_operands[j] = in[i];
+            if(next_inst->in[i]>0 && in[i] != common_register){
+                dep_inst_operands[j] = next_inst->in[i];
                 j++;
             }
         }
